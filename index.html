@@ -1171,7 +1171,7 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
   <div class="sheets-body">
     <p id="sheetsDesc">Accès aux tâches de gestion, listes et ressources officielles Fugazzi :</p>
     <!-- REMPLACEZ LE LIEN CI-DESSOUS PAR VOTRE LIEN GOOGLE SHEETS -->
-    <a href="VOTRE_LIEN_GOOGLE_SHEETS_ICI" target="_blank" class="sheets-link-btn" id="sheetsBtn">
+    <a href="https://docs.google.com/spreadsheets/d/1xVb2bZnTgXHwJqupXkDUzw5fOLIt2ZIPv9RFg57qxu8/edit" target="_blank" class="sheets-link-btn" id="sheetsBtn">
       📋 Ouvrir Google Sheets
     </a>
     <!-- FIN DU LIEN À REMPLACER -->
@@ -1181,6 +1181,9 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
 <!-- ACTION BUTTONS -->
 <div class="action-btns" id="actionBtns" style="display:none">
   <button class="btn-email" onclick="openSendFlow()" id="sendBtn">📄 Télécharger en PDF</button>
+</div>
+<div id="sheetsBtnBlock" style="display:none;margin:10px 14px 0">
+  <button id="submitSheetsBtn" onclick="submitToSheets()" style="width:100%;padding:15px;background:#1a6b3c;color:#fff;border:none;border-radius:16px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 14px rgba(26,107,60,.3)">📊 Envoyer dans Google Sheets</button>
 </div>
 
 <!-- NAV BUTTONS -->
@@ -1316,7 +1319,7 @@ var T = {
     planTitle: "Plan d'action", planSub: 'Actions à entreprendre', planPh: 'Décris les actions correctives à mettre en place…',
     sheetsTitle: 'Ressources gérant', sheetsDesc: 'Accès aux tâches de gestion, listes et ressources officielles Fugazzi :',
     sheetsBtn: '📋 Ouvrir Google Sheets',
-    sendBtn: '📄 Télécharger en PDF',
+    sendBtn: '📄 Télécharger en PDF', sheetsBtn2: '📊 Envoyer dans Google Sheets',
     conforme: '✓ Conforme', nonConforme: '✗ Non conforme',
     photoTitle: '📷 Photos non conformes', photoSub: 'Téléchargez chaque photo pour la joindre au courriel',
     continueBtn: 'Continuer → Envoyer', cancelBtn: 'Annuler',
@@ -1348,7 +1351,7 @@ var T = {
     planTitle: 'Action Plan', planSub: 'Actions to take', planPh: 'Describe the corrective actions to be taken…',
     sheetsTitle: 'Manager Resources', sheetsDesc: 'Access management tasks, lists and official Fugazzi resources:',
     sheetsBtn: '📋 Open Google Sheets',
-    sendBtn: '📄 Download as PDF',
+    sendBtn: '📄 Download as PDF', sheetsBtn2: '📊 Send to Google Sheets',
     conforme: '✓ Compliant', nonConforme: '✗ Non compliant',
     photoTitle: '📷 Non-compliant photos', photoSub: 'Download each photo to attach to the email',
     continueBtn: 'Continue → Send', cancelBtn: 'Cancel',
@@ -1459,6 +1462,7 @@ function goStep(idx) {
   document.getElementById('planSection').style.display = 'none';
   document.getElementById('sheetsBlock').style.display = 'none';
   document.getElementById('actionBtns').style.display = 'none';
+  document.getElementById('sheetsBtnBlock').style.display = 'none';
 
   cur = idx;
 
@@ -1481,6 +1485,7 @@ function goStep(idx) {
     document.getElementById('planSection').style.display = 'block';
     document.getElementById('sheetsBlock').style.display = 'block';
     document.getElementById('actionBtns').style.display = 'flex';
+    document.getElementById('sheetsBtnBlock').style.display = 'block';
     updateScore();
   }
 
@@ -1859,6 +1864,51 @@ function fallbackCopyText(text) {
 document.getElementById('instructionsModal').addEventListener('click', function(e){ if(e.target===this) closeInstructionsModal(); });
 document.getElementById('photosModal').addEventListener('click', function(e){ if (e.target === this) closePhotosModal(); });
 function closeReport(){ var el=document.getElementById('reportOverlay'); if(el) el.remove(); }
+
+// ── GOOGLE SHEETS SUBMISSION ──────────────────────────────
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx28Ab4K5zXqKkt6GfR78gia1FfJvXzSkw-BFOZVcSGn_INt7N-BolxQRGb4tc6bwfM/exec';
+
+function submitToSheets() {
+  var s = getScore();
+  var ncItems = [];
+  document.querySelectorAll('.check-item').forEach(function(item){
+    if (!item.querySelector('.non-conforme.active')) return;
+    var sec = item.getAttribute('data-section') || '';
+    var lbl = item.getAttribute('data-label') || '';
+    var cmt = item.querySelector('.nc-extras input[type=text]') ? item.querySelector('.nc-extras input[type=text]').value : '';
+    ncItems.push({ section: sec, label: lbl, comment: cmt });
+  });
+
+  var payload = {
+    date: document.getElementById('f-date').value,
+    heure: document.getElementById('f-heure').value,
+    succursale: document.getElementById('f-succursale').value || 'Non spécifiée',
+    responsable: document.getElementById('f-resp').value || 'Non spécifié',
+    score: s.pct !== null ? s.pct : 0,
+    conformes: s.c,
+    nonConformes: s.nc,
+    ncItems: ncItems
+  };
+
+  // Show sending indicator
+  var btn = document.getElementById('submitSheetsBtn');
+  if (btn) { btn.textContent = lang==='fr' ? '⏳ Envoi...' : '⏳ Sending...'; btn.disabled = true; }
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(){
+    if (btn) { btn.textContent = '✅ Envoyé !'; btn.style.background = '#28a745'; }
+    showToast(lang==='fr' ? '✅ Rapport enregistré dans Google Sheets !' : '✅ Report saved to Google Sheets!');
+    setTimeout(function(){ 
+      if (btn) { btn.textContent = lang==='fr' ? '📊 Envoyer dans Google Sheets' : '📊 Send to Google Sheets'; btn.style.background = '#1a6b3c'; btn.disabled = false; }
+    }, 3000);
+  }).catch(function(){
+    if (btn) { btn.textContent = lang==='fr' ? '❌ Erreur — Réessayer' : '❌ Error — Retry'; btn.style.background = '#dc3545'; btn.disabled = false; }
+  });
+}
 
 // ── START ─────────────────────────────────────────────────
 goStep(0);
