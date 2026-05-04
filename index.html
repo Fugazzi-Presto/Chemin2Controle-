@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1A1A1A">
+<title>Chemin de contrôle — Fugazzi Pizza Presto</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#00B5A8;--teal-dark:#008C82;--teal-light:#E0F7F5;--yellow:#F5C800;--yellow-light:#FFFBE0;--dark:#1A1A1A;--grey:#F4F4F4;--mid:#888;--radius:16px;--shadow:0 2px 16px rgba(0,181,168,.12);--green:#28a745;--red:#dc3545}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding-bottom:90px}
+/* HEADER */
+.app-header{background:var(--dark);position:sticky;top:0;z-index:50;padding-top:env(safe-area-inset-top,0)}
+.header-inner{padding:12px 20px 10px;text-align:center;position:relative;overflow:hidden}
+.header-inner::before{content:'';position:absolute;top:-30px;left:-30px;width:120px;height:120px;border-radius:50%;background:var(--teal);opacity:.12}
+.header-inner::after{content:'';position:absolute;bottom:-20px;right:-20px;width:90px;height:90px;border-radius:50%;background:var(--yellow);opacity:.15}
+.header-inner h1{font-family:'Black Han Sans',sans-serif;font-size:19px;color:var(--yellow);letter-spacing:2px;text-transform:uppercase;position:relative}
+.header-inner p{font-size:10px;color:var(--teal);margin-top:2px;letter-spacing:1px;font-weight:700;text-transform:uppercase;position:relative}
+.lang-btn{position:absolute;top:50%;right:12px;transform:translateY(-50%);background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:99px;padding:5px 10px;font-family:'Nunito',sans-serif;font-size:11px;font-weight:900;color:#fff;cursor:pointer;z-index:10;letter-spacing:.5px}
+/* PROGRESS */
+.prog-block{background:var(--dark);padding:0 16px 8px}
+.prog-wrap{background:rgba(255,255,255,.15);border-radius:99px;height:6px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--yellow));border-radius:99px;width:0%;transition:width .4s}
+.prog-label{text-align:center;font-size:11px;font-weight:800;color:rgba(255,255,255,.7);margin-top:4px}
+/* STEP DOTS */
+.step-bar{background:var(--dark);padding:6px 16px 8px;display:flex;align-items:center;justify-content:center;gap:5px;border-bottom:2px solid var(--teal)}
+.step-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .3s;flex-shrink:0}
+.step-dot.active{background:var(--teal);width:20px;border-radius:4px}
+.step-dot.done{background:var(--green)}
+.step-lbl{font-size:11px;font-weight:800;color:rgba(255,255,255,.6);margin-left:6px;white-space:nowrap}
+/* INFO */
+.info-block{margin:14px 14px 0;background:#fff;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);border-top:4px solid var(--teal)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.info-field label{font-size:10px;font-weight:800;color:var(--teal-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px}
+.info-field input{width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:10px 12px;font-size:15px;font-family:'Nunito',sans-serif;color:var(--dark);background:var(--teal-light);outline:none}
+.info-field input:focus{border-color:var(--teal);background:#fff}
+.info-field.full{grid-column:1/-1}
+/* SECTIONS */
+.section{margin:14px 14px 0;display:none}
+.section.visible{display:block}
+.section-header{background:var(--yellow);border-radius:var(--radius) var(--radius) 0 0;padding:13px 16px;display:flex;align-items:center;gap:10px}
+.section-number{background:var(--dark);color:var(--yellow);font-family:'Black Han Sans',sans-serif;font-size:15px;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.section-title{font-family:'Black Han Sans',sans-serif;font-size:15px;color:var(--dark);letter-spacing:1px;text-transform:uppercase;line-height:1.3}
+.section-optional{font-size:11px;font-family:'Nunito',sans-serif;font-weight:700;opacity:.6;text-transform:none;letter-spacing:0}
+.section-body{background:#fff;border-radius:0 0 var(--radius) var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.section-count{font-size:11px;font-weight:800;color:var(--teal-dark);text-align:right;padding:6px 14px 2px;opacity:.8}
+/* ITEMS */
+.check-item{padding:14px 14px 12px;border-bottom:1px solid #F0FAF9}
+.check-item:last-child{border-bottom:none}
+.check-item:nth-child(even){background:#FAFEFE}
+.item-label{font-size:14px;font-weight:800;color:var(--dark);margin-bottom:10px;line-height:1.4}
+.item-hint{font-size:12px;color:var(--mid);font-weight:600;margin-top:-6px;margin-bottom:10px;line-height:1.4}
+.check-row{display:flex;gap:10px}
+.btn-check{flex:1;padding:13px 8px;border-radius:12px;border:2px solid #E0E0E0;background:var(--grey);font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#999;cursor:pointer;transition:all .18s;text-align:center;user-select:none}
+.btn-check.conforme.active{background:#D4EDDA;border-color:var(--green);color:#155724}
+.btn-check.non-conforme.active{background:#F8D7DA;border-color:var(--red);color:#721c24}
+.nc-extras{display:none;margin-top:10px;gap:8px;flex-direction:column}
+.nc-extras.visible{display:flex}
+.nc-extras input[type=text]{width:100%;border:2px solid #FFE8A3;border-radius:10px;padding:10px 12px;font-size:14px;font-family:'Nunito',sans-serif;color:var(--dark);background:var(--yellow-light);outline:none}
+.btn-photo{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 14px;border-radius:10px;border:2px dashed var(--red);background:#FFF5F5;color:var(--red);font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer}
+.btn-photo input[type=file]{display:none}
+.photo-previews{display:flex;flex-wrap:wrap;gap:8px}
+.photo-thumb{position:relative;width:68px;height:68px}
+.photo-thumb img{width:68px;height:68px;object-fit:cover;border-radius:10px;border:2px solid var(--red)}
+.photo-thumb .del-photo{position:absolute;top:-6px;right:-6px;background:var(--red);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:900}
+/* REMINDER */
+.reminder-block{display:flex;align-items:flex-start;gap:10px;padding:13px 14px;background:var(--yellow-light);border-top:1px solid #F0FAF9}
+.reminder-icon{font-size:18px;flex-shrink:0}
+.reminder-text{font-size:13px;font-weight:700;color:#7a5c00;line-height:1.5}
+/* NAV BUTTONS */
+.nav-btns{position:fixed;bottom:0;left:0;right:0;display:flex;gap:10px;padding:10px 14px calc(env(safe-area-inset-bottom,0px) + 10px);background:rgba(240,250,249,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(0,181,168,.2);z-index:40}
+.btn-prev{flex:1;padding:14px;border-radius:var(--radius);border:none;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer;background:var(--grey);color:var(--mid)}
+.btn-prev:disabled{opacity:.3}
+.btn-next{flex:2;padding:14px;border-radius:var(--radius);border:none;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer;background:var(--teal);color:#fff;box-shadow:0 4px 14px rgba(0,181,168,.3)}
+.btn-next.yellow{background:var(--yellow);color:var(--dark);box-shadow:0 4px 14px rgba(245,200,0,.3)}
+/* SCORE */
+#scoreBlock{display:none;margin:14px 14px 0;border-radius:var(--radius);padding:20px;text-align:center}
+#scorePct{font-family:'Black Han Sans',sans-serif;font-size:52px;margin-bottom:8px}
+#scoreMsg{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;line-height:1.6}
+/* PLAN */
+.plan-section{margin:14px 14px 0}
+.plan-section .section-header{background:var(--teal)}
+.plan-section .section-number{background:var(--dark);color:var(--teal);font-size:16px}
+.plan-section .section-title{color:#fff}
+.plan-section .section-body{padding:14px}
+.plan-section textarea{width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:12px;font-size:14px;font-family:'Nunito',sans-serif;color:var(--dark);background:var(--teal-light);outline:none;min-height:90px;resize:vertical}
+/* SHEETS LINK */
+.sheets-block{margin:14px 14px 0;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.sheets-header{background:#1a6b3c;padding:12px 16px;display:flex;align-items:center;gap:10px}
+.sheets-header span{font-family:'Black Han Sans',sans-serif;font-size:14px;color:#fff;letter-spacing:1px;text-transform:uppercase}
+.sheets-body{background:#fff;padding:14px}
+.sheets-body p{font-size:12px;font-weight:700;color:var(--mid);margin-bottom:10px;line-height:1.5}
+.sheets-link-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;background:#1a6b3c;color:#fff;border:none;border-radius:12px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer;text-decoration:none}
+.sheets-placeholder{width:100%;padding:14px;background:#F4F4F4;color:var(--mid);border:2px dashed #ccc;border-radius:12px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;text-align:center;cursor:default}
+/* ACTION BUTTONS */
+.action-btns{display:flex;gap:10px;margin:14px 14px 0}
+.btn-email{flex:1;background:var(--yellow);color:var(--dark);border:none;border-radius:var(--radius);padding:15px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 14px rgba(245,200,0,.3)}
+/* MODALS */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:100;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:20px 20px 0 0;padding:22px 18px calc(env(safe-area-inset-bottom,0px)+32px);width:100%;max-width:600px;animation:slideUp .3s ease;max-height:88vh;overflow-y:auto}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal h2{font-family:'Black Han Sans',sans-serif;font-size:17px;color:var(--dark);margin-bottom:6px}
+.modal-sub{font-size:12px;color:var(--mid);font-weight:700;margin-bottom:12px}
+.modal label{font-size:10px;font-weight:800;color:var(--teal-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;margin-top:10px}
+.modal input[type=email]{width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:11px 12px;font-size:14px;font-family:'Nunito',sans-serif;color:var(--dark);background:var(--teal-light);outline:none}
+.modal-btns{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.btn-send-mail{width:100%;background:var(--dark);color:#fff;border:none;border-radius:12px;padding:14px;font-family:'Black Han Sans',sans-serif;font-size:14px;cursor:pointer;letter-spacing:1px}
+.btn-copy-report{width:100%;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px;font-family:'Black Han Sans',sans-serif;font-size:14px;cursor:pointer;letter-spacing:1px}
+.btn-cancel{width:100%;background:var(--grey);color:var(--mid);border:none;border-radius:12px;padding:13px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer}
+.recap-box{background:#F8F8F8;border-radius:10px;padding:12px;max-height:180px;overflow-y:auto;font-size:11px;color:#333;line-height:1.7;white-space:pre-wrap;font-family:monospace;margin-bottom:4px;border:1px solid #eee}
+.warning-box{background:#FFF3CD;border-radius:10px;padding:12px;margin-bottom:10px;border-left:4px solid var(--yellow)}
+.warning-box p{font-size:12px;font-weight:800;color:#856404;line-height:1.6}
+.email-display{background:var(--teal-light);border-radius:10px;padding:12px;margin-bottom:10px}
+.email-display .lbl{font-size:10px;font-weight:800;color:var(--teal-dark);text-transform:uppercase;margin-bottom:4px}
+.email-display .addr{font-size:13px;font-weight:700;color:var(--dark);line-height:1.5}
+/* PHOTOS MODAL */
+.photos-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.photo-nc-item{text-align:center}
+.photo-nc-item img{width:100%;border-radius:10px;border:2px solid var(--red)}
+.photo-nc-label{font-size:10px;font-weight:700;color:#721c24;margin-top:4px;line-height:1.3}
+.photo-nc-dl{display:block;margin-top:5px;background:var(--red);color:#fff;border-radius:8px;padding:6px;font-size:11px;font-weight:800;text-decoration:none;text-align:center}
+/* TOAST */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--dark);color:#fff;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:800;font-family:'Nunito',sans-serif;z-index:200;transition:transform .3s;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media print{
+  body{background:#fff;padding-bottom:0}
+  .nav-btns,.action-btns,.modal-overlay,.btn-photo,.toast,.prog-block,.step-bar,.sheets-block{display:none!important}
+  .section{display:block!important;margin:6px 6px 0}
+  .info-block{margin:6px 6px 0}
+  .btn-check{border:1.5px solid #ccc!important;background:#fff!important;color:#333!important}
+  .btn-check.active.conforme{background:#D4EDDA!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .btn-check.active.non-conforme{background:#F8D7DA!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .section-header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #scoreBlock,.plan-section{display:block!important}
+}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="header-inner">
+    <h1 id="mainTitle">Chemin de contrôle</h1>
+    <p>Fugazzi Pizza Presto</p>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
+  </div>
+  <div class="prog-block">
+    <div class="prog-wrap"><div class="prog-fill" id="progressFill"></div></div>
+    <div class="prog-label" id="progressLabel">0 / 0 points vérifiés</div>
+  </div>
+  <div class="step-bar" id="stepBar"></div>
+</div>
+
+<!-- SECTION 0: INFO -->
+<div class="section visible" id="sec-0">
+  <div class="info-block" style="margin:14px 0 0">
+    <div class="info-grid">
+      <div class="info-field full">
+        <label id="lbl-suc">Succursale</label>
+        <input type="text" id="f-succursale" placeholder="Nom de la succursale">
+      </div>
+      <div class="info-field">
+        <label id="lbl-date">Date</label>
+        <input type="date" id="f-date">
+      </div>
+      <div class="info-field">
+        <label id="lbl-heure">Heure</label>
+        <input type="time" id="f-heure">
+      </div>
+      <div class="info-field full">
+        <label id="lbl-resp">Responsable</label>
+        <input type="text" id="f-resp" placeholder="Nom du responsable">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="sec-1">
+  <div class="section-header">
+    <div class="section-number">1</div>
+    <div class="section-title" data-fr="Extérieur" data-en="Exterior">Extérieur</div>
+  </div>
+  <div class="section-body">
+    <div class="check-item" data-label="Vitres propres" data-label-en="Clean windows" data-section="Extérieur" data-section-en="Exterior">
+      <div class="item-label" data-fr="Vitres propres" data-en="Clean windows">Vitres propres</div>
+      <div class="item-hint" data-fr="Pas de traces, pas de mains, cadre propre" data-en="No marks, no handprints, clean frame">Pas de traces, pas de mains, cadre propre</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Affichages droits et bien collés" data-label-en="Displays straight and properly attached" data-section="Extérieur" data-section-en="Exterior">
+      <div class="item-label" data-fr="Affichages droits et bien collés" data-en="Displays straight and properly attached">Affichages droits et bien collés</div>
+      <div class="item-hint" data-fr="Vitres, porte d'entrée — pas de coins décollés" data-en="Windows, entrance door — no peeling corners">Vitres, porte d'entrée — pas de coins décollés</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Pas de déchets au sol" data-label-en="No debris on the ground" data-section="Extérieur" data-section-en="Exterior">
+      <div class="item-label" data-fr="Pas de déchets au sol" data-en="No debris on the ground">Pas de déchets au sol</div>
+      <div class="item-hint" data-fr="Pas de mégots, balai si besoin, déneiger si nécessaire" data-en="No cigarette butts, sweep if needed, shovel if necessary">Pas de mégots, balai si besoin, déneiger si nécessaire</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Restaurant accueillant et lumières allumées" data-label-en="Welcoming restaurant and lights on" data-section="Extérieur" data-section-en="Exterior">
+      <div class="item-label" data-fr="Restaurant accueillant et lumières allumées" data-en="Welcoming restaurant and lights on">Restaurant accueillant et lumières allumées</div>
+      <div class="item-hint" data-fr="Enseigne allumée, éclairage extérieur fonctionnel" data-en="Sign lit, exterior lighting functional">Enseigne allumée, éclairage extérieur fonctionnel</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Affichage extérieur en place" data-label-en="Exterior display in place" data-section="Extérieur" data-section-en="Exterior">
+      <div class="item-label" data-fr="Affichage extérieur en place" data-en="Exterior display in place">Affichage extérieur en place</div>
+      <div class="item-hint" data-fr="Sandwich du moment, pizza du moment, ardoise…" data-en="Sandwich of the day, pizza of the day, chalkboard…">Sandwich du moment, pizza du moment, ardoise…</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="sec-2">
+  <div class="section-header">
+    <div class="section-number">2</div>
+    <div class="section-title" data-fr="Entrée" data-en="Entrance">Entrée</div>
+  </div>
+  <div class="section-body">
+    <div class="check-item" data-label="Ambiance accueillante et chaleureuse — lumière et musique" data-label-en="Welcoming and warm atmosphere — lighting and music" data-section="Entrée" data-section-en="Entrance">
+      <div class="item-label" data-fr="Ambiance accueillante et chaleureuse — lumière et musique" data-en="Welcoming and warm atmosphere — lighting and music">Ambiance accueillante et chaleureuse — lumière et musique</div>
+      <div class="item-hint" data-fr="Musique avec le iPod Fugazzi, volume adéquat pour la salle à manger" data-en="Music with the Fugazzi iPod, adequate volume for the dining room">Musique avec le iPod Fugazzi, volume adéquat pour la salle à manger</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Accueil par un employé" data-label-en="Greeted by an employee" data-section="Entrée" data-section-en="Entrance">
+      <div class="item-label" data-fr="Accueil par un employé" data-en="Greeted by an employee">Accueil par un employé</div>
+      <div class="item-hint" data-fr="Employé visible au comptoir, sourire, bonjour, contact visuel" data-en="Employee visible at counter, smile, hello, eye contact">Employé visible au comptoir, sourire, bonjour, contact visuel</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="sec-3">
+  <div class="section-header">
+    <div class="section-number">3</div>
+    <div class="section-title" data-fr="Tour de salle" data-en="Dining Room">Tour de salle</div>
+  </div>
+  <div class="section-body">
+    <div class="check-item" data-label="Tables et chaises bien rangées" data-label-en="Tables and chairs properly arranged" data-section="Tour de salle" data-section-en="Dining Room">
+      <div class="item-label" data-fr="Tables et chaises bien rangées" data-en="Tables and chairs properly arranged">Tables et chaises bien rangées</div>
+      <div class="item-hint" data-fr="Chaises sous la table, alignées" data-en="Chairs under the table, aligned">Chaises sous la table, alignées</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Pieds de chaises et de tables propres" data-label-en="Chair and table legs clean" data-section="Tour de salle" data-section-en="Dining Room">
+      <div class="item-label" data-fr="Pieds de chaises et de tables propres" data-en="Chair and table legs clean">Pieds de chaises et de tables propres</div>
+      <div class="item-hint" data-fr="Pas de poussière, pas de traces" data-en="No dust, no marks">Pas de poussière, pas de traces</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Huile piquante sur les tables" data-label-en="Hot sauce on tables" data-section="Tour de salle" data-section-en="Dining Room">
+      <div class="item-label" data-fr="Huile piquante sur les tables" data-en="Hot sauce on tables">Huile piquante sur les tables</div>
+      <div class="item-hint" data-fr="Bouteilles propres et remplies" data-en="Clean and filled bottles">Bouteilles propres et remplies</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Sol propre" data-label-en="Clean floor" data-section="Tour de salle" data-section-en="Dining Room">
+      <div class="item-label" data-fr="Sol propre" data-en="Clean floor">Sol propre</div>
+      <div class="item-hint" data-fr="Balai et mop fait" data-en="Swept and mopped">Balai et mop fait</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Épicerie bien rangée" data-label-en="Grocery items well organized" data-section="Tour de salle" data-section-en="Dining Room">
+      <div class="item-label" data-fr="Épicerie bien rangée" data-en="Grocery items well organized">Épicerie bien rangée</div>
+      <div class="item-hint" data-fr="Le cas échéant" data-en="If applicable">Le cas échéant</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Frigo boissons bien rempli et rangé" data-label-en="Beverage fridge well stocked and organized" data-section="Tour de salle" data-section-en="Dining Room">
+      <div class="item-label" data-fr="Frigo boissons bien rempli et rangé" data-en="Beverage fridge well stocked and organized">Frigo boissons bien rempli et rangé</div>
+      <div class="item-hint" data-fr="Le cas échéant" data-en="If applicable">Le cas échéant</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Boîtes à pizza bien rangées" data-label-en="Pizza boxes well organized" data-section="Tour de salle" data-section-en="Dining Room">
+      <div class="item-label" data-fr="Boîtes à pizza bien rangées" data-en="Pizza boxes well organized">Boîtes à pizza bien rangées</div>
+      <div class="item-hint" data-fr="Logo Fugazzi visible, numéros de téléphone apparents" data-en="Fugazzi logo visible, phone numbers visible">Logo Fugazzi visible, numéros de téléphone apparents</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Poubelles vides et propres" data-label-en="Garbage cans empty and clean" data-section="Tour de salle" data-section-en="Dining Room">
+      <div class="item-label" data-fr="Poubelles vides et propres" data-en="Garbage cans empty and clean">Poubelles vides et propres</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Comptoir allumé" data-label-en="Counter lit" data-section="Tour de salle" data-section-en="Dining Room">
+      <div class="item-label" data-fr="Comptoir allumé" data-en="Counter lit">Comptoir allumé</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Cadres droits et sans poussière" data-label-en="Frames straight and dust-free" data-section="Tour de salle" data-section-en="Dining Room">
+      <div class="item-label" data-fr="Cadres droits et sans poussière" data-en="Frames straight and dust-free">Cadres droits et sans poussière</div>
+      <div class="item-hint" data-fr="Photos de pizza" data-en="Pizza photos">Photos de pizza</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Derrière et dessous tout déplacé et nettoyé" data-label-en="Behind and underneath everything moved and cleaned" data-section="Tour de salle" data-section-en="Dining Room">
+      <div class="item-label" data-fr="Derrière et dessous tout déplacé et nettoyé" data-en="Behind and underneath everything moved and cleaned">Derrière et dessous tout déplacé et nettoyé</div>
+      <div class="item-hint" data-fr="Tables, chaises, poubelles, frigo — tapis, plinthes et murs inclus" data-en="Tables, chairs, garbage cans, fridge — rugs, baseboards and walls included">Tables, chaises, poubelles, frigo — tapis, plinthes et murs inclus</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="sec-4">
+  <div class="section-header">
+    <div class="section-number">4</div>
+    <div class="section-title" data-fr="Comptoir" data-en="Counter">Comptoir</div>
+  </div>
+  <div class="section-body">
+    <div class="check-item" data-label="Comptoir propre, rangé et accueillant" data-label-en="Counter clean, organized and welcoming" data-section="Comptoir" data-section-en="Counter">
+      <div class="item-label" data-fr="Comptoir propre, rangé et accueillant" data-en="Counter clean, organized and welcoming">Comptoir propre, rangé et accueillant</div>
+      <div class="item-hint" data-fr="Rien qui dépasse, pas de poussière — visible côté client" data-en="Nothing sticking out, no dust — visible from customer side">Rien qui dépasse, pas de poussière — visible côté client</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Tous les items vérifiés et actifs sur les tablettes" data-label-en="All items verified and active on tablets" data-section="Comptoir" data-section-en="Counter">
+      <div class="item-label" data-fr="Tous les items vérifiés et actifs sur les tablettes" data-en="All items verified and active on tablets">Tous les items vérifiés et actifs sur les tablettes</div>
+      <div class="item-hint" data-fr="Tous les items sont actifs sur DoorDash, Uber Eats et Deliverect" data-en="All items are active on DoorDash, Uber Eats and Deliverect">Tous les items sont actifs sur DoorDash, Uber Eats et Deliverect</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Frigos remplis, rangés et datés" data-label-en="Fridges filled, organized and dated" data-section="Comptoir" data-section-en="Counter">
+      <div class="item-label" data-fr="Frigos remplis, rangés et datés" data-en="Fridges filled, organized and dated">Frigos remplis, rangés et datés</div>
+      <div class="item-hint" data-fr="Sauces, salades, gâteaux — dates bien inscrites" data-en="Sauces, salads, cakes — dates clearly written">Sauces, salades, gâteaux — dates bien inscrites</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Frigos propres" data-label-en="Clean fridges" data-section="Comptoir" data-section-en="Counter">
+      <div class="item-label" data-fr="Frigos propres" data-en="Clean fridges">Frigos propres</div>
+      <div class="item-hint" data-fr="Joints, parois intérieures, poignées" data-en="Seals, inner walls, handles">Joints, parois intérieures, poignées</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Dessous du réchaud à pizza propre et organisé" data-label-en="Under pizza warmer clean and organized" data-section="Comptoir" data-section-en="Counter">
+      <div class="item-label" data-fr="Dessous du réchaud à pizza propre et organisé" data-en="Under pizza warmer clean and organized">Dessous du réchaud à pizza propre et organisé</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Stock suffisant et rangé" data-label-en="Sufficient and organized stock" data-section="Comptoir" data-section-en="Counter">
+      <div class="item-label" data-fr="Stock suffisant et rangé" data-en="Sufficient and organized stock">Stock suffisant et rangé</div>
+      <div class="item-hint" data-fr="Boîtes à pizza, sacs en papier, agrafes, feutres" data-en="Pizza boxes, paper bags, staples, markers">Boîtes à pizza, sacs en papier, agrafes, feutres</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Derrière et dessous tout déplacé et nettoyé" data-label-en="Behind and underneath everything moved and cleaned" data-section="Comptoir" data-section-en="Counter">
+      <div class="item-label" data-fr="Derrière et dessous tout déplacé et nettoyé" data-en="Behind and underneath everything moved and cleaned">Derrière et dessous tout déplacé et nettoyé</div>
+      <div class="item-hint" data-fr="Frigos, table de préparation — plinthes et murs inclus" data-en="Fridges, prep table — baseboards and walls included">Frigos, table de préparation — plinthes et murs inclus</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Serviettes et huile piquante disponibles au comptoir" data-label-en="Napkins and hot sauce available at counter" data-section="Comptoir" data-section-en="Counter">
+      <div class="item-label" data-fr="Serviettes et huile piquante disponibles au comptoir" data-en="Napkins and hot sauce available at counter">Serviettes et huile piquante disponibles au comptoir</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Grilles d'aération des frigos propres" data-label-en="Fridge ventilation grills clean" data-section="Comptoir" data-section-en="Counter">
+      <div class="item-label" data-fr="Grilles d'aération des frigos propres" data-en="Fridge ventilation grills clean">Grilles d'aération des frigos propres</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="sec-5">
+  <div class="section-header">
+    <div class="section-number">5</div>
+    <div class="section-title" data-fr="Cuisine" data-en="Kitchen">Cuisine</div>
+  </div>
+  <div class="section-body">
+    <div class="check-item" data-label="Table de préparation pizza propre et rangée" data-label-en="Pizza prep table clean and organized" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Table de préparation pizza propre et rangée" data-en="Pizza prep table clean and organized">Table de préparation pizza propre et rangée</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Couteaux en place et identifiés" data-label-en="Knives in place and identified" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Couteaux en place et identifiés" data-en="Knives in place and identified">Couteaux en place et identifiés</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Cuillères de pesée en place" data-label-en="Measuring spoons in place" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Cuillères de pesée en place" data-en="Measuring spoons in place">Cuillères de pesée en place</div>
+      <div class="item-hint" data-fr="Pizzas et/ou sandwichs" data-en="Pizzas and/or sandwiches">Pizzas et/ou sandwichs</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Préparations en place et datées" data-label-en="Preparations in place and dated" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Préparations en place et datées" data-en="Preparations in place and dated">Préparations en place et datées</div>
+      <div class="item-hint" data-fr="Beurre à l'ail, huile, etc." data-en="Garlic butter, oil, etc.">Beurre à l'ail, huile, etc.</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Stock de boîtes à pizza suffisant" data-label-en="Sufficient pizza box stock" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Stock de boîtes à pizza suffisant" data-en="Sufficient pizza box stock">Stock de boîtes à pizza suffisant</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Frigo de préparation propre, daté et rempli" data-label-en="Prep fridge clean, dated and filled" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Frigo de préparation propre, daté et rempli" data-en="Prep fridge clean, dated and filled">Frigo de préparation propre, daté et rempli</div>
+      <div class="item-hint" data-fr="Joints et parois" data-en="Seals and walls">Joints et parois</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Pâte sortie minimum 30 minutes avant" data-label-en="Dough out minimum 30 minutes before" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Pâte sortie minimum 30 minutes avant" data-en="Dough out minimum 30 minutes before">Pâte sortie minimum 30 minutes avant</div>
+      <div class="item-hint" data-fr="Farine disponible, poste propre et prêt" data-en="Flour available, station clean and ready">Farine disponible, poste propre et prêt</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Vaisselle propre, bien rangée et retournée" data-label-en="Dishes clean, organized and turned over" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Vaisselle propre, bien rangée et retournée" data-en="Dishes clean, organized and turned over">Vaisselle propre, bien rangée et retournée</div>
+      <div class="item-hint" data-fr="Éviter eau stagnante" data-en="Avoid standing water">Éviter eau stagnante</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Lave-vaisselle propre à l'intérieur" data-label-en="Dishwasher clean inside" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Lave-vaisselle propre à l'intérieur" data-en="Dishwasher clean inside">Lave-vaisselle propre à l'intérieur</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Dessous des éviers propres et produits remplis" data-label-en="Under sinks clean and products filled" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Dessous des éviers propres et produits remplis" data-en="Under sinks clean and products filled">Dessous des éviers propres et produits remplis</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Bacs propres et sans aliments" data-label-en="Bins clean and food-free" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Bacs propres et sans aliments" data-en="Bins clean and food-free">Bacs propres et sans aliments</div>
+      <div class="item-hint" data-fr="Éviter contamination croisée" data-en="Avoid cross-contamination">Éviter contamination croisée</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Lave-mains équipé" data-label-en="Handwashing station equipped" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Lave-mains équipé" data-en="Handwashing station equipped">Lave-mains équipé</div>
+      <div class="item-hint" data-fr="Savon, papier, eau chaude, affiche lavage des mains" data-en="Soap, paper, hot water, handwashing sign">Savon, papier, eau chaude, affiche lavage des mains</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Rotations faites, tout daté et identifié" data-label-en="Rotations done, everything dated and identified" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Rotations faites, tout daté et identifié" data-en="Rotations done, everything dated and identified">Rotations faites, tout daté et identifié</div>
+      <div class="item-hint" data-fr="Frigo de préparation et frigo de stock" data-en="Prep fridge and stock fridge">Frigo de préparation et frigo de stock</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Four à température, propre et fonctionnel" data-label-en="Oven at temperature, clean and functional" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Four à température, propre et fonctionnel" data-en="Oven at temperature, clean and functional">Four à température, propre et fonctionnel</div>
+      <div class="item-hint" data-fr="Nettoyage mensuel vérifié, sans poussière ni farine" data-en="Monthly cleaning verified, no dust or flour">Nettoyage mensuel vérifié, sans poussière ni farine</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Plinthes, murs, dessous et derrière tout nettoyé en profondeur" data-label-en="Baseboards, walls, under and behind everything deep cleaned" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Plinthes, murs, dessous et derrière tout nettoyé en profondeur" data-en="Baseboards, walls, under and behind everything deep cleaned">Plinthes, murs, dessous et derrière tout nettoyé en profondeur</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Intérieurs et joints de tous les frigos propres" data-label-en="Interiors and seals of all fridges clean" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Intérieurs et joints de tous les frigos propres" data-en="Interiors and seals of all fridges clean">Intérieurs et joints de tous les frigos propres</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Grilles d'aération de tous les frigos propres" data-label-en="Ventilation grills of all fridges clean" data-section="Cuisine" data-section-en="Kitchen">
+      <div class="item-label" data-fr="Grilles d'aération de tous les frigos propres" data-en="Ventilation grills of all fridges clean">Grilles d'aération de tous les frigos propres</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="sec-6">
+  <div class="section-header">
+    <div class="section-number">6</div>
+    <div class="section-title" data-fr="Chambre froide et stocks secs" data-en="Cold Room & Dry Stock">Chambre froide et stocks secs</div>
+  </div>
+  <div class="section-body">
+    <div class="check-item" data-label="Chambre froide propre" data-label-en="Cold room clean" data-section="Chambre froide et stocks secs" data-section-en="Cold Room & Dry Stock">
+      <div class="item-label" data-fr="Chambre froide propre" data-en="Cold room clean">Chambre froide propre</div>
+      <div class="item-hint" data-fr="Murs et plinthes propres" data-en="Walls and baseboards clean">Murs et plinthes propres</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Rotations faites et aucune date dépassée" data-label-en="Rotations done and no expired dates" data-section="Chambre froide et stocks secs" data-section-en="Cold Room & Dry Stock">
+      <div class="item-label" data-fr="Rotations faites et aucune date dépassée" data-en="Rotations done and no expired dates">Rotations faites et aucune date dépassée</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Stock suffisant en chambre froide" data-label-en="Sufficient stock in cold room" data-section="Chambre froide et stocks secs" data-section-en="Cold Room & Dry Stock">
+      <div class="item-label" data-fr="Stock suffisant en chambre froide" data-en="Sufficient stock in cold room">Stock suffisant en chambre froide</div>
+      <div class="item-hint" data-fr="Le cas échéant" data-en="If applicable">Le cas échéant</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Stocks secs — rotations faites" data-label-en="Dry goods — rotations done" data-section="Chambre froide et stocks secs" data-section-en="Cold Room & Dry Stock">
+      <div class="item-label" data-fr="Stocks secs — rotations faites" data-en="Dry goods — rotations done">Stocks secs — rotations faites</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Murs et plinthes de la réserve propres" data-label-en="Reserve room walls and baseboards clean" data-section="Chambre froide et stocks secs" data-section-en="Cold Room & Dry Stock">
+      <div class="item-label" data-fr="Murs et plinthes de la réserve propres" data-en="Reserve room walls and baseboards clean">Murs et plinthes de la réserve propres</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Mop propre et bien accrochée" data-label-en="Mop clean and properly hung" data-section="Chambre froide et stocks secs" data-section-en="Cold Room & Dry Stock">
+      <div class="item-label" data-fr="Mop propre et bien accrochée" data-en="Mop clean and properly hung">Mop propre et bien accrochée</div>
+      <div class="item-hint" data-fr="Pas d'eau stagnante" data-en="No standing water">Pas d'eau stagnante</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Stock suffisant en réserve" data-label-en="Sufficient reserve stock" data-section="Chambre froide et stocks secs" data-section-en="Cold Room & Dry Stock">
+      <div class="item-label" data-fr="Stock suffisant en réserve" data-en="Sufficient reserve stock">Stock suffisant en réserve</div>
+      <div class="item-hint" data-fr="Boissons, sacs, filets à barbe et à cheveux" data-en="Drinks, bags, beard and hair nets">Boissons, sacs, filets à barbe et à cheveux</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Rien ne touche au sol" data-label-en="Nothing touching the floor" data-section="Chambre froide et stocks secs" data-section-en="Cold Room & Dry Stock">
+      <div class="item-label" data-fr="Rien ne touche au sol" data-en="Nothing touching the floor">Rien ne touche au sol</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="sec-7">
+  <div class="section-header">
+    <div class="section-number">7</div>
+    <div class="section-title" data-fr="Couloir" data-en="Hallway">Couloir</div>
+  </div>
+  <div class="section-body">
+    <div class="check-item" data-label="Couloir propre et exempt de déchets" data-label-en="Hallway clean and debris-free" data-section="Couloir" data-section-en="Hallway">
+      <div class="item-label" data-fr="Couloir propre et exempt de déchets" data-en="Hallway clean and debris-free">Couloir propre et exempt de déchets</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Murs et plinthes propres" data-label-en="Walls and baseboards clean" data-section="Couloir" data-section-en="Hallway">
+      <div class="item-label" data-fr="Murs et plinthes propres" data-en="Walls and baseboards clean">Murs et plinthes propres</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Aucun bac dans le couloir" data-label-en="No bins in the hallway" data-section="Couloir" data-section-en="Hallway">
+      <div class="item-label" data-fr="Aucun bac dans le couloir" data-en="No bins in the hallway">Aucun bac dans le couloir</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="reminder-block">
+      <span class="reminder-icon">🗑️</span>
+      <div class="reminder-text">
+        <strong data-fr="Rappel — Sortir les bacs pour le ramassage :" data-en="Reminder — Take out bins for collection:">Rappel — Sortir les bacs pour le ramassage :</strong><br>
+        <span data-fr="Dimanche soir · Mardi soir · Jeudi soir" data-en="Sunday evening · Tuesday evening · Thursday evening">Dimanche soir · Mardi soir · Jeudi soir</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="sec-8">
+  <div class="section-header">
+    <div class="section-number">8</div>
+    <div class="section-title" data-fr="Toilettes" data-en="Restrooms">Toilettes</div>
+  </div>
+  <div class="section-body">
+    <div class="check-item" data-label="Papier, savon et eau chaude disponibles" data-label-en="Paper, soap and hot water available" data-section="Toilettes" data-section-en="Restrooms">
+      <div class="item-label" data-fr="Papier, savon et eau chaude disponibles" data-en="Paper, soap and hot water available">Papier, savon et eau chaude disponibles</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Lavabo propre" data-label-en="Clean sink" data-section="Toilettes" data-section-en="Restrooms">
+      <div class="item-label" data-fr="Lavabo propre" data-en="Clean sink">Lavabo propre</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Miroirs propres et sans traces" data-label-en="Mirrors clean and streak-free" data-section="Toilettes" data-section-en="Restrooms">
+      <div class="item-label" data-fr="Miroirs propres et sans traces" data-en="Mirrors clean and streak-free">Miroirs propres et sans traces</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Murs et plinthes propres" data-label-en="Walls and baseboards clean" data-section="Toilettes" data-section-en="Restrooms">
+      <div class="item-label" data-fr="Murs et plinthes propres" data-en="Walls and baseboards clean">Murs et plinthes propres</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Toilettes propres" data-label-en="Clean toilets" data-section="Toilettes" data-section-en="Restrooms">
+      <div class="item-label" data-fr="Toilettes propres" data-en="Clean toilets">Toilettes propres</div>
+      <div class="item-hint" data-fr="Dessous, derrière et intérieur de la cuvette" data-en="Under, behind and inside the bowl">Dessous, derrière et intérieur de la cuvette</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Produits de nettoyage disponibles" data-label-en="Cleaning products available" data-section="Toilettes" data-section-en="Restrooms">
+      <div class="item-label" data-fr="Produits de nettoyage disponibles" data-en="Cleaning products available">Produits de nettoyage disponibles</div>
+      <div class="item-hint" data-fr="Gants, produits, etc." data-en="Gloves, products, etc.">Gants, produits, etc.</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="sec-9">
+  <div class="section-header">
+    <div class="section-number">9</div>
+    <div class="section-title" data-fr="Bureau" data-en="Office">Bureau<span class="section-optional" data-fr=" (le cas échéant)" data-en=" (if applicable)"> (le cas échéant)</span></div>
+  </div>
+  <div class="section-body">
+    <div class="check-item" data-label="Bureau propre et rangé" data-label-en="Office clean and organized" data-section="Bureau" data-section-en="Office">
+      <div class="item-label" data-fr="Bureau propre et rangé" data-en="Office clean and organized">Bureau propre et rangé</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="sec-10">
+  <div class="section-header">
+    <div class="section-number">10</div>
+    <div class="section-title" data-fr="Extérieur arrière" data-en="Back Exterior">Extérieur arrière<span class="section-optional" data-fr=" (le cas échéant)" data-en=" (if applicable)"> (le cas échéant)</span></div>
+  </div>
+  <div class="section-body">
+    <div class="check-item" data-label="Pas de déchets à l'extérieur arrière" data-label-en="No debris at back exterior" data-section="Extérieur arrière" data-section-en="Back Exterior">
+      <div class="item-label" data-fr="Pas de déchets à l'extérieur arrière" data-en="No debris at back exterior">Pas de déchets à l'extérieur arrière</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Portes bien fermées" data-label-en="Doors properly closed" data-section="Extérieur arrière" data-section-en="Back Exterior">
+      <div class="item-label" data-fr="Portes bien fermées" data-en="Doors properly closed">Portes bien fermées</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Poubelles en place, fermées et déneigées si nécessaire" data-label-en="Garbage cans in place, closed and cleared of snow if needed" data-section="Extérieur arrière" data-section-en="Back Exterior">
+      <div class="item-label" data-fr="Poubelles en place, fermées et déneigées si nécessaire" data-en="Garbage cans in place, closed and cleared of snow if needed">Poubelles en place, fermées et déneigées si nécessaire</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="sec-11">
+  <div class="section-header">
+    <div class="section-number">11</div>
+    <div class="section-title" data-fr="Sous-sol" data-en="Basement">Sous-sol<span class="section-optional" data-fr=" (le cas échéant)" data-en=" (if applicable)"> (le cas échéant)</span></div>
+  </div>
+  <div class="section-body">
+    <div class="check-item" data-label="Sol propre et rien par terre" data-label-en="Clean floor with nothing on the ground" data-section="Sous-sol" data-section-en="Basement">
+      <div class="item-label" data-fr="Sol propre et rien par terre" data-en="Clean floor with nothing on the ground">Sol propre et rien par terre</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Rangé et organisé" data-label-en="Organized and tidy" data-section="Sous-sol" data-section-en="Basement">
+      <div class="item-label" data-fr="Rangé et organisé" data-en="Organized and tidy">Rangé et organisé</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="sec-12">
+  <div class="section-header">
+    <div class="section-number">12</div>
+    <div class="section-title" data-fr="Tâches de gestion" data-en="Management Tasks">Tâches de gestion</div>
+  </div>
+  <div class="section-body">
+    <div class="check-item" data-label="Tâches de gestion complétées" data-label-en="Management tasks completed" data-section="Tâches de gestion" data-section-en="Management Tasks">
+      <div class="item-label" data-fr="Tâches de gestion complétées" data-en="Management tasks completed">Tâches de gestion complétées</div>
+      <div class="item-hint" data-fr="Pertes, heures Veloce, et toutes tâches selon le document officiel" data-en="Losses, Veloce hours, and all tasks per the official document">Pertes, heures Veloce, et toutes tâches selon le document officiel</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+    <div class="check-item" data-label="Tenue vestimentaire conforme" data-label-en="Dress code compliant" data-section="Tâches de gestion" data-section-en="Management Tasks">
+      <div class="item-label" data-fr="Tenue vestimentaire conforme" data-en="Dress code compliant">Tenue vestimentaire conforme</div>
+      <div class="item-hint" data-fr="Chaussures fermées, pantalon ou jean bleu/noir, chandail Fugazzi (ou blanc), casquette, bandana, tablier" data-en="Closed shoes, blue/black pants or jeans, Fugazzi shirt (or white), cap, bandana, apron">Chaussures fermées, pantalon ou jean bleu/noir, chandail Fugazzi (ou blanc), casquette, bandana, tablier</div>
+      <div class="check-row">
+        <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
+        <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
+      </div>
+      <div class="nc-extras">
+        <input type="text" placeholder="Commentaire…">
+        <label class="btn-photo">📷 Photo<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label>
+        <div class="photo-previews"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SCORE -->
+<div id="scoreBlock"><div id="scorePct"></div><div id="scoreMsg"></div></div>
+
+<!-- PLAN D'ACTION -->
+<div class="plan-section" id="planSection" style="display:none">
+  <div class="section-header">
+    <div class="section-number">📋</div>
+    <div class="section-title" id="planTitle">Plan d'action</div>
+  </div>
+  <div class="section-body">
+    <p id="planSubtitle" style="font-size:12px;font-weight:800;color:#008C82;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Actions à entreprendre</p>
+    <textarea id="planAction" placeholder="Décris les actions correctives à mettre en place…"></textarea>
+  </div>
+</div>
+
+<!-- GOOGLE SHEETS LINK -->
+<div class="sheets-block" id="sheetsBlock" style="display:none">
+  <div class="sheets-header">
+    <span>📊</span>
+    <span id="sheetsTitle">Ressources gérant</span>
+  </div>
+  <div class="sheets-body">
+    <p id="sheetsDesc">Accès aux tâches de gestion, listes et ressources officielles Fugazzi :</p>
+    <!-- REMPLACEZ LE LIEN CI-DESSOUS PAR VOTRE LIEN GOOGLE SHEETS -->
+    <a href="VOTRE_LIEN_GOOGLE_SHEETS_ICI" target="_blank" class="sheets-link-btn" id="sheetsBtn">
+      📋 Ouvrir Google Sheets
+    </a>
+    <!-- FIN DU LIEN À REMPLACER -->
+  </div>
+</div>
+
+<!-- ACTION BUTTONS -->
+<div class="action-btns" id="actionBtns" style="display:none">
+  <button class="btn-email" onclick="openSendFlow()" id="sendBtn">📄 Télécharger en PDF</button>
+</div>
+
+<!-- NAV BUTTONS -->
+<div class="nav-btns" id="navBtns">
+  <button class="btn-prev" id="btnPrev" onclick="prevStep()" disabled>← <span id="prevLbl">Retour</span></button>
+  <button class="btn-next" id="btnNext" onclick="nextStep()"><span id="nextLbl">Commencer</span> →</button>
+</div>
+
+<!-- PHOTOS MODAL -->
+<div class="modal-overlay" id="photosModal">
+  <div class="modal">
+    <h2 id="photoModalTitle">📷 Photos non conformes</h2>
+    <p class="modal-sub" id="photoModalSub">Téléchargez chaque photo pour la joindre au courriel</p>
+    <div style="background:#FFF3CD;border-radius:10px;padding:12px;margin-bottom:10px;border-left:4px solid #F5C800">
+      <p style="font-size:12px;font-weight:800;color:#856404;line-height:1.7">
+        📱 <strong>Comment joindre les photos :</strong><br>
+        1. Appuyez <strong>⬇ Télécharger</strong> sur chaque photo<br>
+        2. La photo s'enregistre dans vos <strong>Fichiers</strong><br>
+        3. Dans Mail → Nouveau message → appuyez longuement → <strong>Joindre un fichier</strong>
+      </p>
+    </div>
+    <div class="photos-grid" id="photosGrid"></div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <button onclick="closePhotosModal();openEmailModal();" style="width:100%;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px;font-family:'Black Han Sans',sans-serif;font-size:14px;cursor:pointer" id="continueBtn">Continuer → Envoyer</button>
+      <button onclick="closePhotosModal()" style="width:100%;background:var(--grey);color:var(--mid);border:none;border-radius:12px;padding:12px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer" id="cancelPhotoBtn">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL MODAL -->
+<div class="modal-overlay" id="emailModal">
+  <div class="modal">
+    <h2 id="emailModalTitle">📧 Envoyer le rapport</h2>
+    <div class="warning-box">
+      <p id="emailWarning">⚠️ <strong>Étapes à suivre :</strong><br>1. Appuyez sur <strong>Ouvrir Mail</strong><br>2. Le courriel s'ouvre avec le rapport<br>3. Joignez les photos manuellement<br>4. Envoyez !</p>
+    </div>
+    <div class="email-display">
+      <div class="lbl" id="emailToLbl">Destinataires</div>
+      <div class="addr" id="emailDisplay">fugazzipresto@barroco.ca</div>
+    </div>
+    <p style="font-size:11px;font-weight:800;color:var(--teal-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="reportPreviewLbl">Aperçu du rapport</p>
+    <div class="recap-box" id="recapBox"></div>
+    <div class="modal-btns">
+      <button class="btn-send-mail" onclick="openMail()" id="openMailBtn">📱 Ouvrir Mail</button>
+      <p style="font-size:11px;font-weight:700;color:#888;text-align:center;margin-top:4px;line-height:1.5" id="mailNote">Si Mail ne s'ouvre pas → utilisez <strong>Copier le rapport</strong> ci-dessous, puis ouvrez Mail manuellement et collez</p>
+      <button class="btn-copy-report" onclick="copyReport()" id="copyBtn">📋 Copier le rapport</button>
+      <button class="btn-cancel" onclick="closeEmailModal()" id="closeEmailBtn">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<!-- INSTRUCTIONS MODAL -->
+<div class="modal-overlay" id="instructionsModal">
+  <div class="modal">
+    <div style="background:#00B5A8;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <div style="font-size:22px">📥</div>
+      <div id="instrTitle" style="color:#fff;font-weight:900;font-size:16px;font-family:'Black Han Sans',sans-serif;letter-spacing:1px">RAPPORT TÉLÉCHARGÉ !</div>
+    </div>
+    <p id="instrSubtitle" style="font-size:13px;font-weight:700;color:#888;margin-bottom:14px;line-height:1.5">Votre rapport avec les photos est prêt. Suivez les étapes selon votre téléphone :</p>
+
+    <!-- iPhone -->
+    <div style="border:1.5px solid #E0E0E0;border-radius:12px;overflow:hidden;margin-bottom:10px">
+      <div style="background:#1A1A1A;padding:8px 14px;font-size:12px;font-weight:900;color:#F5C800;letter-spacing:1px;font-family:'Black Han Sans',sans-serif">IPHONE</div>
+      <div style="padding:12px 14px" id="iphoneSteps">
+        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+          <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">1</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Ouvre l'app <strong>Fichiers</strong> sur ton iPhone</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+          <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">2</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Appuie sur <strong>Téléchargements</strong></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+          <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">3</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Appuie sur le fichier <strong>Rapport_Fugazzi...</strong></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">4</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Appuie sur <strong>Partager</strong> (carré + flèche ↑) → <strong>Mail</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Android -->
+    <div style="border:1.5px solid #E0E0E0;border-radius:12px;overflow:hidden;margin-bottom:10px">
+      <div style="background:#1A1A1A;padding:8px 14px;font-size:12px;font-weight:900;color:#F5C800;letter-spacing:1px;font-family:'Black Han Sans',sans-serif">ANDROID</div>
+      <div style="padding:12px 14px" id="androidSteps">
+        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+          <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">1</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Glisse vers le bas → appuie sur la <strong>notification</strong> de téléchargement</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+          <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">2</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Le rapport s'ouvre dans le navigateur</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">3</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Menu ⋮ → <strong>Partager</strong> → <strong>Gmail</strong> ou <strong>Mail</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emails -->
+    <div style="background:#E0F7F5;border-radius:12px;padding:12px 14px;margin-bottom:12px">
+      <div style="font-size:10px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="instrEmailLbl">Envoyer à</div>
+      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.8" id="instrEmails">fugazzipresto@barroco.ca</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <button onclick="copyEmails()" id="copyEmailsBtn" style="width:100%;padding:14px;background:#1A1A1A;color:#fff;border:none;border-radius:12px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer">📋 Copier les adresses courriel</button>
+      <button onclick="closeInstructionsModal()" id="instrCloseBtn" style="width:100%;padding:13px;background:#00B5A8;color:#fff;border:none;border-radius:12px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer">OK, compris !</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── STATE ─────────────────────────────────────────────────
+var lang = 'fr';
+var cur = 0;
+var TOTAL = 14; // 0=info, 1-12=sections, 13=recap
+
+// ── TRANSLATIONS ──────────────────────────────────────────
+var T = {
+  fr: {
+    mainTitle: 'Chemin de contrôle',
+    progress: ' points vérifiés',
+    steps: ['Infos','Extérieur','Entrée','Tour de salle','Comptoir','Cuisine','Ch. Froide','Couloir','Toilettes','Bureau','Ext. Arr.','Sous-sol','Gestion','Résumé'],
+    prevBtn: 'Retour', nextBtn: 'Commencer', nextBtnNext: 'Suivant', nextBtnFinal: 'Voir le résumé',
+    suc: 'Succursale', date: 'Date', heure: 'Heure', resp: 'Responsable',
+    sucPh: 'Nom de la succursale', respPh: 'Nom du responsable', commentPh: 'Commentaire…',
+    planTitle: "Plan d'action", planSub: 'Actions à entreprendre', planPh: 'Décris les actions correctives à mettre en place…',
+    sheetsTitle: 'Ressources gérant', sheetsDesc: 'Accès aux tâches de gestion, listes et ressources officielles Fugazzi :',
+    sheetsBtn: '📋 Ouvrir Google Sheets',
+    sendBtn: '📄 Télécharger en PDF',
+    conforme: '✓ Conforme', nonConforme: '✗ Non conforme',
+    photoTitle: '📷 Photos non conformes', photoSub: 'Téléchargez chaque photo pour la joindre au courriel',
+    continueBtn: 'Continuer → Envoyer', cancelBtn: 'Annuler',
+    emailTitle: '📧 Envoyer le rapport',
+    emailWarning: '<strong>Étapes à suivre :</strong><br>1. Appuyez sur <strong>Ouvrir Mail</strong><br>2. Le courriel s\'ouvre avec le rapport<br>3. Joignez les photos manuellement<br>4. Envoyez !',
+    emailToLbl: 'Destinataires', reportPreviewLbl: 'Aperçu du rapport',
+    openMailBtn: '📱 Ouvrir Mail', copyBtn: '📋 Copier le rapport', closeEmailBtn: 'Fermer', mailNote: 'Si Mail ne s\'ouvre pas → utilisez <strong>Copier le rapport</strong> ci-dessous, puis ouvrez Mail manuellement et collez',
+    noPhotos: 'Aucune photo ajoutée aux points non conformes.',
+    download: '⬇ Télécharger', copied: '✅ Rapport copié !',
+    score90: '🟢 Excellent — Bravo, vous répondez au standard Fugazzi !',
+    score80: '🟡 Bien — Quelques points à corriger, on est sur le bon chemin.',
+    score60: "🟠 Plan d'action requis aujourd'hui — Envoyer à Kahena.",
+    score0: '🔴 Critique — Appel obligatoire avec Kahena.',
+    nonCompliant: 'non conforme', nonCompliants: 'non conformes', point: 'point', points: 'points',
+    reportHeader: 'RAPPORT — Fugazzi Pizza Presto',
+    reportLoc: 'Succursale', reportScore: 'Score',
+    reportAllOk: '✅ Tous les points sont conformes !',
+    reportPlan: "PLAN D'ACTION", reportPhotos: 'PHOTO(S) À JOINDRE MANUELLEMENT',
+    reportNote: 'Note: les photos doivent être jointes manuellement.',
+    secTitle: 'SECTION',
+  },
+  en: {
+    mainTitle: 'Control Walkthrough',
+    progress: ' points checked',
+    steps: ['Info','Exterior','Entrance','Dining Room','Counter','Kitchen','Cold Room','Hallway','Restrooms','Office','Back Ext.','Basement','Management','Summary'],
+    prevBtn: 'Back', nextBtn: 'Start', nextBtnNext: 'Next', nextBtnFinal: 'See summary',
+    suc: 'Location', date: 'Date', heure: 'Time', resp: 'Manager',
+    sucPh: 'Location name', respPh: 'Manager name', commentPh: 'Comment…',
+    planTitle: 'Action Plan', planSub: 'Actions to take', planPh: 'Describe the corrective actions to be taken…',
+    sheetsTitle: 'Manager Resources', sheetsDesc: 'Access management tasks, lists and official Fugazzi resources:',
+    sheetsBtn: '📋 Open Google Sheets',
+    sendBtn: '📄 Download as PDF',
+    conforme: '✓ Compliant', nonConforme: '✗ Non compliant',
+    photoTitle: '📷 Non-compliant photos', photoSub: 'Download each photo to attach to the email',
+    continueBtn: 'Continue → Send', cancelBtn: 'Cancel',
+    emailTitle: '📧 Send report',
+    emailWarning: '<strong>Steps to follow:</strong><br>1. Tap <strong>Open Mail</strong><br>2. The email opens with the report<br>3. Attach photos manually<br>4. Send!',
+    emailToLbl: 'Recipients', reportPreviewLbl: 'Report preview',
+    openMailBtn: '📱 Open Mail', copyBtn: '📋 Copy report', closeEmailBtn: 'Close', mailNote: 'If Mail does not open → use <strong>Copy report</strong> below, then open Mail manually and paste',
+    noPhotos: 'No photos added to non-compliant points.',
+    download: '⬇ Download', copied: '✅ Report copied!',
+    score90: '🟢 Excellent — You meet the Fugazzi standard!',
+    score80: '🟡 Good — A few points to fix, we are on the right track.',
+    score60: '🟠 Action plan required today — Send to Kahena.',
+    score0: '🔴 Critical — Mandatory call with Kahena.',
+    nonCompliant: 'non-compliant', nonCompliants: 'non-compliant', point: 'point', points: 'points',
+    reportHeader: 'REPORT — Fugazzi Pizza Presto',
+    reportLoc: 'Location', reportScore: 'Score',
+    reportAllOk: '✅ All points are compliant!',
+    reportPlan: 'ACTION PLAN', reportPhotos: 'PHOTO(S) TO ATTACH MANUALLY',
+    reportNote: 'Note: photos must be attached manually.',
+    secTitle: 'SECTION',
+  }
+};
+
+// ── LANGUAGE TOGGLE ───────────────────────────────────────
+function toggleLang() {
+  lang = lang === 'fr' ? 'en' : 'fr';
+  document.getElementById('langBtn').textContent = lang === 'fr' ? 'EN' : 'FR';
+  applyLang();
+}
+
+function applyLang() {
+  var t = T[lang];
+  // Header
+  document.getElementById('mainTitle').textContent = t.mainTitle;
+  // Labels
+  document.getElementById('lbl-suc').textContent = t.suc;
+  document.getElementById('lbl-date').textContent = t.date;
+  document.getElementById('lbl-heure').textContent = t.heure;
+  document.getElementById('lbl-resp').textContent = t.resp;
+  // Placeholders
+  document.getElementById('f-succursale').placeholder = t.sucPh;
+  document.getElementById('f-resp').placeholder = t.respPh;
+  document.querySelectorAll('.nc-extras input[type=text]').forEach(function(i){ i.placeholder = t.commentPh; });
+  // Item labels & hints
+  document.querySelectorAll('[data-fr]').forEach(function(el) {
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') return;
+    if (el.children.length > 0) return;
+    var val = lang === 'fr' ? el.getAttribute('data-fr') : el.getAttribute('data-en');
+    if (val) el.textContent = val;
+  });
+  // Buttons
+  document.querySelectorAll('.btn-check.conforme').forEach(function(b){ b.textContent = t.conforme; });
+  document.querySelectorAll('.btn-check.non-conforme').forEach(function(b){ b.textContent = t.nonConforme; });
+  // Plan
+  document.getElementById('planTitle').textContent = t.planTitle;
+  document.getElementById('planSubtitle').textContent = t.planSub;
+  document.getElementById('planAction').placeholder = t.planPh;
+  // Sheets
+  document.getElementById('sheetsTitle').textContent = t.sheetsTitle;
+  document.getElementById('sheetsDesc').textContent = t.sheetsDesc;
+  document.getElementById('sheetsBtn').textContent = t.sheetsBtn;
+  // Buttons
+  document.getElementById('sendBtn').textContent = t.sendBtn;
+  // Modal
+  document.getElementById('photoModalTitle').textContent = t.photoTitle;
+  document.getElementById('photoModalSub').textContent = t.photoSub;
+  document.getElementById('continueBtn').textContent = t.continueBtn;
+  document.getElementById('cancelPhotoBtn').textContent = t.cancelBtn;
+  document.getElementById('emailModalTitle').textContent = t.emailTitle;
+  document.getElementById('emailWarning').innerHTML = '⚠️ ' + t.emailWarning;
+  document.getElementById('emailToLbl').textContent = t.emailToLbl;
+  document.getElementById('reportPreviewLbl').textContent = t.reportPreviewLbl;
+  document.getElementById('openMailBtn').textContent = t.openMailBtn;
+  document.getElementById('mailNote').innerHTML = t.mailNote;
+  document.getElementById('copyBtn').textContent = t.copyBtn;
+  document.getElementById('closeEmailBtn').textContent = t.closeEmailBtn;
+  // Nav
+  document.getElementById('prevLbl').textContent = t.prevBtn;
+  updateNavBtns();
+  updateProgress();
+  if (cur === 13) updateScore();
+  updateStepLabel();
+}
+
+// ── INIT ─────────────────────────────────────────────────
+var n = new Date();
+document.getElementById('f-date').value = n.toISOString().split('T')[0];
+document.getElementById('f-heure').value = n.toTimeString().slice(0,5);
+
+// Build step dots
+var sb = document.getElementById('stepBar');
+for (var i = 0; i <= 13; i++) {
+  var dot = document.createElement('div');
+  dot.className = 'step-dot' + (i === 0 ? ' active' : '');
+  dot.id = 'dot-' + i;
+  sb.appendChild(dot);
+}
+var lbl = document.createElement('span');
+lbl.className = 'step-lbl';
+lbl.id = 'stepLbl';
+lbl.textContent = 'Infos';
+sb.appendChild(lbl);
+
+// ── NAVIGATION ────────────────────────────────────────────
+function goStep(idx) {
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('visible'); });
+  document.getElementById('scoreBlock').style.display = 'none';
+  document.getElementById('planSection').style.display = 'none';
+  document.getElementById('sheetsBlock').style.display = 'none';
+  document.getElementById('actionBtns').style.display = 'none';
+
+  cur = idx;
+
+  for (var i = 0; i <= 13; i++) {
+    var d = document.getElementById('dot-' + i);
+    if (!d) continue;
+    d.className = 'step-dot' + (i === cur ? ' active' : i < cur ? ' done' : '');
+  }
+
+  if (idx === 0) {
+    document.getElementById('sec-0').classList.add('visible');
+  } else if (idx >= 1 && idx <= 12) {
+    var sec = document.getElementById('sec-' + idx);
+    if (sec) {
+      sec.classList.add('visible');
+      updateSectionCount(idx);
+    }
+  } else if (idx === 13) {
+    document.getElementById('scoreBlock').style.display = 'block';
+    document.getElementById('planSection').style.display = 'block';
+    document.getElementById('sheetsBlock').style.display = 'block';
+    document.getElementById('actionBtns').style.display = 'flex';
+    updateScore();
+  }
+
+  updateNavBtns();
+  updateStepLabel();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function updateStepLabel() {
+  var steps = T[lang].steps;
+  document.getElementById('stepLbl').textContent = steps[cur] || '';
+}
+
+function updateSectionCount(secId) {
+  var sec = document.getElementById('sec-' + secId);
+  if (!sec) return;
+  var existing = sec.querySelector('.section-count');
+  if (existing) existing.remove();
+  var items = sec.querySelectorAll('.check-item');
+  var done = [].filter.call(items, function(i){ return i.querySelector('.active'); }).length;
+  if (items.length === 0) return;
+  var div = document.createElement('div');
+  div.className = 'section-count';
+  div.textContent = done + ' / ' + items.length + (lang === 'fr' ? ' vérifiés' : ' checked');
+  sec.insertBefore(div, sec.querySelector('.section-body'));
+}
+
+function updateNavBtns() {
+  var t = T[lang];
+  var nb = document.getElementById('navBtns');
+  if (cur === 13) { nb.style.display = 'none'; return; }
+  nb.style.display = 'flex';
+  var prev = document.getElementById('btnPrev');
+  var next = document.getElementById('btnNext');
+  var nextLbl = document.getElementById('nextLbl');
+  prev.disabled = cur === 0;
+  if (cur === 0) { nextLbl.textContent = t.nextBtn; next.classList.remove('yellow'); }
+  else if (cur === 12) { nextLbl.textContent = t.nextBtnFinal; next.classList.add('yellow'); }
+  else { nextLbl.textContent = t.nextBtnNext; next.classList.remove('yellow'); }
+}
+
+function nextStep() { if (cur < 13) goStep(cur + 1); }
+function prevStep() { if (cur > 0) goStep(cur - 1); }
+
+// ── TOGGLE ────────────────────────────────────────────────
+function toggle(btn) {
+  var row = btn.closest('.check-row');
+  var item = btn.closest('.check-item');
+  var extras = item.querySelector('.nc-extras');
+  var isNC = btn.classList.contains('non-conforme');
+  var wasActive = btn.classList.contains('active');
+  row.querySelectorAll('.btn-check').forEach(function(b){ b.classList.remove('active'); });
+  if (!wasActive) btn.classList.add('active');
+  extras.classList.toggle('visible', !wasActive && isNC);
+  if (wasActive || !isNC) extras.querySelectorAll('input[type=text]').forEach(function(i){ i.value = ''; });
+  updateProgress();
+  if (cur >= 1 && cur <= 12) updateSectionCount(cur);
+}
+
+// ── SCORE & PROGRESS ─────────────────────────────────────
+function getScore() {
+  var items = document.querySelectorAll('.check-item'), c = 0, nc = 0;
+  items.forEach(function(item){
+    if (item.querySelector('.conforme.active')) c++;
+    else if (item.querySelector('.non-conforme.active')) nc++;
+  });
+  var t2 = items.length, v = c + nc, pct = v > 0 ? Math.round(c / v * 100) : null;
+  return {pct: pct, c: c, nc: nc, t: t2, v: v};
+}
+
+function updateProgress() {
+  var s = getScore();
+  var pct = s.t > 0 ? Math.round(s.v / s.t * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = s.v + ' / ' + s.t + T[lang].progress;
+}
+
+function updateScore() {
+  var s = getScore();
+  var sb = document.getElementById('scoreBlock');
+  var sp = document.getElementById('scorePct');
+  var sm = document.getElementById('scoreMsg');
+  if (s.pct === null) { sb.style.display = 'none'; return; }
+  sb.style.display = 'block';
+  sp.textContent = s.pct + '%';
+  var t2 = T[lang];
+  var suf = s.nc > 0 ? '<br><span style="font-size:12px;font-weight:700;opacity:.8">' + s.nc + ' ' + (s.nc > 1 ? t2.points : t2.point) + ' ' + (s.nc > 1 ? t2.nonCompliants : t2.nonCompliant) + '</span>' : '';
+  if (s.pct >= 90) { sb.style.background='#D4EDDA'; sp.style.color='#155724'; sm.style.color='#155724'; sm.innerHTML = t2.score90 + suf; }
+  else if (s.pct >= 80) { sb.style.background='#FFF3CD'; sp.style.color='#856404'; sm.style.color='#856404'; sm.innerHTML = t2.score80 + suf; }
+  else if (s.pct >= 60) { sb.style.background='#FFE5CC'; sp.style.color='#C05000'; sm.style.color='#C05000'; sm.innerHTML = t2.score60 + suf; }
+  else { sb.style.background='#F8D7DA'; sp.style.color='#721c24'; sm.style.color='#721c24'; sm.innerHTML = t2.score0 + suf; }
+}
+
+// ── PHOTO ─────────────────────────────────────────────────
+function addPhoto(input) {
+  var previews = input.closest('.check-item').querySelector('.photo-previews');
+  var file = input.files[0]; if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var thumb = document.createElement('div'); thumb.className = 'photo-thumb';
+    thumb.innerHTML = '<img src="' + e.target.result + '"><button class="del-photo" onclick="this.parentElement.remove()">✕</button>';
+    previews.appendChild(thumb);
+  };
+  reader.readAsDataURL(file); input.value = '';
+}
+
+// ── BUILD REPORT ─────────────────────────────────────────
+function buildReport() {
+  var t2 = T[lang];
+  var date = document.getElementById('f-date').value;
+  var heure = document.getElementById('f-heure').value;
+  var resp = document.getElementById('f-resp').value || (lang === 'fr' ? 'Non spécifié' : 'Not specified');
+  var suc = document.getElementById('f-succursale').value || (lang === 'fr' ? 'Non spécifiée' : 'Not specified');
+  var s = getScore();
+  var sep = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
+  var photoCount = 0;
+  document.querySelectorAll('.check-item').forEach(function(item){
+    if (item.querySelector('.non-conforme.active'))
+      photoCount += item.querySelectorAll('.photo-thumb img').length;
+  });
+
+  var body = '🍕 ' + t2.reportHeader + '\n';
+  body += '📍 ' + t2.reportLoc + ' : ' + suc + '\n';
+  body += '📅 ' + date + ' ' + heure + ' | 👤 ' + resp + '\n';
+  body += '📊 ' + t2.reportScore + ' : ' + (s.pct !== null ? s.pct + '%' : '—') + ' (' + s.c + '/' + s.t + ')\n';
+  body += sep + '\n';
+
+  var hasNC = false;
+  var curSec = '';
+  document.querySelectorAll('.check-item').forEach(function(item){
+    if (!item.querySelector('.non-conforme.active')) return;
+    hasNC = true;
+    var sec = lang === 'fr' ? item.getAttribute('data-section') : (item.getAttribute('data-section-en') || item.getAttribute('data-section'));
+    var lbl = lang === 'fr' ? item.getAttribute('data-label') : (item.getAttribute('data-label-en') || item.getAttribute('data-label'));
+    if (sec !== curSec) { curSec = sec; body += '\n❌ ' + sec.toUpperCase() + '\n'; }
+    var cmt = item.querySelector('.nc-extras input[type=text]') ? item.querySelector('.nc-extras input[type=text]').value : '';
+    var imgs = item.querySelectorAll('.photo-thumb img').length;
+    body += '  • ' + lbl + '\n';
+    if (cmt) body += '    💬 ' + cmt + '\n';
+    if (imgs > 0) body += '    📷 ' + imgs + ' photo(s)\n';
+  });
+
+  if (!hasNC) body += '\n' + t2.reportAllOk + '\n';
+
+  var plan = document.getElementById('planAction').value;
+  body += '\n' + sep + '\n' + t2.reportPlan + '\n' + (plan || (lang === 'fr' ? '(Aucun plan)' : '(None)'));
+
+  if (photoCount > 0) {
+    body += '\n\n' + sep + '\n';
+    body += '📷 ' + photoCount + ' ' + t2.reportPhotos + '\n';
+  }
+
+  return body;
+}
+
+// ── SEND FLOW ─────────────────────────────────────────────
+function openSendFlow() {
+  var t2 = T[lang];
+  var date = document.getElementById('f-date').value;
+  var heure = document.getElementById('f-heure').value;
+  var resp = document.getElementById('f-resp').value || (lang==='fr'?'Non spécifié':'Not specified');
+  var suc = document.getElementById('f-succursale').value || (lang==='fr'?'Non spécifiée':'Not specified');
+  var s = getScore();
+  var gerant = suc ? 'gerant.' + suc.toLowerCase().replace(/\s+/g,'') + '@fugazzipresto.ca' : '';
+  var toEmails = 'fugazzipresto@barroco.ca' + (gerant ? ', ' + gerant : '');
+
+  // Build HTML report with photos
+  var scoreColor = s.pct===null?'#888':s.pct>=90?'#155724':s.pct>=80?'#856404':s.pct>=60?'#C05000':'#721c24';
+  var scoreBg = s.pct===null?'#f4f4f4':s.pct>=90?'#D4EDDA':s.pct>=80?'#FFF3CD':s.pct>=60?'#FFE5CC':'#F8D7DA';
+  var scoreMsg = s.pct===null?'—':s.pct>=90?t2.score90:s.pct>=80?t2.score80:s.pct>=60?t2.score60:t2.score0;
+
+  var ncRows = '';
+  var curSec = '';
+  document.querySelectorAll('.check-item').forEach(function(item){
+    if (!item.querySelector('.non-conforme.active')) return;
+    var sec = lang==='fr'?item.getAttribute('data-section'):(item.getAttribute('data-section-en')||item.getAttribute('data-section'));
+    var lbl = lang==='fr'?item.getAttribute('data-label'):(item.getAttribute('data-label-en')||item.getAttribute('data-label'));
+    var cmt = item.querySelector('.nc-extras input[type=text]')?item.querySelector('.nc-extras input[type=text]').value:'';
+    var imgs = item.querySelectorAll('.photo-thumb img');
+    if (sec !== curSec) {
+      curSec = sec;
+      ncRows += '<tr><td colspan="2" style="background:#1A1A1A;color:#F5C800;font-weight:900;padding:10px 14px;font-size:13px;letter-spacing:1px;text-transform:uppercase">❌ ' + sec + '</td></tr>';
+    }
+    var photoHtml = '';
+    imgs.forEach(function(img){
+      photoHtml += '<img src="'+img.src+'" style="width:120px;height:120px;object-fit:cover;border-radius:8px;border:2px solid #dc3545;margin:4px 4px 0 0">';
+    });
+    ncRows += '<tr style="border-bottom:1px solid #eee"><td style="padding:10px 14px;vertical-align:top"><div style="font-weight:800;font-size:13px;color:#1A1A1A;margin-bottom:4px">'+lbl+'</div>'+(cmt?'<div style="font-size:12px;color:#666;margin-bottom:4px">💬 '+cmt+'</div>':'')+(photoHtml?'<div>'+photoHtml+'</div>':'')+'</td></tr>';
+  });
+
+  if (!ncRows) {
+    ncRows = '<tr><td style="padding:20px;text-align:center;font-weight:800;color:#155724;font-size:14px">✅ ' + t2.reportAllOk + '</td></tr>';
+  }
+
+  var plan = document.getElementById('planAction').value || (lang==='fr'?'(Aucun plan)':'(None)');
+
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rapport Fugazzi — '+suc+'</title></head><body style="font-family:Arial,sans-serif;background:#F0FAF9;margin:0;padding:16px"><div id="reportContent">'
+    + '<div style="background:#1A1A1A;border-radius:16px;padding:20px;text-align:center;margin-bottom:16px">'
+    + '<div style="font-size:20px;font-weight:900;color:#F5C800;letter-spacing:2px;text-transform:uppercase">🍕 RAPPORT FUGAZZI</div>'
+    + '<div style="font-size:13px;color:#00B5A8;margin-top:4px;font-weight:700">'+suc+' · '+date+' · '+heure+'</div>'
+    + '<div style="font-size:12px;color:#aaa;margin-top:2px">👤 '+resp+'</div>'
+    + '</div>'
+    + '<div style="background:'+scoreBg+';border-radius:12px;padding:16px;text-align:center;margin-bottom:16px">'
+    + '<div style="font-size:42px;font-weight:900;color:'+scoreColor+'">'+( s.pct!==null?s.pct+'%':'—')+'</div>'
+    + '<div style="font-size:13px;font-weight:800;color:'+scoreColor+'">'+scoreMsg+'</div>'
+    + '</div>'
+    + '<table style="width:100%;border-radius:12px;overflow:hidden;border-collapse:collapse;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.1)">'+ncRows+'</table>'
+    + '<div style="background:#fff;border-radius:12px;padding:16px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.08)">'
+    + '<div style="font-weight:900;font-size:13px;color:#008C82;text-transform:uppercase;margin-bottom:8px">📋 '+(lang==='fr'?"Plan d'action":'Action Plan')+'</div>'
+    + '<div style="font-size:13px;color:#333;line-height:1.6">'+plan+'</div>'
+    + '</div>'
+    + '<div style="height:20px"></div>'
+    + '</div>'
+    + '<div style="padding:16px 16px 32px;text-align:center">'
+    + '<button id="pdfGenBtn" style="width:100%;padding:14px;background:#dc3545;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:900;cursor:pointer;font-family:Arial,sans-serif">📄 Génération en cours...</button>'
+    + '<p style="font-size:11px;color:#888;margin-top:8px;font-family:Arial,sans-serif">Patientez quelques secondes</p>'
+    + '</div>'
+    + '</body></html>';
+
+  // Show report in overlay then trigger PDF
+  var overlay = document.createElement('div');
+  overlay.id = 'pdfOverlay';
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:9998;overflow-y:auto;background:#F0FAF9';
+  overlay.innerHTML = html;
+  document.body.appendChild(overlay);
+
+  // Load html2pdf and trigger download
+  var script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+  script.onload = function() {
+    var btn = overlay.querySelector('#pdfGenBtn');
+    if (btn) { btn.textContent = lang==='fr' ? '⏳ Génération...' : '⏳ Generating...'; btn.disabled = true; }
+    var el = overlay.querySelector('#reportContent');
+    var filename = 'Rapport_Fugazzi_' + (suc||'fugazzi').replace(/\s+/g,'_') + '_' + date + '.pdf';
+    var opt = {
+      margin: [10,10,10,10],
+      filename: filename,
+      image: { type: 'jpeg', quality: 0.92 },
+      html2canvas: { scale: 2, useCORS: true, allowTaint: true, logging: false },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(el).save().then(function(){
+      if (btn) { btn.textContent = lang==='fr' ? '✅ PDF téléchargé !' : '✅ PDF downloaded!'; btn.style.background='#28a745'; }
+      openInstructionsModal(suc, gerant);
+      setTimeout(function(){ var ov=document.getElementById('pdfOverlay'); if(ov) ov.remove(); }, 500);
+    }).catch(function(e){
+      if (btn) { btn.textContent = lang==='fr' ? '📄 Réessayer' : '📄 Retry'; btn.disabled=false; }
+    });
+  };
+  script.onerror = function() {
+    // Fallback to HTML download if CDN fails
+    var blob = new Blob([html], {type: 'text/html;charset=utf-8'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'Rapport_Fugazzi_' + (suc||'fugazzi').replace(/\s+/g,'_') + '_' + date + '.html';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    openInstructionsModal(suc, gerant);
+    var ov=document.getElementById('pdfOverlay'); if(ov) ov.remove();
+  };
+  document.head.appendChild(script);
+}
+
+function openPhotosModal() {
+  var t2 = T[lang];
+  var grid = document.getElementById('photosGrid');
+  grid.innerHTML = '';
+  var hasPhotos = false;
+  document.querySelectorAll('.check-item').forEach(function(item){
+    if (!item.querySelector('.non-conforme.active')) return;
+    var imgs = item.querySelectorAll('.photo-thumb img');
+    if (!imgs.length) return;
+    var lbl = lang === 'fr' ? item.getAttribute('data-label') : (item.getAttribute('data-label-en') || item.getAttribute('data-label'));
+    imgs.forEach(function(img, idx){
+      hasPhotos = true;
+      var wrap = document.createElement('div');
+      wrap.className = 'photo-nc-item';
+      var i = document.createElement('img'); i.src = img.src;
+      var caption = document.createElement('div');
+      caption.className = 'photo-nc-label';
+      caption.textContent = lbl + (imgs.length > 1 ? ' #' + (idx + 1) : '');
+      var dl = document.createElement('a');
+      dl.href = img.src; dl.download = 'NC_photo_' + (idx + 1) + '.jpg';
+      dl.className = 'photo-nc-dl';
+      dl.textContent = t2.download;
+      wrap.appendChild(i); wrap.appendChild(caption); wrap.appendChild(dl);
+      grid.appendChild(wrap);
+    });
+  });
+  if (!hasPhotos) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:20px;color:#888;font-weight:700;font-size:13px">' + t2.noPhotos + '</div>';
+  }
+  document.getElementById('photosModal').classList.add('open');
+}
+function closePhotosModal() { document.getElementById('photosModal').classList.remove('open'); }
+
+function openEmailModal() {
+  var suc = document.getElementById('f-succursale').value || '';
+  var gerant = suc ? 'gerant.' + suc.toLowerCase().replace(/\s+/g, '') + '@fugazzipresto.ca' : 'gerant.[succursale]@fugazzipresto.ca';
+  document.getElementById('emailDisplay').innerHTML = 'fugazzipresto@barroco.ca<br>' + gerant;
+  document.getElementById('recapBox').textContent = buildReport();
+  document.getElementById('emailModal').classList.add('open');
+}
+function closeEmailModal() { document.getElementById('emailModal').classList.remove('open'); }
+
+function openMail() {
+  var suc = document.getElementById('f-succursale').value || '';
+  var gerant = suc ? 'gerant.' + suc.toLowerCase().replace(/\s+/g, '') + '@fugazzipresto.ca' : '';
+  var to = 'fugazzipresto@barroco.ca' + (gerant ? ',' + gerant : '');
+  var s = getScore();
+  var subject = encodeURIComponent((lang === 'fr' ? 'Rapport contrôle' : 'Control Report') + ' — ' + (suc || 'Fugazzi') + ' — ' + document.getElementById('f-date').value + ' — ' + (s.pct !== null ? s.pct + '%' : ''));
+  var body = encodeURIComponent(buildReport());
+  window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+}
+
+function copyReport() {
+  var body = buildReport();
+  var t2 = T[lang];
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(body).then(function(){ showToast(t2.copied); }).catch(function(){ fallbackCopy(body); });
+  } else { fallbackCopy(body); }
+}
+
+function fallbackCopy(body) {
+  var ta = document.createElement('textarea'); ta.value = body;
+  ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try { document.execCommand('copy'); showToast(T[lang].copied); } catch(e) { alert('Copy manually'); }
+  document.body.removeChild(ta);
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 3000);
+}
+
+// Close modals on overlay click
+document.getElementById('emailModal').addEventListener('click', function(e){ if (e.target === this) closeEmailModal(); });
+
+function openInstructionsModal(suc, gerant) {
+  var emailStr = 'fugazzipresto@barroco.ca';
+  if (gerant) emailStr += '\n' + gerant;
+  document.getElementById('instrEmails').textContent = emailStr;
+  // Store for copy
+  document.getElementById('instructionsModal')._emails = emailStr;
+  // Update language if needed
+  var t2 = T[lang];
+  document.getElementById('instrTitle').textContent = lang==='fr'?'RAPPORT TELECHARGE !':'REPORT DOWNLOADED!';
+  document.getElementById('instrSubtitle').textContent = lang==='fr'?'Votre rapport avec les photos est pret. Suivez les etapes selon votre telephone :':'Your report with photos is ready. Follow the steps for your device:';
+  document.getElementById('instrEmailLbl').textContent = lang==='fr'?'Envoyer a':'Send to';
+  document.getElementById('copyEmailsBtn').textContent = lang==='fr'?'Copier les adresses courriel':'Copy email addresses';
+  document.getElementById('instrCloseBtn').textContent = lang==='fr'?'OK, compris !':'OK, got it!';
+  document.getElementById('instructionsModal').classList.add('open');
+}
+
+function closeInstructionsModal() {
+  document.getElementById('instructionsModal').classList.remove('open');
+}
+
+function copyEmails() {
+  var emails = document.getElementById('instructionsModal')._emails || 'fugazzipresto@barroco.ca';
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(emails).then(function(){
+      showToast(lang==='fr'?'✅ Adresses copiees !':'✅ Addresses copied!');
+    }).catch(function(){ fallbackCopyText(emails); });
+  } else { fallbackCopyText(emails); }
+}
+
+function fallbackCopyText(text) {
+  var ta = document.createElement('textarea'); ta.value = text;
+  ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try { document.execCommand('copy'); showToast(lang==='fr'?'Adresses copiees !':'Addresses copied!'); } catch(e){}
+  document.body.removeChild(ta);
+}
+
+document.getElementById('instructionsModal').addEventListener('click', function(e){ if(e.target===this) closeInstructionsModal(); });
+document.getElementById('photosModal').addEventListener('click', function(e){ if (e.target === this) closePhotosModal(); });
+function closeReport(){ var el=document.getElementById('reportOverlay'); if(el) el.remove(); }
+
+// ── START ─────────────────────────────────────────────────
+goStep(0);
+updateProgress();
+</script>
+</body>
+</html>
