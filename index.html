@@ -1163,12 +1163,7 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
   </div>
 </div>
 
-<!-- GOOGLE SHEETS LINK -->
-    <span>📊</span>
-  </div>
-    <!-- REMPLACEZ LE LIEN CI-DESSOUS PAR VOTRE LIEN GOOGLE SHEETS -->
-      📋 Ouvrir Google Sheets
-    </a>
+
 
 <!-- ACTION BUTTONS -->
 <div class="action-btns" id="actionBtns" style="display:none">
@@ -1932,84 +1927,38 @@ document.getElementById('instructionsModal').addEventListener('click', function(
 document.getElementById('photosModal').addEventListener('click', function(e){ if (e.target === this) closePhotosModal(); });
 document.getElementById('menuOverlay').addEventListener('click', function(e){ if(e.target===this) closeMenu(); });
 
-// ── STORAGE (JSONBin.io public) ───────────────────────────
-// Uses JSONBin with API key for reliable storage
-var JSONBIN_KEY = '$2a$10$8K1p/a0dclxKWnRPPiMnpOesFHsRQpEuDtIcXNBXRlAIUaGY3JOnW';
-var JSONBIN_BASE = 'https://api.jsonbin.io/v3/b';
+// ── FIREBASE STORAGE ─────────────────────────────────────
+var FB_URL = 'https://fugazzi-presto-default-rtdb.firebaseio.com';
 
-// Fixed bin IDs - created once, reused always
-var MESSAGES_BIN_ID = null;
-var REPORTS_BIN_ID = null;
-var BINS_INITIALIZED = false;
+function initBins(callback) { if(callback) callback(); }
 
-function initBins(callback) {
-  if (BINS_INITIALIZED) { if(callback) callback(); return; }
-  // Try to get stored bin IDs from localStorage
-  var stored = localStorage.getItem('fugazzi_v3_bins');
-  if (stored) {
-    try {
-      var bins = JSON.parse(stored);
-      if (bins.m && bins.r) {
-        MESSAGES_BIN_ID = bins.m;
-        REPORTS_BIN_ID = bins.r;
-        BINS_INITIALIZED = true;
-        if (callback) callback();
-        return;
-      }
-    } catch(e) {}
-  }
-  // Create two new bins
-  var created = 0;
-  function tryCreate(name, isMessages) {
-    fetch(JSONBIN_BASE, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': JSONBIN_KEY,
-        'X-Bin-Name': 'fugazzi-' + name + '-' + Date.now(),
-        'X-Bin-Private': 'false'
-      },
-      body: JSON.stringify([])
-    })
+function readBin(path, callback) {
+  fetch(FB_URL + '/' + path + '.json')
     .then(function(r){ return r.json(); })
     .then(function(d){
-      var id = d.metadata ? d.metadata.id : null;
-      if (isMessages) MESSAGES_BIN_ID = id;
-      else REPORTS_BIN_ID = id;
-      created++;
-      if (created === 2) {
-        localStorage.setItem('fugazzi_v3_bins', JSON.stringify({m: MESSAGES_BIN_ID, r: REPORTS_BIN_ID}));
-        BINS_INITIALIZED = true;
-        if (callback) callback();
-      }
+      if (!d) { callback([]); return; }
+      // Firebase stores arrays as objects with numeric keys
+      var result = Array.isArray(d) ? d : Object.values(d);
+      callback(result.filter(Boolean));
     })
-    .catch(function(){
-      created++;
-      if (created === 2 && callback) callback();
-    });
-  }
-  tryCreate('messages', true);
-  tryCreate('reports', false);
+    .catch(function(){ callback([]); });
 }
 
-function readBin(binId, callback) {
-  if (!binId) { callback([]); return; }
-  fetch(JSONBIN_BASE + '/' + binId + '/latest', {
-    headers: { 'X-Master-Key': JSONBIN_KEY }
-  })
-  .then(function(r){ return r.json(); })
-  .then(function(d){ callback(Array.isArray(d.record) ? d.record : []); })
-  .catch(function(){ callback([]); });
-}
-
-function writeBin(binId, data, callback) {
-  if (!binId) { if(callback) callback(false); return; }
-  fetch(JSONBIN_BASE + '/' + binId, {
+function writeBin(path, data, callback) {
+  fetch(FB_URL + '/' + path + '.json', {
     method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Master-Key': JSONBIN_KEY
-    },
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  })
+  .then(function(r){ return r.ok; })
+  .then(function(ok){ if(callback) callback(ok); })
+  .catch(function(){ if(callback) callback(false); });
+}
+
+function pushToBin(path, data, callback) {
+  fetch(FB_URL + '/' + path + '.json', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
   })
   .then(function(r){ return r.ok; })
@@ -2043,36 +1992,25 @@ function loadMessages() {
   list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Chargement...':'Loading...') + '</div>';
   
   initBins(function() {
-    readBin(MESSAGES_BIN_ID, function(messages) {
-      if (!messages || messages.length === 0) {
-        list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun message pour le moment.':'No messages yet.') + '</div>';
-        document.getElementById('commsSubtitle').textContent = lang==='fr'?'Aucun message':'No messages';
-        return;
+    var newMsg = {
+      id: 'msg_' + Date.now(),
+      text: text,
+      date: dateStr,
+      author: 'Kahena'
+    };
+    pushToBin('messages', newMsg, function(ok) {
+      if (btn) {
+        btn.textContent = ok ? '✅' : '❌';
+        btn.style.background = ok ? '#28a745' : '#dc3545';
+        setTimeout(function(){ btn.textContent = '📤 ' + (lang==='fr'?'Publier':'Publish'); btn.style.background='#00B5A8'; btn.disabled=false; }, 2000);
       }
-      var unread = 0;
-      var myDeviceId = localStorage.getItem('fugazzi_device_id');
-      if (!myDeviceId) {
-        myDeviceId = 'dev_' + Date.now() + '_' + Math.random().toString(36).slice(2);
-        localStorage.setItem('fugazzi_device_id', myDeviceId);
+      if (ok) {
+        document.getElementById('newMessageText').value = '';
+        showToast(lang==='fr'?'✅ Message publié !':'✅ Message published!');
+        loadMessages();
+      } else {
+        showToast(lang==='fr'?'❌ Erreur — réessayez':'❌ Error — try again');
       }
-      list.innerHTML = messages.slice().reverse().map(function(msg) {
-        var readBy = msg.readBy || [];
-        var isRead = readBy.indexOf(myDeviceId) >= 0;
-        if (!isRead) unread++;
-        var readCount = readBy.length;
-        return '<div style="background:' + (isRead?'#F8F8F8':'#E0F7F5') + ';border-radius:10px;padding:12px;margin-bottom:8px;border-left:3px solid ' + (isRead?'#ddd':'#00B5A8') + '">' +
-          '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">' +
-          '<div style="font-size:11px;color:#888;font-weight:700">' + msg.date + ' · ' + (msg.author||'Kahena') + '</div>' +
-          '<button onclick="deleteMessage(\'' + msg.id + '\')" style="background:none;border:none;color:#ccc;font-size:14px;cursor:pointer;padding:0 2px">🗑️</button>' +
-          '</div>' +
-          '<div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5;margin-bottom:8px">' + msg.text + '</div>' +
-          '<div style="display:flex;justify-content:space-between;align-items:center">' +
-          (!isRead ? '<button onclick="markRead(\'' + msg.id + '\')" style="padding:6px 14px;background:#00B5A8;color:#fff;border:none;border-radius:8px;font-size:11px;font-weight:900;cursor:pointer;font-family:Nunito,sans-serif">✓ ' + (lang==='fr'?'Marquer comme lu':'Mark as read') + '</button>' :
-          '<span style="font-size:11px;color:#888;font-weight:700">✓ ' + (lang==='fr'?'Lu':'Read') + '</span>') +
-          '<span style="font-size:11px;color:#888;font-weight:700">👁 ' + readCount + ' ' + (lang==='fr'?'lu(s)':'read') + '</span>' +
-          '</div></div>';
-      }).join('');
-      document.getElementById('commsSubtitle').textContent = unread > 0 ? unread + (lang==='fr'?' non lu(s)':' unread') : (lang==='fr'?'Tout est lu':'All read');
     });
   });
 }
@@ -2080,7 +2018,7 @@ function loadMessages() {
 
 function markRead(msgId) {
   var myDeviceId = localStorage.getItem('fugazzi_device_id') || 'unknown';
-  readBin(MESSAGES_BIN_ID, function(messages) {
+  readBin('messages', function(messages) {
     var updated = false;
     messages = messages.map(function(msg) {
       if (msg.id === msgId) {
@@ -2093,14 +2031,13 @@ function markRead(msgId) {
       return msg;
     });
     if (updated) {
-      writeBin(MESSAGES_BIN_ID, messages, function(){ loadMessages(); });
+      writeBin('messages', messages, function(){ loadMessages(); });
     }
   });
 }
 
 function postMessage() {
   var text = document.getElementById('newMessageText').value.trim();
-  if (!text) { showToast(lang==='fr'?'Écrivez un message !':'Write a message!'); return; }
   
   var btn = document.getElementById('publishBtn');
   if (btn) { btn.textContent = '⏳'; btn.disabled = true; }
@@ -2109,7 +2046,7 @@ function postMessage() {
   var dateStr = now.toLocaleDateString('fr-CA') + ' ' + now.toLocaleTimeString('fr-CA', {hour:'2-digit',minute:'2-digit'});
   
   initBins(function() {
-    readBin(MESSAGES_BIN_ID, function(messages) {
+    readBin('messages', function(messages) {
       var newMsg = {
         id: 'msg_' + Date.now(),
         text: text,
@@ -2118,7 +2055,7 @@ function postMessage() {
         readBy: []
       };
       messages.push(newMsg);
-      writeBin(MESSAGES_BIN_ID, messages, function(ok) {
+      writeBin('messages', messages, function(ok) {
         if (btn) {
           btn.textContent = ok ? '✅' : '❌';
           btn.style.background = ok ? '#28a745' : '#dc3545';
@@ -2139,9 +2076,9 @@ function postMessage() {
 function deleteMessage(msgId) {
   var pwd = prompt(lang==='fr'?'Mot de passe admin :':'Admin password:');
   if (pwd !== 'Presto') { showToast(lang==='fr'?'Mot de passe incorrect':'Wrong password'); return; }
-  readBin(MESSAGES_BIN_ID, function(messages) {
+  readBin('messages', function(messages) {
     var filtered = messages.filter(function(m){ return m.id !== msgId; });
-    writeBin(MESSAGES_BIN_ID, filtered, function(ok) {
+    writeBin('messages', filtered, function(ok) {
       if (ok) { showToast(lang==='fr'?'🗑️ Message supprimé':'🗑️ Message deleted'); loadMessages(); }
     });
   });
@@ -2150,12 +2087,8 @@ function deleteMessage(msgId) {
 // ── REPORTS ───────────────────────────────────────────────
 function saveReport(reportData) {
   initBins(function() {
-    readBin(REPORTS_BIN_ID, function(reports) {
-      reports.push(reportData);
-      if (reports.length > 200) reports = reports.slice(-200);
-      writeBin(REPORTS_BIN_ID, reports, function(ok) {
-        if (ok) showToast(lang==='fr' ? '📊 Rapport sauvegardé !' : '📊 Report saved!');
-      });
+    pushToBin('reports', reportData, function(ok) {
+      if (ok) showToast(lang==='fr' ? '📊 Rapport sauvegardé !' : '📊 Report saved!');
     });
   });
 }
@@ -2164,7 +2097,7 @@ function loadReports() {
   var list = document.getElementById('reportsList');
   list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">Chargement...</div>';
   
-  readBin(REPORTS_BIN_ID, function(reports) {
+  readBin('reports', function(reports) {
     if (!reports || reports.length === 0) {
       list.innerHTML = '<div style="text-align:center;padding:16px;color:#888;font-size:12px;font-weight:700">Aucun rapport soumis encore.</div>';
       document.getElementById('reportsSubtitle').textContent = 'Aucun rapport';
@@ -2184,7 +2117,7 @@ function loadReports() {
 
 function filterReports() {
   var val = document.getElementById('reportFilter').value;
-  readBin(REPORTS_BIN_ID, function(reports) {
+  readBin('reports', function(reports) {
     renderReports(reports, val);
   });
 }
