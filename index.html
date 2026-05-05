@@ -2103,24 +2103,36 @@ function saveReport(reportData) {
 
 function loadReports() {
   var list = document.getElementById('reportsList');
-  list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">Chargement...</div>';
+  list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Chargement...':'Loading...') + '</div>';
   
-  readBin('reports', function(reports) {
-    if (!reports || reports.length === 0) {
-      list.innerHTML = '<div style="text-align:center;padding:16px;color:#888;font-size:12px;font-weight:700">Aucun rapport soumis encore.</div>';
-      document.getElementById('reportsSubtitle').textContent = 'Aucun rapport';
-      return;
-    }
-    
-    // Populate filter
-    var filter = document.getElementById('reportFilter');
-    var succursales = [...new Set(reports.map(function(r){ return r.succursale; }))].filter(Boolean);
-    filter.innerHTML = '<option value="all">Toutes les succursales (' + reports.length + ')</option>' +
-      succursales.map(function(s){ return '<option value="' + s + '">' + s + '</option>'; }).join('');
-    
-    document.getElementById('reportsSubtitle').textContent = reports.length + ' rapport(s)';
-    renderReports(reports, 'all');
-  });
+  fetch(FB_URL + '/reports.json')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var reports = [];
+      if (d && typeof d === 'object') {
+        reports = Object.values(d).filter(Boolean);
+      }
+      
+      if (reports.length === 0) {
+        list.innerHTML = '<div style="text-align:center;padding:16px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun rapport soumis encore.':'No reports yet.') + '</div>';
+        document.getElementById('reportsSubtitle').textContent = lang==='fr'?'Aucun rapport':'No reports';
+        return;
+      }
+      
+      // Populate filter
+      var filter = document.getElementById('reportFilter');
+      var seen = {}; var succursales = [];
+      reports.forEach(function(r){ if(r.succursale&&!seen[r.succursale]){seen[r.succursale]=true;succursales.push(r.succursale);} });
+      filter.innerHTML = '<option value="all">' + (lang==='fr'?'Toutes les succursales':'All locations') + ' (' + reports.length + ')</option>' +
+        succursales.map(function(s){ return '<option value="' + s + '">' + s + '</option>'; }).join('');
+      
+      document.getElementById('reportsSubtitle').textContent = reports.length + ' rapport(s)';
+      renderReports(reports, 'all');
+    })
+    .catch(function(e){
+      list.innerHTML = '<div style="text-align:center;padding:16px;color:#dc3545;font-size:12px;font-weight:700">' + (lang==='fr'?'Erreur de connexion — réessayez':'Connection error — try again') + '</div>';
+      document.getElementById('reportsSubtitle').textContent = lang==='fr'?'Erreur':'Error';
+    });
 }
 
 function filterReports() {
