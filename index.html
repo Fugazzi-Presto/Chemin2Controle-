@@ -1940,12 +1940,22 @@ function readBin(path, callback) {
   fetch(FB_URL + '/' + path + '.json')
     .then(function(r){ return r.json(); })
     .then(function(d){
-      if (!d) { callback([]); return; }
-      // Firebase stores arrays as objects with numeric keys
-      var result = Array.isArray(d) ? d : Object.values(d);
-      callback(result.filter(Boolean));
+      if (!d || d === null) { callback([]); return; }
+      var result = [];
+      if (Array.isArray(d)) {
+        result = d;
+      } else if (typeof d === 'object') {
+        // Firebase returns object with auto-generated keys like {"-OrsS70L": {...}}
+        var keys = Object.keys(d);
+        for (var i = 0; i < keys.length; i++) {
+          if (d[keys[i]] !== null && d[keys[i]] !== undefined) {
+            result.push(d[keys[i]]);
+          }
+        }
+      }
+      callback(result);
     })
-    .catch(function(){ callback([]); });
+    .catch(function(e){ console.log('readBin error:', e); callback([]); });
 }
 
 function writeBin(path, data, callback) {
