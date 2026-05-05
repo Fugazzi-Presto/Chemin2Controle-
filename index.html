@@ -1984,8 +1984,10 @@ function pushToBin(path, data, callback) {
 function openMenu() {
   var overlay = document.getElementById('menuOverlay');
   overlay.style.display = 'flex';
-  loadMessages();
-  loadReports();
+  setTimeout(function(){
+    loadMessages();
+    loadReports();
+  }, 100);
 }
 
 function closeMenu() {
@@ -2137,9 +2139,13 @@ function loadReports() {
 
 function filterReports() {
   var val = document.getElementById('reportFilter').value;
-  readBin('reports', function(reports) {
-    renderReports(reports, val);
-  });
+  fetch(FB_URL + '/reports.json')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var reports = d && typeof d==='object' ? Object.values(d).filter(Boolean) : [];
+      renderReports(reports, val);
+    })
+    .catch(function(){ });
 }
 
 function renderReports(reports, filter) {
