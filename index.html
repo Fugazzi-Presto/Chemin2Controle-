@@ -1720,29 +1720,126 @@ function buildReport() {
 }
 
 // ── SEND FLOW ─────────────────────────────────────────────
-function openSendFlow() {
-  // Auto-save to JSONBin
-  var s = getScore();
+// ── CLOUDINARY ───────────────────────────────────────────
+var CLOUD_NAME = 'drnovmfmp';
+var UPLOAD_PRESET = 'fugazzi_reports';
+
+function uploadPhotoToCloudinary(dataUrl, filename, callback) {
+  var formData = new FormData();
+  // Convert dataUrl to blob
+  var arr = dataUrl.split(','), mime = arr[0].match(/:(.*?);/)[1];
+  var bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+  while(n--) u8arr[n] = bstr.charCodeAt(n);
+  var blob = new Blob([u8arr], {type: mime});
+  formData.append('file', blob, filename);
+  formData.append('upload_preset', UPLOAD_PRESET);
+  formData.append('api_key', '292998532642883');
+  // Add folder with date for easy cleanup
+  var now = new Date();
+  var folder = 'fugazzi/' + now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+  formData.append('folder', folder);
+  
+  fetch('https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/image/upload', {
+    method: 'POST',
+    body: formData
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){ callback(d.secure_url || null); })
+  .catch(function(){ callback(null); });
+}
+
+function uploadAllNCPhotos(callback) {
   var ncItems = [];
+  var uploadTasks = [];
+  
   document.querySelectorAll('.check-item').forEach(function(item){
     if (!item.querySelector('.non-conforme.active')) return;
-    ncItems.push({
-      section: item.getAttribute('data-section')||'',
-      label: item.getAttribute('data-label')||'',
-      comment: item.querySelector('.nc-extras input[type=text]') ? item.querySelector('.nc-extras input[type=text]').value : ''
+    var lbl = item.getAttribute('data-label') || '';
+    var sec = item.getAttribute('data-section') || '';
+    var cmt = item.querySelector('.nc-extras input[type=text]') ? item.querySelector('.nc-extras input[type=text]').value : '';
+    var imgs = item.querySelectorAll('.photo-thumb img');
+    var photoUrls = [];
+    
+    imgs.forEach(function(img, idx){
+      uploadTasks.push({
+        dataUrl: img.src,
+        filename: 'NC_' + lbl.replace(/[^a-zA-Z0-9]/g,'_').slice(0,20) + '_' + idx + '.jpg',
+        targetArray: photoUrls
+      });
+    });
+    
+    ncItems.push({ section: sec, label: lbl, comment: cmt, photos: photoUrls });
+  });
+  
+  if (uploadTasks.length === 0) { callback(ncItems); return; }
+  
+  var completed = 0;
+  uploadTasks.forEach(function(task){
+    uploadPhotoToCloudinary(task.dataUrl, task.filename, function(url){
+      if (url) task.targetArray.push(url);
+      completed++;
+      if (completed === uploadTasks.length) callback(ncItems);
     });
   });
-  var reportData = {
-    date: document.getElementById('f-date').value,
-    heure: document.getElementById('f-heure').value,
-    succursale: document.getElementById('f-succursale').value||'Non specifiee',
-    responsable: document.getElementById('f-resp').value||'Non specifie',
-    score: s.pct!==null?s.pct:0,
-    conformes: s.c,
-    nonConformes: s.nc,
-    ncItems: ncItems
-  };
-  initBins(function(){ saveReport(reportData); });
+}
+
+function openSendFlow() {
+  var s = getScore();
+  var sendBtn = document.getElementById('sendBtn');
+  if(sendBtn){ sendBtn.textContent = lang==='fr'?'⏳ Upload photos...':'⏳ Uploading...'; sendBtn.disabled=true; }
+  
+  // Upload photos to Cloudinary first
+  var hasPhotos = false;
+  document.querySelectorAll('.check-item').forEach(function(item){
+    if(item.querySelector('.non-conforme.active') && item.querySelectorAll('.photo-thumb img').length > 0) hasPhotos = true;
+  });
+  
+  function proceedWithSave(ncItemsWithPhotos) {
+    if(sendBtn){ sendBtn.textContent = T[lang].sendBtn; sendBtn.disabled=false; }
+    
+    // Determine rush
+    var heure = document.getElementById('f-heure').value;
+    var heureNum = parseInt((heure||'00').split(':')[0]);
+    var rush = heureNum < 12 ? 'midi' : (heureNum >= 15 && heureNum < 18 ? 'soir' : 'hors-rush');
+    
+    var reportData = {
+      date: document.getElementById('f-date').value,
+      heure: heure,
+      succursale: document.getElementById('f-succursale').value||'Non specifiee',
+      responsable: document.getElementById('f-resp').value||'Non specifie',
+      score: s.pct!==null?s.pct:0,
+      conformes: s.c,
+      nonConformes: s.nc,
+      rush: rush,
+      timestamp: Date.now(),
+      ncItems: ncItemsWithPhotos
+    };
+    saveReport(reportData);
+    
+    // Auto email if score < 80
+    if (s.pct !== null && s.pct < 80) {
+      sendLowScoreEmail(reportData);
+    }
+    
+    // Cleanup old photos (7 days) - runs silently
+    cleanupOldReports();
+  }
+  
+  if (hasPhotos) {
+    uploadAllNCPhotos(proceedWithSave);
+  } else {
+    var ncItems = [];
+    document.querySelectorAll('.check-item').forEach(function(item){
+      if (!item.querySelector('.non-conforme.active')) return;
+      ncItems.push({
+        section: item.getAttribute('data-section')||'',
+        label: item.getAttribute('data-label')||'',
+        comment: item.querySelector('.nc-extras input[type=text]') ? item.querySelector('.nc-extras input[type=text]').value : '',
+        photos: []
+      });
+    });
+    proceedWithSave(ncItems);
+  }
 
   // Build HTML report with photos
   var t2 = T[lang];
@@ -2005,24 +2102,40 @@ function toggleMenuSection(section) {
 // ── COMMUNICATIONS ────────────────────────────────────────
 function loadMessages() {
   var list = document.getElementById('messagesList');
-  list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Chargement...':'Loading...') + '</div>';
-  readBin('messages', function(messages) {
-    if (!messages || messages.length === 0) {
-      list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun message pour le moment.':'No messages yet.') + '</div>';
-      document.getElementById('commsSubtitle').textContent = lang==='fr'?'Aucun message':'No messages';
-      return;
-    }
-    list.innerHTML = messages.slice().reverse().map(function(msg) {
-      return '<div style="background:#fff;border-radius:10px;padding:12px;margin-bottom:8px;border-left:3px solid #00B5A8;border:1px solid #E0F7F5">' +
-        '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">' +
-        '<div style="font-size:11px;color:#888;font-weight:700">' + (msg.date||'') + ' · ' + (msg.author||'Kahena') + '</div>' +
-        '<button onclick="deleteMessage(\'' + msg.id + '\')" style="background:none;border:none;color:#ddd;font-size:13px;cursor:pointer;padding:0">&#128465;</button>' +
-        '</div>' +
-        '<div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.6">' + (msg.text||'') + '</div>' +
-        '</div>';
-    }).join('');
-    document.getElementById('commsSubtitle').textContent = messages.length + ' message(s)';
-  });
+  if(cachedMessages.length > 0) displayMessages(cachedMessages);
+  else list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Chargement...':'Loading...') + '</div>';
+  
+  fetch(FB_URL + '/messages.json')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if(d && typeof d==='object') cachedMessages = Array.isArray(d) ? d.filter(Boolean) : Object.values(d).filter(Boolean);
+      else cachedMessages = [];
+      displayMessages(cachedMessages);
+    })
+    .catch(function(){
+      if(cachedMessages.length===0){
+        list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun message.':'No messages.') + '</div>';
+      }
+    });
+}
+
+function displayMessages(messages) {
+  var list = document.getElementById('messagesList');
+  if(!messages || messages.length===0){
+    list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun message pour le moment.':'No messages yet.') + '</div>';
+    document.getElementById('commsSubtitle').textContent = lang==='fr'?'Aucun message':'No messages';
+    return;
+  }
+  list.innerHTML = messages.slice().reverse().map(function(msg){
+    return '<div style="background:#fff;border-radius:10px;padding:12px;margin-bottom:8px;border-left:3px solid #00B5A8;border:1px solid #E0F7F5">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">' +
+      '<div style="font-size:11px;color:#888;font-weight:700">' + (msg.date||'') + ' · ' + (msg.author||'Kahena') + '</div>' +
+      '<button onclick="deleteMessage(\'' + (msg.id||'') + '\')" style="background:none;border:none;color:#ddd;font-size:13px;cursor:pointer;padding:0">&#128465;</button>' +
+      '</div>' +
+      '<div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.6">' + (msg.text||'') + '</div>' +
+      '</div>';
+  }).join('');
+  document.getElementById('commsSubtitle').textContent = messages.length + ' message(s)';
 }
 
 
@@ -2105,47 +2218,49 @@ function saveReport(reportData) {
 
 function loadReports() {
   var list = document.getElementById('reportsList');
-  list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Chargement...':'Loading...') + '</div>';
   
+  // Show cached data immediately if available
+  if (cachedReports.length > 0) {
+    displayReports(cachedReports);
+  } else {
+    list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Chargement...':'Loading...') + '</div>';
+  }
+  
+  // Always refresh from Firebase
   fetch(FB_URL + '/reports.json')
     .then(function(r){ return r.json(); })
     .then(function(d){
-      var reports = [];
-      if (d && typeof d === 'object') {
-        reports = Object.values(d).filter(Boolean);
-      }
-      
-      if (reports.length === 0) {
-        list.innerHTML = '<div style="text-align:center;padding:16px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun rapport soumis encore.':'No reports yet.') + '</div>';
-        document.getElementById('reportsSubtitle').textContent = lang==='fr'?'Aucun rapport':'No reports';
-        return;
-      }
-      
-      // Populate filter
-      var filter = document.getElementById('reportFilter');
-      var seen = {}; var succursales = [];
-      reports.forEach(function(r){ if(r.succursale&&!seen[r.succursale]){seen[r.succursale]=true;succursales.push(r.succursale);} });
-      filter.innerHTML = '<option value="all">' + (lang==='fr'?'Toutes les succursales':'All locations') + ' (' + reports.length + ')</option>' +
-        succursales.map(function(s){ return '<option value="' + s + '">' + s + '</option>'; }).join('');
-      
-      document.getElementById('reportsSubtitle').textContent = reports.length + ' rapport(s)';
-      renderReports(reports, 'all');
+      cachedReports = d && typeof d==='object' ? Object.values(d).filter(Boolean) : [];
+      displayReports(cachedReports);
     })
-    .catch(function(e){
-      list.innerHTML = '<div style="text-align:center;padding:16px;color:#dc3545;font-size:12px;font-weight:700">' + (lang==='fr'?'Erreur de connexion — réessayez':'Connection error — try again') + '</div>';
-      document.getElementById('reportsSubtitle').textContent = lang==='fr'?'Erreur':'Error';
+    .catch(function(){
+      if(cachedReports.length === 0){
+        list.innerHTML = '<div style="text-align:center;padding:16px;color:#dc3545;font-size:12px;font-weight:700">' + (lang==='fr'?'Erreur — vérifiez votre connexion':'Error — check your connection') + '</div>';
+      }
     });
+}
+
+function displayReports(reports) {
+  var list = document.getElementById('reportsList');
+  if (!reports || reports.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:16px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun rapport soumis encore.':'No reports yet.') + '</div>';
+    document.getElementById('reportsSubtitle').textContent = lang==='fr'?'Aucun rapport':'No reports';
+    return;
+  }
+  var filter = document.getElementById('reportFilter');
+  var seen = {}; var succursales = [];
+  reports.forEach(function(r){ if(r.succursale&&!seen[r.succursale]){seen[r.succursale]=true;succursales.push(r.succursale);} });
+  var currentVal = filter.value || 'all';
+  filter.innerHTML = '<option value="all">' + (lang==='fr'?'Toutes les succursales':'All locations') + ' (' + reports.length + ')</option>' +
+    succursales.map(function(s){ return '<option value="' + s + '">' + s + '</option>'; }).join('');
+  filter.value = currentVal;
+  document.getElementById('reportsSubtitle').textContent = reports.length + ' rapport(s)';
+  renderReports(reports, currentVal);
 }
 
 function filterReports() {
   var val = document.getElementById('reportFilter').value;
-  fetch(FB_URL + '/reports.json')
-    .then(function(r){ return r.json(); })
-    .then(function(d){
-      var reports = d && typeof d==='object' ? Object.values(d).filter(Boolean) : [];
-      renderReports(reports, val);
-    })
-    .catch(function(){ });
+  renderReports(cachedReports, val);
 }
 
 function renderReports(reports, filter) {
@@ -2206,20 +2321,37 @@ function renderReports(reports, filter) {
       '</div>';
   }
   
-  // Recent reports list
+  // Recent reports list - clickable to see details + photos
   var recentHtml = '<div style="background:#fff;border-radius:10px;padding:12px;border:1px solid #eee">' +
     '<div style="font-size:11px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">📋 ' + (lang==='fr'?'Derniers rapports':'Recent reports') + '</div>' +
-    filtered.slice(0, 10).map(function(r) {
+    filtered.slice(0, 15).map(function(r, idx) {
       var sc = r.score || 0;
       var bg = sc >= 90 ? '#D4EDDA' : sc >= 80 ? '#FFF3CD' : sc >= 60 ? '#FFE5CC' : '#F8D7DA';
       var col = sc >= 90 ? '#155724' : sc >= 80 ? '#856404' : sc >= 60 ? '#C05000' : '#721c24';
       var shortSuc = (r.succursale||'?').replace('Fugazzi Presto ','');
-      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #F5F5F5">' +
+      var rushLabel = r.rush==='midi'?'🌞 Midi':r.rush==='soir'?'🌙 Soir':'';
+      var hasPhotos = r.ncItems && r.ncItems.some(function(nc){ return nc.photos && nc.photos.length > 0; });
+      return '<div style="border-bottom:1px solid #F5F5F5;padding:8px 0">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer" onclick="toggleReportDetail(this)" data-detail="detail_'+idx+'">' +
         '<div style="flex:1;min-width:0">' +
-        '<div style="font-size:12px;font-weight:800;color:#1A1A1A;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + shortSuc + ' · ' + (r.responsable||'?') + '</div>' +
-        '<div style="font-size:11px;color:#888;font-weight:700">' + (r.date||'') + ' ' + (r.heure||'') + (r.nonConformes>0?' · '+r.nonConformes+' NC':'') + '</div>' +
+        '<div style="font-size:12px;font-weight:800;color:#1A1A1A">' + shortSuc + ' · ' + (r.responsable||'?') + (rushLabel?' <span style="font-size:10px;color:#888">'+rushLabel+'</span>':'') + '</div>' +
+        '<div style="font-size:11px;color:#888;font-weight:700">' + (r.date||'') + ' ' + (r.heure||'') + (r.nonConformes>0?' · <span style="color:#dc3545">'+r.nonConformes+' NC</span>':'') + (hasPhotos?' 📷':'') + '</div>' +
         '</div>' +
-        '<div style="background:' + bg + ';color:' + col + ';padding:3px 10px;border-radius:99px;font-size:12px;font-weight:900;margin-left:8px;flex-shrink:0">' + sc + '%</div></div>';
+        '<div style="display:flex;align-items:center;gap:6px">' +
+        '<div style="background:' + bg + ';color:' + col + ';padding:3px 10px;border-radius:99px;font-size:12px;font-weight:900">' + sc + '%</div>' +
+        '<span style="color:#ccc;font-size:12px">▼</span></div></div>' +
+        '<div id="detail_'+idx+'" style="display:none;margin-top:8px;background:#F8F8F8;border-radius:8px;padding:10px">' +
+        (r.ncItems && r.ncItems.length > 0 ? r.ncItems.map(function(nc){
+          var photosHtml = nc.photos && nc.photos.length > 0 ? 
+            '<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">' + 
+            nc.photos.map(function(url){ return '<a href="'+url+'" target="_blank"><img src="'+url+'" style="width:60px;height:60px;object-fit:cover;border-radius:6px;border:1.5px solid #dc3545"></a>'; }).join('') + 
+            '</div>' : '';
+          return '<div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #eee">' +
+            '<div style="font-size:11px;font-weight:800;color:#721c24">❌ '+nc.section+' — '+nc.label+'</div>' +
+            (nc.comment?'<div style="font-size:11px;color:#666;margin-top:2px">💬 '+nc.comment+'</div>':'') +
+            photosHtml + '</div>';
+        }).join('') : '<div style="font-size:11px;color:#155724;font-weight:700">✅ '+(lang==="fr"?"Tous conformes":"All compliant")+'</div>') +
+        '</div></div>';
     }).join('') +
     '</div>';
   
@@ -2228,10 +2360,72 @@ function renderReports(reports, filter) {
 
 function closeReport(){ var el=document.getElementById('reportOverlay'); if(el) el.remove(); }
 
+function toggleReportDetail(btn) {
+  var id = btn.getAttribute('data-detail');
+  var el = document.getElementById(id);
+  if (!el) return;
+  var isOpen = el.style.display !== 'none';
+  el.style.display = isOpen ? 'none' : 'block';
+  var arrow = btn.querySelector('span:last-child');
+  if (arrow) arrow.textContent = isOpen ? '▼' : '▲';
+}
+
 // ── START ─────────────────────────────────────────────────
+// ── AUTO CLEANUP (7 days) ────────────────────────────────
+function cleanupOldReports() {
+  var sevenDaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+  fetch(FB_URL + '/reports.json')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (!d || typeof d !== 'object') return;
+      var keys = Object.keys(d);
+      keys.forEach(function(key){
+        var report = d[key];
+        if (report && report.timestamp && report.timestamp < sevenDaysAgo) {
+          fetch(FB_URL + '/reports/' + key + '.json', {method:'DELETE'}).catch(function(){});
+        }
+      });
+    }).catch(function(){});
+}
+
+// ── LOW SCORE EMAIL ───────────────────────────────────────
+function sendLowScoreEmail(reportData) {
+  var suc = reportData.succursale || '';
+  var gerant = suc ? 'gerant.' + suc.toLowerCase().replace(/\s+/g,'') + '@fugazzipresto.ca' : '';
+  var to = 'fugazzipresto@barroco.ca' + (gerant ? ',' + gerant : '');
+  var subject = encodeURIComponent('ALERTE Score ' + reportData.score + '% - ' + suc + ' - ' + reportData.date);
+  var ncList = (reportData.ncItems||[]).map(function(nc){
+    return 'NC: ' + nc.section + ' - ' + nc.label + (nc.comment ? ' : ' + nc.comment : '');
+  }).join('%0A');
+  var body = 'RAPPORT FUGAZZI - SCORE SOUS 80%25%0A';
+  body += 'Succursale: ' + encodeURIComponent(suc) + '%0A';
+  body += 'Date: ' + reportData.date + ' ' + reportData.heure + '%0A';
+  body += 'Score: ' + reportData.score + '%25%0A';
+  body += 'Rush: ' + (reportData.rush||'') + '%0A%0A';
+  body += 'POINTS NC:%0A' + ncList;
+  window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+}
+
+
 goStep(0);
 updateProgress();
-initBins(function(){});
+
+// Pre-load data on startup
+var cachedReports = [];
+var cachedMessages = [];
+
+fetch(FB_URL + '/reports.json')
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if(d && typeof d==='object') cachedReports = Object.values(d).filter(Boolean);
+  }).catch(function(){});
+
+fetch(FB_URL + '/messages.json')
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if(d && typeof d==='object') cachedMessages = Object.values(d).filter(Boolean);
+    else if(Array.isArray(d)) cachedMessages = d.filter(Boolean);
+  }).catch(function(){});
 </script>
 </body>
 </html>
