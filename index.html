@@ -1165,6 +1165,21 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
 
 
 
+<!-- MESSAGE FIN DE RAPPORT -->
+<div id="endMessage" style="display:none;margin:14px 14px 0;background:#1A1A1A;border-radius:16px;padding:20px;text-align:center">
+  <div style="font-size:24px;margin-bottom:10px">🍕</div>
+  <div style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#F5C800;letter-spacing:1px;margin-bottom:10px" id="endTitle">MERCI POUR TON RAPPORT !</div>
+  <div style="font-size:13px;color:rgba(255,255,255,.8);font-weight:700;line-height:1.7;margin-bottom:14px" id="endMsg">Ton suivi quotidien fait toute la différence.<br>Chaque détail compte pour le standard Fugazzi. 💪</div>
+  <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:12px;margin-bottom:10px;text-align:left">
+    <div style="font-size:10px;font-weight:800;color:#00B5A8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="endReportLbl">📊 Ton rapport est sauvegardé</div>
+    <div style="font-size:12px;color:rgba(255,255,255,.7);font-weight:700;line-height:1.6" id="endReportDesc">Il est accessible dans le menu ☰ → Rapports & Suivi pour toi et ton équipe.</div>
+  </div>
+  <div id="endLowScore" style="display:none;background:#dc3545;border-radius:10px;padding:12px;text-align:left">
+    <div style="font-size:11px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="endUrgentLbl">🔴 ACTION REQUISE</div>
+    <div style="font-size:12px;color:#fff;font-weight:700;line-height:1.7" id="endUrgentDesc">Score sous 80% — Envoie le rapport à :<br><strong>fugazzipresto@barroco.ca</strong><br>En cas d'urgence, appelle immédiatement Kahena.</div>
+  </div>
+</div>
+
 <!-- ACTION BUTTONS -->
 <div class="action-btns" id="actionBtns" style="display:none">
   <button class="btn-email" onclick="openSendFlow()" id="sendBtn">📄 Télécharger en PDF</button>
@@ -1552,6 +1567,23 @@ function applyLang() {
   updateProgress();
   if (cur === 13) updateScore();
   updateStepLabel();
+  // End message translations
+  var endTitle = document.getElementById('endTitle');
+  if(endTitle) endTitle.textContent = lang==='fr'?'MERCI POUR TON RAPPORT !':'THANK YOU FOR YOUR REPORT!';
+  var endMsg = document.getElementById('endMsg');
+  if(endMsg) endMsg.innerHTML = lang==='fr'?'Ton suivi quotidien fait toute la différence.<br>Chaque détail compte pour le standard Fugazzi. 💪':'Your daily follow-up makes all the difference.<br>Every detail counts for the Fugazzi standard. 💪';
+  var endReportLbl = document.getElementById('endReportLbl');
+  if(endReportLbl) endReportLbl.textContent = lang==='fr'?'📊 Ton rapport est sauvegardé':'📊 Your report is saved';
+  var endReportDesc = document.getElementById('endReportDesc');
+  if(endReportDesc) endReportDesc.textContent = lang==='fr'?'Il est accessible dans le menu ☰ → Rapports & Suivi pour toi et ton équipe.':'It is accessible in the ☰ menu → Reports & Tracking for you and your team.';
+  var endUrgentLbl = document.getElementById('endUrgentLbl');
+  if(endUrgentLbl) endUrgentLbl.textContent = lang==='fr'?'🔴 ACTION REQUISE':'🔴 ACTION REQUIRED';
+  var endUrgentDesc = document.getElementById('endUrgentDesc');
+  if(endUrgentDesc) {
+    var urgFr = 'Score sous 80% — Envoie le rapport à : fugazzipresto@barroco.ca | En cas urgence, appelle Kahena.';
+    var urgEn = 'Score under 80% — Send report to: fugazzipresto@barroco.ca | In emergency, call Kahena.';
+    endUrgentDesc.textContent = lang==='fr' ? urgFr : urgEn;
+  }
   // Update menu texts
   var publishBtn = document.getElementById('publishBtn');
   if (publishBtn) publishBtn.textContent = lang==='fr' ? '📤 Publier' : '📤 Publish';
@@ -1588,7 +1620,7 @@ function goStep(idx) {
   document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('visible'); });
   document.getElementById('scoreBlock').style.display = 'none';
   document.getElementById('planSection').style.display = 'none';
-
+  document.getElementById('endMessage').style.display = 'none';
   document.getElementById('actionBtns').style.display = 'none';
 
   cur = idx;
@@ -1610,9 +1642,13 @@ function goStep(idx) {
   } else if (idx === 13) {
     document.getElementById('scoreBlock').style.display = 'block';
     document.getElementById('planSection').style.display = 'block';
-
+    document.getElementById('endMessage').style.display = 'block';
     document.getElementById('actionBtns').style.display = 'flex';
     updateScore();
+    // Show low score warning
+    var s13 = getScore();
+    var lowScore = document.getElementById('endLowScore');
+    if (lowScore) lowScore.style.display = (s13.pct !== null && s13.pct < 80) ? 'block' : 'none';
   }
 
   updateNavBtns();
