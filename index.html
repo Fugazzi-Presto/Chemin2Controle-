@@ -1122,7 +1122,7 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
   <div class="section-body">
     <div class="check-item" data-label="Tâches de gestion complétées" data-label-en="Management tasks completed" data-section="Tâches de gestion" data-section-en="Management Tasks">
       <div class="item-label" data-fr="Tâches de gestion complétées" data-en="Management tasks completed">Tâches de gestion complétées</div>
-      <div class="item-hint" data-fr="Pertes, heures Veloce, et toutes tâches selon le document officiel" data-en="Losses, Veloce hours, and all tasks per the official document">Pertes, heures Veloce, et toutes tâches selon le document officiel</div>
+      <div class="item-hint" data-fr="Pertes, prise de température, heures Veloce, et toutes tâches selon le document officiel" data-en="Losses, temperature check, Veloce hours, and all tasks per the official document">Pertes, prise de température, heures Veloce, et toutes tâches selon le document officiel</div>
       <div class="check-row">
         <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
         <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
@@ -1368,6 +1368,54 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
           </select>
         </div>
         <div id="reportsList"></div>
+      </div>
+    </div>
+
+    <!-- SECTION: Visite superviseur -->
+    <div style="border-bottom:1px solid #F0F0F0">
+      <div onclick="toggleMenuSection('supervisor')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="background:#F8D7DA;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">🔐</div>
+          <div>
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="VISITE SUPERVISEUR" data-en="SUPERVISOR VISIT">VISITE SUPERVISEUR</div>
+            <div style="font-size:11px;color:#888;font-weight:700" id="supervisorSubtitle" data-fr="Accès protégé" data-en="Protected access">Accès protégé</div>
+          </div>
+        </div>
+        <div id="supervisorArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
+      </div>
+      <div id="supervisorSection" style="display:none;padding:0 14px 14px">
+        <div id="supervisorLocked" style="display:block">
+          <div style="background:#F8D7DA;border-radius:12px;padding:14px;margin-bottom:10px;text-align:center">
+            <div style="font-size:24px;margin-bottom:6px">🔐</div>
+            <div style="font-size:13px;font-weight:800;color:#721c24;margin-bottom:10px" id="supervisorLockMsg">Accès réservé au superviseur</div>
+            <input type="password" id="supervisorPwd" placeholder="Mot de passe..." style="width:100%;border:2px solid #F5C8C8;border-radius:10px;padding:10px;font-size:14px;font-family:'Nunito',sans-serif;outline:none;background:#fff;margin-bottom:8px">
+            <button onclick="unlockSupervisor()" style="width:100%;padding:11px;background:#721c24;color:#fff;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:13px;cursor:pointer;letter-spacing:1px">🔓 Accéder</button>
+          </div>
+        </div>
+        <div id="supervisorUnlocked" style="display:none">
+          <!-- Sub-tabs -->
+          <div style="display:flex;gap:8px;margin-bottom:12px">
+            <button onclick="showSupervisorTab('monthly')" id="tabMonthly" style="flex:1;padding:10px;background:#1A1A1A;color:#F5C800;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:12px;cursor:pointer;letter-spacing:.5px">📋 MENSUELLE</button>
+            <button onclick="showSupervisorTab('surprise')" id="tabSurprise" style="flex:1;padding:10px;background:#F4F4F4;color:#888;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:12px;cursor:pointer;letter-spacing:.5px">⚡ SURPRISE</button>
+          </div>
+          <!-- Monthly tab -->
+          <div id="supervisorMonthly" style="display:block">
+            <div style="background:#FFF3CD;border-radius:12px;padding:16px;text-align:center;border:2px dashed #F5C800">
+              <div style="font-size:20px;margin-bottom:8px">📋</div>
+              <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#856404;letter-spacing:1px;margin-bottom:6px">VISITE MENSUELLE</div>
+              <div style="font-size:12px;color:#856404;font-weight:700;line-height:1.5">Liste en cours de création<br>Disponible prochainement</div>
+            </div>
+          </div>
+          <!-- Surprise tab -->
+          <div id="supervisorSurprise" style="display:none">
+            <div style="background:#F8D7DA;border-radius:12px;padding:16px;text-align:center;border:2px dashed #dc3545">
+              <div style="font-size:20px;margin-bottom:8px">⚡</div>
+              <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#721c24;letter-spacing:1px;margin-bottom:6px">VISITE SURPRISE</div>
+              <div style="font-size:12px;color:#721c24;font-weight:700;line-height:1.5">Liste en cours de création<br>Disponible prochainement</div>
+            </div>
+          </div>
+          <button onclick="lockSupervisor()" style="width:100%;margin-top:10px;padding:10px;background:#F4F4F4;color:#888;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer">🔒 Se déconnecter</button>
+        </div>
       </div>
     </div>
 
@@ -2028,6 +2076,42 @@ document.getElementById('instructionsModal').addEventListener('click', function(
 document.getElementById('photosModal').addEventListener('click', function(e){ if (e.target === this) closePhotosModal(); });
 document.getElementById('menuOverlay').addEventListener('click', function(e){ if(e.target===this) closeMenu(); });
 
+// ── SUPERVISOR ────────────────────────────────────────────
+var SUPERVISOR_PWD = 'Fugazzi.Presto';
+
+function unlockSupervisor() {
+  var pwd = document.getElementById('supervisorPwd').value;
+  if (pwd === SUPERVISOR_PWD) {
+    document.getElementById('supervisorLocked').style.display = 'none';
+    document.getElementById('supervisorUnlocked').style.display = 'block';
+    document.getElementById('supervisorSubtitle').textContent = lang==='fr'?'Connecté ✅':'Connected ✅';
+    document.getElementById('supervisorPwd').value = '';
+  } else {
+    showToast(lang==='fr'?'Mot de passe incorrect':'Wrong password');
+    document.getElementById('supervisorPwd').value = '';
+  }
+}
+
+function lockSupervisor() {
+  document.getElementById('supervisorLocked').style.display = 'block';
+  document.getElementById('supervisorUnlocked').style.display = 'none';
+  document.getElementById('supervisorSubtitle').textContent = lang==='fr'?'Accès protégé':'Protected access';
+}
+
+function showSupervisorTab(tab) {
+  document.getElementById('supervisorMonthly').style.display = tab==='monthly'?'block':'none';
+  document.getElementById('supervisorSurprise').style.display = tab==='surprise'?'block':'none';
+  document.getElementById('tabMonthly').style.background = tab==='monthly'?'#1A1A1A':'#F4F4F4';
+  document.getElementById('tabMonthly').style.color = tab==='monthly'?'#F5C800':'#888';
+  document.getElementById('tabSurprise').style.background = tab==='surprise'?'#721c24':'#F4F4F4';
+  document.getElementById('tabSurprise').style.color = tab==='surprise'?'#fff':'#888';
+}
+
+// Allow Enter key for supervisor password
+document.getElementById('supervisorPwd').addEventListener('keypress', function(e){
+  if(e.key==='Enter') unlockSupervisor();
+});
+
 // ── FIREBASE STORAGE ─────────────────────────────────────
 var FB_URL = 'https://fugazzi-presto-default-rtdb.firebaseio.com';
 
@@ -2390,20 +2474,9 @@ function cleanupOldReports() {
 
 // ── LOW SCORE EMAIL ───────────────────────────────────────
 function sendLowScoreEmail(reportData) {
-  var suc = reportData.succursale || '';
-  var gerant = suc ? 'gerant.' + suc.toLowerCase().replace(/\s+/g,'') + '@fugazzipresto.ca' : '';
-  var to = 'fugazzipresto@barroco.ca' + (gerant ? ',' + gerant : '');
-  var subject = encodeURIComponent('ALERTE Score ' + reportData.score + '% - ' + suc + ' - ' + reportData.date);
-  var ncList = (reportData.ncItems||[]).map(function(nc){
-    return 'NC: ' + nc.section + ' - ' + nc.label + (nc.comment ? ' : ' + nc.comment : '');
-  }).join('%0A');
-  var body = 'RAPPORT FUGAZZI - SCORE SOUS 80%25%0A';
-  body += 'Succursale: ' + encodeURIComponent(suc) + '%0A';
-  body += 'Date: ' + reportData.date + ' ' + reportData.heure + '%0A';
-  body += 'Score: ' + reportData.score + '%25%0A';
-  body += 'Rush: ' + (reportData.rush||'') + '%0A%0A';
-  body += 'POINTS NC:%0A' + ncList;
-  window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+  // Same method as regular report - show alert then open instructions
+  showToast(lang==='fr' ? '🔴 Score sous 80% — Envoyez le rapport à fugazzipresto@barroco.ca' : '🔴 Score under 80% — Send report to fugazzipresto@barroco.ca');
+  openInstructionsModal(reportData.succursale||'', reportData.succursale ? 'fugazzipresto@barroco.ca' : '');
 }
 
 
