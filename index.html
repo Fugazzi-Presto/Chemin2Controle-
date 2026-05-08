@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -91,47 +92,48 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
 
 /* ACTION BUTTONS */
 .action-btns{display:flex;gap:10px;margin:14px 14px 0}
-.btn-email{flex:1;background:var(--yellow);color:var(--dark);border:none;border-radius:var(--radius);padding:15px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 14px rgba(245,200,0,.3)}
+.btn-email{flex:1;background:var(–yellow);color:var(–dark);border:none;border-radius:var(–radius);padding:15px;font-family:‘Black Han Sans’,sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 14px rgba(245,200,0,.3)}
 /* MODALS */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:100;align-items:flex-end;justify-content:center}
 .modal-overlay.open{display:flex}
 .modal{background:#fff;border-radius:20px 20px 0 0;padding:22px 18px calc(env(safe-area-inset-bottom,0px)+32px);width:100%;max-width:600px;animation:slideUp .3s ease;max-height:88vh;overflow-y:auto}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 @keyframes slideRight{from{transform:translateX(-100%)}to{transform:translateX(0)}}
-.modal h2{font-family:'Black Han Sans',sans-serif;font-size:17px;color:var(--dark);margin-bottom:6px}
-.modal-sub{font-size:12px;color:var(--mid);font-weight:700;margin-bottom:12px}
-.modal label{font-size:10px;font-weight:800;color:var(--teal-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;margin-top:10px}
-.modal input[type=email]{width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:11px 12px;font-size:14px;font-family:'Nunito',sans-serif;color:var(--dark);background:var(--teal-light);outline:none}
+.modal h2{font-family:‘Black Han Sans’,sans-serif;font-size:17px;color:var(–dark);margin-bottom:6px}
+.modal-sub{font-size:12px;color:var(–mid);font-weight:700;margin-bottom:12px}
+.modal label{font-size:10px;font-weight:800;color:var(–teal-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;margin-top:10px}
+.modal input[type=email]{width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:11px 12px;font-size:14px;font-family:‘Nunito’,sans-serif;color:var(–dark);background:var(–teal-light);outline:none}
 .modal-btns{display:flex;flex-direction:column;gap:8px;margin-top:14px}
-.btn-send-mail{width:100%;background:var(--dark);color:#fff;border:none;border-radius:12px;padding:14px;font-family:'Black Han Sans',sans-serif;font-size:14px;cursor:pointer;letter-spacing:1px}
-.btn-copy-report{width:100%;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px;font-family:'Black Han Sans',sans-serif;font-size:14px;cursor:pointer;letter-spacing:1px}
-.btn-cancel{width:100%;background:var(--grey);color:var(--mid);border:none;border-radius:12px;padding:13px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer}
+.btn-send-mail{width:100%;background:var(–dark);color:#fff;border:none;border-radius:12px;padding:14px;font-family:‘Black Han Sans’,sans-serif;font-size:14px;cursor:pointer;letter-spacing:1px}
+.btn-copy-report{width:100%;background:var(–teal);color:#fff;border:none;border-radius:12px;padding:14px;font-family:‘Black Han Sans’,sans-serif;font-size:14px;cursor:pointer;letter-spacing:1px}
+.btn-cancel{width:100%;background:var(–grey);color:var(–mid);border:none;border-radius:12px;padding:13px;font-family:‘Nunito’,sans-serif;font-size:13px;font-weight:800;cursor:pointer}
 .recap-box{background:#F8F8F8;border-radius:10px;padding:12px;max-height:180px;overflow-y:auto;font-size:11px;color:#333;line-height:1.7;white-space:pre-wrap;font-family:monospace;margin-bottom:4px;border:1px solid #eee}
-.warning-box{background:#FFF3CD;border-radius:10px;padding:12px;margin-bottom:10px;border-left:4px solid var(--yellow)}
+.warning-box{background:#FFF3CD;border-radius:10px;padding:12px;margin-bottom:10px;border-left:4px solid var(–yellow)}
 .warning-box p{font-size:12px;font-weight:800;color:#856404;line-height:1.6}
-.email-display{background:var(--teal-light);border-radius:10px;padding:12px;margin-bottom:10px}
-.email-display .lbl{font-size:10px;font-weight:800;color:var(--teal-dark);text-transform:uppercase;margin-bottom:4px}
-.email-display .addr{font-size:13px;font-weight:700;color:var(--dark);line-height:1.5}
+.email-display{background:var(–teal-light);border-radius:10px;padding:12px;margin-bottom:10px}
+.email-display .lbl{font-size:10px;font-weight:800;color:var(–teal-dark);text-transform:uppercase;margin-bottom:4px}
+.email-display .addr{font-size:13px;font-weight:700;color:var(–dark);line-height:1.5}
 /* PHOTOS MODAL */
 .photos-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 .photo-nc-item{text-align:center}
-.photo-nc-item img{width:100%;border-radius:10px;border:2px solid var(--red)}
+.photo-nc-item img{width:100%;border-radius:10px;border:2px solid var(–red)}
 .photo-nc-label{font-size:10px;font-weight:700;color:#721c24;margin-top:4px;line-height:1.3}
-.photo-nc-dl{display:block;margin-top:5px;background:var(--red);color:#fff;border-radius:8px;padding:6px;font-size:11px;font-weight:800;text-decoration:none;text-align:center}
+.photo-nc-dl{display:block;margin-top:5px;background:var(–red);color:#fff;border-radius:8px;padding:6px;font-size:11px;font-weight:800;text-decoration:none;text-align:center}
 /* TOAST */
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--dark);color:#fff;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:800;font-family:'Nunito',sans-serif;z-index:200;transition:transform .3s;white-space:nowrap}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(80px);background:var(–dark);color:#fff;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:800;font-family:‘Nunito’,sans-serif;z-index:200;transition:transform .3s;white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0)}
 @media print{
-  body{background:#fff;padding-bottom:0}
-  .section{display:block!important;margin:6px 6px 0}
-  .info-block{margin:6px 6px 0}
-  .btn-check{border:1.5px solid #ccc!important;background:#fff!important;color:#333!important}
-  .btn-check.active.conforme{background:#D4EDDA!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .btn-check.active.non-conforme{background:#F8D7DA!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .section-header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #scoreBlock,.plan-section{display:block!important}
+body{background:#fff;padding-bottom:0}
+.section{display:block!important;margin:6px 6px 0}
+.info-block{margin:6px 6px 0}
+.btn-check{border:1.5px solid #ccc!important;background:#fff!important;color:#333!important}
+.btn-check.active.conforme{background:#D4EDDA!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.btn-check.active.non-conforme{background:#F8D7DA!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.section-header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#scoreBlock,.plan-section{display:block!important}
 }
 </style>
+
 </head>
 <body>
 
@@ -150,6 +152,7 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
 </div>
 
 <!-- SECTION 0: INFO -->
+
 <div class="section visible" id="sec-0">
   <div class="info-block" style="margin:14px 0 0">
     <div class="info-grid">
@@ -1152,6 +1155,7 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
 <div id="scoreBlock"><div id="scorePct"></div><div id="scoreMsg"></div></div>
 
 <!-- PLAN D'ACTION -->
+
 <div class="plan-section" id="planSection" style="display:none">
   <div class="section-header">
     <div class="section-number">📋</div>
@@ -1163,9 +1167,8 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
   </div>
 </div>
 
-
-
 <!-- MESSAGE FIN DE RAPPORT -->
+
 <div id="endMessage" style="display:none;margin:14px 14px 0;background:#1A1A1A;border-radius:16px;padding:20px;text-align:center">
   <div style="font-size:24px;margin-bottom:10px">🍕</div>
   <div style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#F5C800;letter-spacing:1px;margin-bottom:10px" id="endTitle">MERCI POUR TON RAPPORT !</div>
@@ -1181,17 +1184,20 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
 </div>
 
 <!-- ACTION BUTTONS -->
+
 <div class="action-btns" id="actionBtns" style="display:none">
   <button class="btn-email" onclick="openSendFlow()" id="sendBtn">📄 Télécharger en PDF</button>
 </div>
 
 <!-- NAV BUTTONS -->
+
 <div class="nav-btns" id="navBtns">
   <button class="btn-prev" id="btnPrev" onclick="prevStep()" disabled>← <span id="prevLbl">Retour</span></button>
   <button class="btn-next" id="btnNext" onclick="nextStep()"><span id="nextLbl">Commencer</span> →</button>
 </div>
 
 <!-- PHOTOS MODAL -->
+
 <div class="modal-overlay" id="photosModal">
   <div class="modal">
     <h2 id="photoModalTitle">📷 Photos non conformes</h2>
@@ -1213,6 +1219,7 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
 </div>
 
 <!-- EMAIL MODAL -->
+
 <div class="modal-overlay" id="emailModal">
   <div class="modal">
     <h2 id="emailModalTitle">📧 Envoyer le rapport</h2>
@@ -1235,6 +1242,7 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
 </div>
 
 <!-- INSTRUCTIONS MODAL -->
+
 <div class="modal-overlay" id="instructionsModal">
   <div class="modal">
     <div style="background:#00B5A8;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:10px;margin-bottom:14px">
@@ -1243,203 +1251,244 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
     </div>
     <p id="instrSubtitle" style="font-size:13px;font-weight:700;color:#888;margin-bottom:14px;line-height:1.5">Votre rapport avec les photos est prêt. Suivez les étapes selon votre téléphone :</p>
 
-    <!-- iPhone -->
-    <div style="border:1.5px solid #E0E0E0;border-radius:12px;overflow:hidden;margin-bottom:10px">
-      <div style="background:#1A1A1A;padding:8px 14px;font-size:12px;font-weight:900;color:#F5C800;letter-spacing:1px;font-family:'Black Han Sans',sans-serif" id="iphoneLabel">IPHONE</div>
-      <div style="padding:12px 14px" id="iphoneSteps">
-        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
-          <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">1</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Ouvre l'app <strong>Fichiers</strong> sur ton iPhone" data-en="Open the <strong>Files</strong> app on your iPhone">Ouvre l'app <strong>Fichiers</strong> sur ton iPhone</div>
-        </div>
-        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
-          <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">2</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Appuie sur <strong>Téléchargements</strong>" data-en="Tap <strong>Downloads</strong>">Appuie sur <strong>Téléchargements</strong></div>
-        </div>
-        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
-          <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">3</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Appuie sur le fichier <strong>Rapport_Fugazzi...</strong>" data-en="Tap the file <strong>Rapport_Fugazzi...</strong>">Appuie sur le fichier <strong>Rapport_Fugazzi...</strong></div>
-        </div>
-        <div style="display:flex;gap:10px;align-items:flex-start">
-          <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">4</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Appuie sur <strong>Partager</strong> (carré + flèche ↑) → <strong>Mail</strong>" data-en="Tap <strong>Share</strong> (square + arrow ↑) → <strong>Mail</strong>">Appuie sur <strong>Partager</strong> (carré + flèche ↑) → <strong>Mail</strong></div>
-        </div>
-      </div>
+```
+<!-- iPhone -->
+<div style="border:1.5px solid #E0E0E0;border-radius:12px;overflow:hidden;margin-bottom:10px">
+  <div style="background:#1A1A1A;padding:8px 14px;font-size:12px;font-weight:900;color:#F5C800;letter-spacing:1px;font-family:'Black Han Sans',sans-serif" id="iphoneLabel">IPHONE</div>
+  <div style="padding:12px 14px" id="iphoneSteps">
+    <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+      <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">1</div>
+      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Ouvre l'app <strong>Fichiers</strong> sur ton iPhone" data-en="Open the <strong>Files</strong> app on your iPhone">Ouvre l'app <strong>Fichiers</strong> sur ton iPhone</div>
     </div>
+    <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+      <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">2</div>
+      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Appuie sur <strong>Téléchargements</strong>" data-en="Tap <strong>Downloads</strong>">Appuie sur <strong>Téléchargements</strong></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+      <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">3</div>
+      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Appuie sur le fichier <strong>Rapport_Fugazzi...</strong>" data-en="Tap the file <strong>Rapport_Fugazzi...</strong>">Appuie sur le fichier <strong>Rapport_Fugazzi...</strong></div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:flex-start">
+      <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">4</div>
+      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Appuie sur <strong>Partager</strong> (carré + flèche ↑) → <strong>Mail</strong>" data-en="Tap <strong>Share</strong> (square + arrow ↑) → <strong>Mail</strong>">Appuie sur <strong>Partager</strong> (carré + flèche ↑) → <strong>Mail</strong></div>
+    </div>
+  </div>
+</div>
 
-    <!-- Android -->
-    <div style="border:1.5px solid #E0E0E0;border-radius:12px;overflow:hidden;margin-bottom:10px">
-      <div style="background:#1A1A1A;padding:8px 14px;font-size:12px;font-weight:900;color:#F5C800;letter-spacing:1px;font-family:'Black Han Sans',sans-serif" id="androidLabel">ANDROID</div>
-      <div style="padding:12px 14px" id="androidSteps">
-        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
-          <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">1</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Glisse vers le bas → appuie sur la <strong>notification</strong> de téléchargement" data-en="Swipe down → tap the download <strong>notification</strong>">Glisse vers le bas → appuie sur la <strong>notification</strong> de téléchargement</div>
-        </div>
-        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
-          <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">2</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Le rapport s'ouvre dans le navigateur" data-en="The report opens in the browser">Le rapport s'ouvre dans le navigateur</div>
-        </div>
-        <div style="display:flex;gap:10px;align-items:flex-start">
-          <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">3</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Menu ⋮ → <strong>Partager</strong> → <strong>Gmail</strong> ou <strong>Mail</strong>" data-en="Menu ⋮ → <strong>Share</strong> → <strong>Gmail</strong> or <strong>Mail</strong>">Menu ⋮ → <strong>Partager</strong> → <strong>Gmail</strong> ou <strong>Mail</strong></div>
-        </div>
-      </div>
+<!-- Android -->
+<div style="border:1.5px solid #E0E0E0;border-radius:12px;overflow:hidden;margin-bottom:10px">
+  <div style="background:#1A1A1A;padding:8px 14px;font-size:12px;font-weight:900;color:#F5C800;letter-spacing:1px;font-family:'Black Han Sans',sans-serif" id="androidLabel">ANDROID</div>
+  <div style="padding:12px 14px" id="androidSteps">
+    <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+      <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">1</div>
+      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Glisse vers le bas → appuie sur la <strong>notification</strong> de téléchargement" data-en="Swipe down → tap the download <strong>notification</strong>">Glisse vers le bas → appuie sur la <strong>notification</strong> de téléchargement</div>
     </div>
+    <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+      <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">2</div>
+      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Le rapport s'ouvre dans le navigateur" data-en="The report opens in the browser">Le rapport s'ouvre dans le navigateur</div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:flex-start">
+      <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">3</div>
+      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Menu ⋮ → <strong>Partager</strong> → <strong>Gmail</strong> ou <strong>Mail</strong>" data-en="Menu ⋮ → <strong>Share</strong> → <strong>Gmail</strong> or <strong>Mail</strong>">Menu ⋮ → <strong>Partager</strong> → <strong>Gmail</strong> ou <strong>Mail</strong></div>
+    </div>
+  </div>
+</div>
 
-    <!-- Emails -->
-    <div style="background:#E0F7F5;border-radius:12px;padding:12px 14px;margin-bottom:12px">
-      <div style="font-size:10px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="instrEmailLbl">Envoyer à</div>
-      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.8" id="instrEmails">fugazzipresto@barroco.ca</div>
-    </div>
+<!-- Emails -->
+<div style="background:#E0F7F5;border-radius:12px;padding:12px 14px;margin-bottom:12px">
+  <div style="font-size:10px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="instrEmailLbl">Envoyer à</div>
+  <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.8" id="instrEmails">fugazzipresto@barroco.ca</div>
+</div>
 
-    <div style="display:flex;flex-direction:column;gap:8px">
-      <button onclick="copyEmails()" id="copyEmailsBtn" style="width:100%;padding:14px;background:#1A1A1A;color:#fff;border:none;border-radius:12px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer">📋 Copier les adresses courriel</button>
-      <button onclick="closeInstructionsModal()" id="instrCloseBtn" style="width:100%;padding:13px;background:#00B5A8;color:#fff;border:none;border-radius:12px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer">OK, compris !</button>
-    </div>
+<div style="display:flex;flex-direction:column;gap:8px">
+  <button onclick="copyEmails()" id="copyEmailsBtn" style="width:100%;padding:14px;background:#1A1A1A;color:#fff;border:none;border-radius:12px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer">📋 Copier les adresses courriel</button>
+  <button onclick="closeInstructionsModal()" id="instrCloseBtn" style="width:100%;padding:13px;background:#00B5A8;color:#fff;border:none;border-radius:12px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer">OK, compris !</button>
+</div>
+```
+
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <!-- MENU OVERLAY -->
+
 <div id="menuOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:200;align-items:flex-start;justify-content:flex-start">
   <div id="menuPanel" style="background:#fff;width:88%;max-width:360px;height:100%;overflow-y:auto;animation:slideRight .3s ease;box-shadow:4px 0 20px rgba(0,0,0,.2)">
-    
-    <!-- Menu Header -->
-    <div style="background:#1A1A1A;padding:env(safe-area-inset-top,0) 0 0">
-      <div style="padding:16px 16px 14px;display:flex;align-items:center;justify-content:space-between">
-        <div>
-          <div style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#F5C800;letter-spacing:2px;text-transform:uppercase">Fugazzi</div>
-          <div style="font-size:10px;color:#00B5A8;font-weight:700;letter-spacing:1px;text-transform:uppercase">Pizza Presto</div>
-        </div>
-        <button onclick="closeMenu()" style="background:rgba(255,255,255,.1);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
+
+```
+<!-- Menu Header -->
+<div style="background:#1A1A1A;padding:env(safe-area-inset-top,0) 0 0">
+  <div style="padding:16px 16px 14px;display:flex;align-items:center;justify-content:space-between">
+    <div>
+      <div style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#F5C800;letter-spacing:2px;text-transform:uppercase">Fugazzi</div>
+      <div style="font-size:10px;color:#00B5A8;font-weight:700;letter-spacing:1px;text-transform:uppercase">Pizza Presto</div>
+    </div>
+    <button onclick="closeMenu()" style="background:rgba(255,255,255,.1);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
+  </div>
+</div>
+
+<!-- SECTION: Communications -->
+<div style="border-bottom:1px solid #F0F0F0">
+  <div onclick="toggleMenuSection('comms')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="background:#E0F7F5;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">📢</div>
+      <div>
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="COMMUNICATIONS" data-en="COMMUNICATIONS">COMMUNICATIONS</div>
+        <div style="font-size:11px;color:#888;font-weight:700" id="commsSubtitle" data-fr="Chargement..." data-en="Loading...">Chargement...</div>
       </div>
     </div>
-
-    <!-- SECTION: Communications -->
-    <div style="border-bottom:1px solid #F0F0F0">
-      <div onclick="toggleMenuSection('comms')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="background:#E0F7F5;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">📢</div>
-          <div>
-            <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="COMMUNICATIONS" data-en="COMMUNICATIONS">COMMUNICATIONS</div>
-            <div style="font-size:11px;color:#888;font-weight:700" id="commsSubtitle" data-fr="Chargement..." data-en="Loading...">Chargement...</div>
-          </div>
-        </div>
-        <div id="commsArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
-      </div>
-      <div id="commsSection" style="display:none;padding:0 14px 14px">
-        <!-- Messages list -->
-        <div id="messagesList" style="margin-bottom:12px"></div>
-        <!-- Write message -->
-        <div style="background:#F8F8F8;border-radius:12px;padding:12px">
-          <div style="font-size:11px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="newMsgLbl" data-fr="Nouveau message" data-en="New message">Nouveau message</div>
-          <textarea id="newMessageText" placeholder="Écrivez votre message ici..." style="width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:10px;font-size:13px;font-family:'Nunito',sans-serif;color:#1A1A1A;background:#fff;outline:none;min-height:80px;resize:vertical"></textarea>
-          <button onclick="postMessage()" style="width:100%;margin-top:8px;padding:11px;background:#00B5A8;color:#fff;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:13px;letter-spacing:1px;cursor:pointer" id="publishBtn">📤 Publier</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION: Ressources -->
-    <div style="border-bottom:1px solid #F0F0F0">
-      <div onclick="toggleMenuSection('resources')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="background:#E8F5E9;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">🔗</div>
-          <div>
-            <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="RESSOURCES GÉRANT" data-en="MANAGER RESOURCES">RESSOURCES GÉRANT</div>
-            <div style="font-size:11px;color:#888;font-weight:700" data-fr="Listes, procédures, contacts" data-en="Lists, procedures, contacts">Listes, procédures, contacts</div>
-          </div>
-        </div>
-        <div id="resourcesArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
-      </div>
-      <div id="resourcesSection" style="display:none;padding:0 14px 14px">
-        <a href="https://docs.google.com/spreadsheets/d/1xVb2bZnTgXHwJqupXkDUzw5fOLIt2ZIPv9RFg57qxu8/edit" target="_blank" style="display:flex;align-items:center;gap:10px;background:#1a6b3c;color:#fff;padding:14px;border-radius:12px;text-decoration:none;margin-bottom:8px">
-          <span style="font-size:20px">📋</span>
-          <div>
-            <div style="font-family:'Black Han Sans',sans-serif;font-size:13px;letter-spacing:.5px" data-fr="OUVRIR GOOGLE SHEETS" data-en="OPEN GOOGLE SHEETS">OUVRIR GOOGLE SHEETS</div>
-            <div style="font-size:11px;opacity:.8;font-family:'Nunito',sans-serif;font-weight:700" data-fr="Tâches, listes, ressources officielles" data-en="Tasks, lists, official resources">Tâches, listes, ressources officielles</div>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <!-- SECTION: Rapports -->
-    <div style="border-bottom:1px solid #F0F0F0">
-      <div onclick="toggleMenuSection('reports')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="background:#FFF3CD;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">📊</div>
-          <div>
-            <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="RAPPORTS & SUIVI" data-en="REPORTS & TRACKING">RAPPORTS & SUIVI</div>
-            <div style="font-size:11px;color:#888;font-weight:700" id="reportsSubtitle">Chargement...</div>
-          </div>
-        </div>
-        <div id="reportsArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
-      </div>
-      <div id="reportsSection" style="display:none;padding:0 14px 14px">
-        <!-- Filter by succursale -->
-        <div style="margin-bottom:10px">
-          <label style="font-size:10px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px" id="filterLbl" data-fr="Filtrer par succursale" data-en="Filter by location">Filtrer par succursale</label>
-          <select id="reportFilter" onchange="filterReports()" style="width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:10px;font-size:14px;font-family:'Nunito',sans-serif;color:#1A1A1A;background:#E0F7F5;outline:none">
-            <option value="all">Toutes les succursales</option>
-          </select>
-        </div>
-        <div id="reportsList"></div>
-      </div>
-    </div>
-
-    <!-- SECTION: Visite superviseur -->
-    <div style="border-bottom:1px solid #F0F0F0">
-      <div onclick="toggleMenuSection('supervisor')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="background:#F8D7DA;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">🔐</div>
-          <div>
-            <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="VISITE SUPERVISEUR" data-en="SUPERVISOR VISIT">VISITE SUPERVISEUR</div>
-            <div style="font-size:11px;color:#888;font-weight:700" id="supervisorSubtitle" data-fr="Accès protégé" data-en="Protected access">Accès protégé</div>
-          </div>
-        </div>
-        <div id="supervisorArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
-      </div>
-      <div id="supervisorSection" style="display:none;padding:0 14px 14px">
-        <div id="supervisorLocked" style="display:block">
-          <div style="background:#F8D7DA;border-radius:12px;padding:14px;margin-bottom:10px;text-align:center">
-            <div style="font-size:24px;margin-bottom:6px">🔐</div>
-            <div style="font-size:13px;font-weight:800;color:#721c24;margin-bottom:10px" id="supervisorLockMsg">Accès réservé au superviseur</div>
-            <input type="password" id="supervisorPwd" placeholder="Mot de passe..." style="width:100%;border:2px solid #F5C8C8;border-radius:10px;padding:10px;font-size:14px;font-family:'Nunito',sans-serif;outline:none;background:#fff;margin-bottom:8px">
-            <button onclick="unlockSupervisor()" style="width:100%;padding:11px;background:#721c24;color:#fff;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:13px;cursor:pointer;letter-spacing:1px">🔓 Accéder</button>
-          </div>
-        </div>
-        <div id="supervisorUnlocked" style="display:none">
-          <!-- Sub-tabs -->
-          <div style="display:flex;gap:8px;margin-bottom:12px">
-            <button onclick="showSupervisorTab('monthly')" id="tabMonthly" style="flex:1;padding:10px;background:#1A1A1A;color:#F5C800;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:12px;cursor:pointer;letter-spacing:.5px">📋 MENSUELLE</button>
-            <button onclick="showSupervisorTab('surprise')" id="tabSurprise" style="flex:1;padding:10px;background:#F4F4F4;color:#888;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:12px;cursor:pointer;letter-spacing:.5px">⚡ SURPRISE</button>
-          </div>
-          <!-- Monthly tab -->
-          <div id="supervisorMonthly" style="display:block">
-            <div style="background:#FFF3CD;border-radius:12px;padding:16px;text-align:center;border:2px dashed #F5C800">
-              <div style="font-size:20px;margin-bottom:8px">📋</div>
-              <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#856404;letter-spacing:1px;margin-bottom:6px">VISITE MENSUELLE</div>
-              <div style="font-size:12px;color:#856404;font-weight:700;line-height:1.5">Liste en cours de création<br>Disponible prochainement</div>
-            </div>
-          </div>
-          <!-- Surprise tab -->
-          <div id="supervisorSurprise" style="display:none">
-            <div style="background:#F8D7DA;border-radius:12px;padding:16px;text-align:center;border:2px dashed #dc3545">
-              <div style="font-size:20px;margin-bottom:8px">⚡</div>
-              <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#721c24;letter-spacing:1px;margin-bottom:6px">VISITE SURPRISE</div>
-              <div style="font-size:12px;color:#721c24;font-weight:700;line-height:1.5">Liste en cours de création<br>Disponible prochainement</div>
-            </div>
-          </div>
-          <button onclick="lockSupervisor()" style="width:100%;margin-top:10px;padding:10px;background:#F4F4F4;color:#888;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer">🔒 Se déconnecter</button>
-        </div>
-      </div>
-    </div>
-
-    <div style="padding:20px;text-align:center">
-      <div style="font-size:11px;color:#ccc;font-weight:700">Fugazzi Pizza Presto · Chemin de contrôle</div>
+    <div id="commsArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
+  </div>
+  <div id="commsSection" style="display:none;padding:0 14px 14px">
+    <!-- Messages list -->
+    <div id="messagesList" style="margin-bottom:12px"></div>
+    <!-- Write message -->
+    <div style="background:#F8F8F8;border-radius:12px;padding:12px">
+      <div style="font-size:11px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="newMsgLbl" data-fr="Nouveau message" data-en="New message">Nouveau message</div>
+      <textarea id="newMessageText" placeholder="Écrivez votre message ici..." style="width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:10px;font-size:13px;font-family:'Nunito',sans-serif;color:#1A1A1A;background:#fff;outline:none;min-height:80px;resize:vertical"></textarea>
+      <button onclick="postMessage()" style="width:100%;margin-top:8px;padding:11px;background:#00B5A8;color:#fff;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:13px;letter-spacing:1px;cursor:pointer" id="publishBtn">📤 Publier</button>
     </div>
   </div>
 </div>
 
+<!-- SECTION: Ressources -->
+<div style="border-bottom:1px solid #F0F0F0">
+  <div onclick="toggleMenuSection('resources')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="background:#E8F5E9;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">🔗</div>
+      <div>
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="RESSOURCES GÉRANT" data-en="MANAGER RESOURCES">RESSOURCES GÉRANT</div>
+        <div style="font-size:11px;color:#888;font-weight:700" data-fr="Listes, procédures, contacts" data-en="Lists, procedures, contacts">Listes, procédures, contacts</div>
+      </div>
+    </div>
+    <div id="resourcesArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
+  </div>
+  <div id="resourcesSection" style="display:none;padding:0 14px 14px">
+    <a href="https://docs.google.com/spreadsheets/d/1xVb2bZnTgXHwJqupXkDUzw5fOLIt2ZIPv9RFg57qxu8/edit" target="_blank" style="display:flex;align-items:center;gap:10px;background:#1a6b3c;color:#fff;padding:14px;border-radius:12px;text-decoration:none;margin-bottom:8px">
+      <span style="font-size:20px">📋</span>
+      <div>
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:13px;letter-spacing:.5px" data-fr="OUVRIR GOOGLE SHEETS" data-en="OPEN GOOGLE SHEETS">OUVRIR GOOGLE SHEETS</div>
+        <div style="font-size:11px;opacity:.8;font-family:'Nunito',sans-serif;font-weight:700" data-fr="Tâches, listes, ressources officielles" data-en="Tasks, lists, official resources">Tâches, listes, ressources officielles</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- SECTION: Rapports -->
+<div style="border-bottom:1px solid #F0F0F0">
+  <div onclick="toggleMenuSection('reports')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="background:#FFF3CD;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">📊</div>
+      <div>
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="RAPPORTS & SUIVI" data-en="REPORTS & TRACKING">RAPPORTS & SUIVI</div>
+        <div style="font-size:11px;color:#888;font-weight:700" id="reportsSubtitle">Chargement...</div>
+      </div>
+    </div>
+    <div id="reportsArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
+  </div>
+  <div id="reportsSection" style="display:none;padding:0 14px 14px">
+    <!-- Filter by succursale -->
+    <div style="margin-bottom:10px">
+      <label style="font-size:10px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px" id="filterLbl" data-fr="Filtrer par succursale" data-en="Filter by location">Filtrer par succursale</label>
+      <select id="reportFilter" onchange="filterReports()" style="width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:10px;font-size:14px;font-family:'Nunito',sans-serif;color:#1A1A1A;background:#E0F7F5;outline:none">
+        <option value="all">Toutes les succursales</option>
+      </select>
+    </div>
+    <div id="reportsList"></div>
+  </div>
+</div>
+
+<!-- SECTION: Visite superviseur -->
+<div style="border-bottom:1px solid #F0F0F0">
+  <div onclick="toggleMenuSection('supervisor')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="background:#F8D7DA;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">🔐</div>
+      <div>
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="VISITE SUPERVISEUR" data-en="SUPERVISOR VISIT">VISITE SUPERVISEUR</div>
+        <div style="font-size:11px;color:#888;font-weight:700" id="supervisorSubtitle" data-fr="Accès protégé" data-en="Protected access">Accès protégé</div>
+      </div>
+    </div>
+    <div id="supervisorArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
+  </div>
+  <div id="supervisorSection" style="display:none;padding:0 14px 14px">
+    <div id="supervisorLocked" style="display:block">
+      <div style="background:#F8D7DA;border-radius:12px;padding:14px;margin-bottom:10px;text-align:center">
+        <div style="font-size:24px;margin-bottom:6px">🔐</div>
+        <div style="font-size:13px;font-weight:800;color:#721c24;margin-bottom:10px" id="supervisorLockMsg">Accès réservé au superviseur</div>
+        <input type="password" id="supervisorPwd" placeholder="Mot de passe..." style="width:100%;border:2px solid #F5C8C8;border-radius:10px;padding:10px;font-size:14px;font-family:'Nunito',sans-serif;outline:none;background:#fff;margin-bottom:8px">
+        <button onclick="unlockSupervisor()" style="width:100%;padding:11px;background:#721c24;color:#fff;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:13px;cursor:pointer;letter-spacing:1px">🔓 Accéder</button>
+      </div>
+    </div>
+    <div id="supervisorUnlocked" style="display:none">
+      <!-- Sub-tabs -->
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <button onclick="showSupervisorTab('monthly')" id="tabMonthly" style="flex:1;padding:10px;background:#1A1A1A;color:#F5C800;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:12px;cursor:pointer;letter-spacing:.5px">📋 MENSUELLE</button>
+        <button onclick="showSupervisorTab('surprise')" id="tabSurprise" style="flex:1;padding:10px;background:#F4F4F4;color:#888;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:12px;cursor:pointer;letter-spacing:.5px">⚡ SURPRISE</button>
+      </div>
+      <!-- Monthly tab -->
+      <div id="supervisorMonthly" style="display:block">
+        <div style="background:#FFF3CD;border-radius:12px;padding:16px;text-align:center;border:2px dashed #F5C800">
+          <div style="font-size:20px;margin-bottom:8px">📋</div>
+          <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#856404;letter-spacing:1px;margin-bottom:6px">VISITE MENSUELLE</div>
+          <div style="font-size:12px;color:#856404;font-weight:700;line-height:1.5">Liste en cours de création<br>Disponible prochainement</div>
+        </div>
+      </div>
+      <!-- Surprise tab -->
+      <div id="supervisorSurprise" style="display:none">
+        <div style="font-size:10px;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;text-align:center">⚡ VISITE SURPRISE SUPERVISEUR</div>
+        
+        <!-- Section 1: Extérieur -->
+        <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
+          <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">1. EXTÉRIEUR</div>
+          <div id="sv-ext"></div>
+        </div>
+        
+        <!-- Section 2: Accueil -->
+        <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
+          <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">2. ACCUEIL</div>
+          <div id="sv-acc"></div>
+        </div>
+        
+        <!-- Section 3: Propreté -->
+        <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
+          <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">3. PROPRETÉ GÉNÉRALE</div>
+          <div id="sv-prop"></div>
+        </div>
+        
+        <!-- Section 4: Toilettes -->
+        <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
+          <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">4. TOILETTES</div>
+          <div id="sv-wc"></div>
+        </div>
+        
+        <!-- Section 5: Qualité -->
+        <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
+          <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">5. QUALITÉ DE LA COMMANDE</div>
+          <div id="sv-qual"></div>
+        </div>
+        
+        <!-- Score & Submit -->
+        <div id="sv-score" style="display:none;border-radius:10px;padding:14px;text-align:center;margin-bottom:8px">
+          <div style="font-family:'Black Han Sans',sans-serif;font-size:36px" id="sv-score-pct">—</div>
+          <div style="font-size:12px;font-weight:800" id="sv-score-msg"></div>
+        </div>
+        
+        <button onclick="submitSurpriseVisit()" style="width:100%;padding:13px;background:#721c24;color:#fff;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:13px;cursor:pointer;letter-spacing:1px;margin-bottom:6px">📤 Soumettre la visite</button>
+        <button onclick="resetSurpriseVisit()" style="width:100%;padding:10px;background:#F4F4F4;color:#888;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer">🔄 Recommencer</button>
+      </div>
+      <button onclick="lockSupervisor()" style="width:100%;margin-top:10px;padding:10px;background:#F4F4F4;color:#888;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer">🔒 Se déconnecter</button>
+    </div>
+  </div>
+</div>
+
+<div style="padding:20px;text-align:center">
+  <div style="font-size:11px;color:#ccc;font-weight:700">Fugazzi Pizza Presto · Chemin de contrôle</div>
+</div>
+```
+
+  </div>
+</div>
 
 <script>
 // ── STATE ─────────────────────────────────────────────────
@@ -1909,20 +1958,49 @@ function openSendFlow() {
     cleanupOldReports();
   }
   
-  if (hasPhotos) {
-    uploadAllNCPhotos(proceedWithSave);
-  } else {
-    var ncItems = [];
-    document.querySelectorAll('.check-item').forEach(function(item){
-      if (!item.querySelector('.non-conforme.active')) return;
-      ncItems.push({
-        section: item.getAttribute('data-section')||'',
-        label: item.getAttribute('data-label')||'',
-        comment: item.querySelector('.nc-extras input[type=text]') ? item.querySelector('.nc-extras input[type=text]').value : '',
-        photos: []
-      });
+  // Always collect NC items immediately
+  var ncItemsBase = [];
+  document.querySelectorAll('.check-item').forEach(function(item){
+    if (!item.querySelector('.non-conforme.active')) return;
+    var photoSrcs = [];
+    item.querySelectorAll('.photo-thumb img').forEach(function(img){ photoSrcs.push(img.src); });
+    ncItemsBase.push({
+      section: item.getAttribute('data-section')||'',
+      label: item.getAttribute('data-label')||'',
+      comment: item.querySelector('.nc-extras input[type=text]') ? item.querySelector('.nc-extras input[type=text]').value : '',
+      photos: photoSrcs  // store base64 locally for now
     });
-    proceedWithSave(ncItems);
+  });
+  
+  // Save to Firebase immediately (without waiting for Cloudinary)
+  proceedWithSave(ncItemsBase);
+  
+  // Then try to upload photos to Cloudinary in background and update Firebase
+  if (hasPhotos) {
+    uploadAllNCPhotos(function(ncItemsWithCloudinary) {
+      // Update the report in Firebase with Cloudinary URLs if upload succeeded
+      var anyCloudinaryPhotos = ncItemsWithCloudinary.some(function(nc){ return nc.photos && nc.photos.some(function(p){ return p.startsWith('http'); }); });
+      if (anyCloudinaryPhotos) {
+        // Re-save with Cloudinary URLs
+        var s2 = getScore();
+        var heure2 = document.getElementById('f-heure').value;
+        var heureNum2 = parseInt((heure2||'00').split(':')[0]);
+        var rush2 = heureNum2 < 12 ? 'midi' : (heureNum2 >= 15 && heureNum2 < 18 ? 'soir' : 'hors-rush');
+        var reportData2 = {
+          date: document.getElementById('f-date').value,
+          heure: heure2,
+          succursale: document.getElementById('f-succursale').value||'Non specifiee',
+          responsable: document.getElementById('f-resp').value||'Non specifie',
+          score: s2.pct!==null?s2.pct:0,
+          conformes: s2.c,
+          nonConformes: s2.nc,
+          rush: rush2,
+          timestamp: Date.now(),
+          ncItems: ncItemsWithCloudinary
+        };
+        saveReport(reportData2);
+      }
+    });
   }
 
   // Build HTML report with photos
@@ -2122,6 +2200,7 @@ function unlockSupervisor() {
     document.getElementById('supervisorUnlocked').style.display = 'block';
     document.getElementById('supervisorSubtitle').textContent = lang==='fr'?'Connecté ✅':'Connected ✅';
     document.getElementById('supervisorPwd').value = '';
+    buildSurpriseVisit();
   } else {
     showToast(lang==='fr'?'Mot de passe incorrect':'Wrong password');
     document.getElementById('supervisorPwd').value = '';
@@ -2132,6 +2211,213 @@ function lockSupervisor() {
   document.getElementById('supervisorLocked').style.display = 'block';
   document.getElementById('supervisorUnlocked').style.display = 'none';
   document.getElementById('supervisorSubtitle').textContent = lang==='fr'?'Accès protégé':'Protected access';
+}
+
+// ── SURPRISE VISIT ────────────────────────────────────────
+var SV_SECTIONS = {
+  'sv-ext': [
+    'Vitres et façade propres',
+    'Pas de déchets au sol',
+    'Affichage en place et bien collé',
+    'Enseigne allumée'
+  ],
+  'sv-acc': [
+    'Accueil chaleureux par un employé',
+    'Tenue vestimentaire conforme',
+    'Ambiance — lumière et musique'
+  ],
+  'sv-prop': [
+    'Sol propre',
+    'Tables et chaises propres',
+    'Comptoir propre et accueillant',
+    'Poubelles vides'
+  ],
+  'sv-wc': [
+    'Papier, savon et eau chaude disponibles',
+    'Lavabo et miroirs propres',
+    'Toilettes propres'
+  ],
+  'sv-qual': [
+    'Présentation de la commande',
+    'Croûte standard Fugazzi',
+    'Respect des quantités de la recette',
+    'Goût et qualité du produit',
+    'Température adéquate',
+    'Emballage propre et correct'
+  ]
+};
+
+var SV_SECTION_NAMES = {
+  'sv-ext': 'Extérieur',
+  'sv-acc': 'Accueil',
+  'sv-prop': 'Propreté générale',
+  'sv-wc': 'Toilettes',
+  'sv-qual': 'Qualité de la commande'
+};
+
+function buildSurpriseVisit() {
+  Object.keys(SV_SECTIONS).forEach(function(sectionId) {
+    var container = document.getElementById(sectionId);
+    if (!container) return;
+    var items = SV_SECTIONS[sectionId];
+    var html = '';
+    items.forEach(function(label, idx) {
+      var itemId = sectionId + '_' + idx;
+      html += '<div style="padding:10px 12px;border-bottom:1px solid #F5F5F5">';
+      html += '<div style="font-size:13px;font-weight:800;color:#1A1A1A;margin-bottom:8px">' + label + '</div>';
+      html += '<div style="display:flex;gap:8px;margin-bottom:6px">';
+      html += '<button id="ok_' + itemId + '" style="flex:1;padding:10px;border-radius:10px;border:2px solid #E0E0E0;background:#F4F4F4;font-family:Nunito,sans-serif;font-size:13px;font-weight:900;color:#999;cursor:pointer">&#10003; OK</button>';
+      html += '<button id="nc_' + itemId + '" style="flex:1;padding:10px;border-radius:10px;border:2px solid #E0E0E0;background:#F4F4F4;font-family:Nunito,sans-serif;font-size:13px;font-weight:900;color:#999;cursor:pointer">&#10007; NC</button>';
+      html += '</div>';
+      html += '<div id="extras_' + itemId + '" style="display:none;gap:6px;flex-direction:column">';
+      html += '<input type="text" placeholder="Commentaire..." style="width:100%;border:2px solid #FFE8A3;border-radius:8px;padding:8px 10px;font-size:13px;font-family:Nunito,sans-serif;outline:none;background:#FFFBE0" id="cmt_' + itemId + '">';
+      html += '<label style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:8px;border:2px dashed #dc3545;background:#FFF5F5;color:#dc3545;font-family:Nunito,sans-serif;font-size:12px;font-weight:800;cursor:pointer">&#128247; Photo<input type="file" accept="image/*" capture="environment" id="file_' + itemId + '" style="display:none"></label>';
+      html += '<div id="photos_' + itemId + '" style="display:flex;flex-wrap:wrap;gap:6px"></div>';
+      html += '</div></div>';
+    });
+    container.innerHTML = html;
+    
+    // Add event listeners after HTML is set
+    items.forEach(function(label, idx) {
+      var itemId = sectionId + '_' + idx;
+      var okBtn = document.getElementById('ok_' + itemId);
+      var ncBtn = document.getElementById('nc_' + itemId);
+      var fileInput = document.getElementById('file_' + itemId);
+      if(okBtn) okBtn.addEventListener('click', function(){ svToggle(itemId, true); });
+      if(ncBtn) ncBtn.addEventListener('click', function(){ svToggle(itemId, false); });
+      if(fileInput) fileInput.addEventListener('change', function(){ svAddPhoto(this, itemId); });
+    });
+  });
+}
+
+
+function svToggle(itemId, isOk) {
+  var okBtn = document.getElementById('ok_'+itemId);
+  var ncBtn = document.getElementById('nc_'+itemId);
+  var extras = document.getElementById('extras_'+itemId);
+  okBtn.style.background = isOk ? '#D4EDDA' : '#F4F4F4';
+  okBtn.style.color = isOk ? '#155724' : '#999';
+  okBtn.style.borderColor = isOk ? '#28a745' : '#E0E0E0';
+  ncBtn.style.background = !isOk ? '#F8D7DA' : '#F4F4F4';
+  ncBtn.style.color = !isOk ? '#721c24' : '#999';
+  ncBtn.style.borderColor = !isOk ? '#dc3545' : '#E0E0E0';
+  extras.style.display = !isOk ? 'flex' : 'none';
+  okBtn.setAttribute('data-selected', isOk ? 'true' : '');
+  ncBtn.setAttribute('data-selected', !isOk ? 'true' : '');
+  svUpdateScore();
+}
+
+function svAddPhoto(input) {
+  var itemId = input.getAttribute('data-itemid');
+  var file = input.files[0]; if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var container = document.getElementById('photos_'+itemId);
+    var div = document.createElement('div');
+    div.style.cssText = 'position:relative;width:60px;height:60px';
+    div.innerHTML = '<img src="'+e.target.result+'" style="width:60px;height:60px;object-fit:cover;border-radius:8px;border:2px solid #dc3545"><button onclick="this.parentElement.remove()" style="position:absolute;top:-5px;right:-5px;background:#dc3545;color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:10px;cursor:pointer;font-weight:900">✕</button>';
+    container.appendChild(div);
+  };
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+
+function svUpdateScore() {
+  var total = 0, ok = 0;
+  Object.keys(SV_SECTIONS).forEach(function(sectionId){
+    SV_SECTIONS[sectionId].forEach(function(label, idx){
+      var itemId = sectionId + '_' + idx;
+      var okBtn = document.getElementById('ok_'+itemId);
+      var ncBtn = document.getElementById('nc_'+itemId);
+      if(!okBtn) return;
+      total++;
+      if(okBtn.getAttribute('data-selected')==='true') ok++;
+    });
+  });
+  var checked = ok + document.querySelectorAll('[id^="nc_"][data-selected="true"]').length;
+  if(checked === 0) { document.getElementById('sv-score').style.display='none'; return; }
+  var pct = Math.round(ok/total*100);
+  var scoreEl = document.getElementById('sv-score');
+  var pctEl = document.getElementById('sv-score-pct');
+  var msgEl = document.getElementById('sv-score-msg');
+  scoreEl.style.display = 'block';
+  pctEl.textContent = pct+'%';
+  if(pct>=90){scoreEl.style.background='#D4EDDA';pctEl.style.color='#155724';msgEl.style.color='#155724';msgEl.textContent='Excellent — Standard Fugazzi respecté !';}
+  else if(pct>=80){scoreEl.style.background='#FFF3CD';pctEl.style.color='#856404';msgEl.style.color='#856404';msgEl.textContent='Bien — quelques points à corriger.';}
+  else if(pct>=60){scoreEl.style.background='#FFE5CC';pctEl.style.color='#C05000';msgEl.style.color='#C05000';msgEl.textContent='Plan action requis.';}
+  else{scoreEl.style.background='#F8D7DA';pctEl.style.color='#721c24';msgEl.style.color='#721c24';msgEl.textContent='Critique — intervention immédiate.';}
+}
+
+function submitSurpriseVisit() {
+  var suc = document.getElementById('f-succursale').value || 'Non spécifiée';
+  var date = document.getElementById('f-date').value;
+  var heure = document.getElementById('f-heure').value;
+  var ncItems = [];
+  var total = 0, ok = 0;
+  
+  Object.keys(SV_SECTIONS).forEach(function(sectionId){
+    var secName = SV_SECTION_NAMES[sectionId];
+    SV_SECTIONS[sectionId].forEach(function(label, idx){
+      var itemId = sectionId + '_' + idx;
+      var okBtn = document.getElementById('ok_'+itemId);
+      var ncBtn = document.getElementById('nc_'+itemId);
+      if(!okBtn) return;
+      total++;
+      if(okBtn.getAttribute('data-selected')==='true') { ok++; return; }
+      if(ncBtn.getAttribute('data-selected')==='true') {
+        var cmt = document.getElementById('cmt_'+itemId) ? document.getElementById('cmt_'+itemId).value : '';
+        var photos = [];
+        document.querySelectorAll('#photos_'+itemId+' img').forEach(function(img){ photos.push(img.src); });
+        ncItems.push({section: secName, label: label, comment: cmt, photos: photos});
+      }
+    });
+  });
+  
+  var pct = total > 0 ? Math.round(ok/total*100) : 0;
+  
+  // Build HTML report
+  var ncRows = ncItems.length === 0 ? '<tr><td style="padding:16px;text-align:center;color:#155724;font-weight:800">✅ Tous les points sont conformes !</td></tr>' :
+    ncItems.map(function(nc){
+      var photos = nc.photos.map(function(p){ return '<img src="'+p+'" style="width:100px;height:100px;object-fit:cover;border-radius:6px;border:2px solid #dc3545;margin:4px">'; }).join('');
+      return '<tr style="border-bottom:1px solid #eee"><td style="padding:10px 14px"><div style="font-weight:800;font-size:13px;color:#1A1A1A">❌ '+nc.section+' — '+nc.label+'</div>'+(nc.comment?'<div style="font-size:12px;color:#666;margin-top:4px">💬 '+nc.comment+'</div>':'')+(photos?'<div style="margin-top:6px">'+photos+'</div>':'')+'</td></tr>';
+    }).join('');
+  
+  var scoreBg = pct>=90?'#D4EDDA':pct>=80?'#FFF3CD':pct>=60?'#FFE5CC':'#F8D7DA';
+  var scoreCol = pct>=90?'#155724':pct>=80?'#856404':pct>=60?'#C05000':'#721c24';
+  
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Visite Surprise — '+suc+'</title></head>'
+    +'<body style="font-family:Arial,sans-serif;background:#F0FAF9;margin:0;padding:16px">'
+    +'<div style="background:#721c24;border-radius:16px;padding:20px;text-align:center;margin-bottom:16px">'
+    +'<div style="font-size:18px;font-weight:900;color:#F5C800;letter-spacing:2px;text-transform:uppercase">⚡ VISITE SURPRISE SUPERVISEUR</div>'
+    +'<div style="font-size:13px;color:rgba(255,255,255,.8);margin-top:4px;font-weight:700">'+suc+' · '+date+' · '+heure+'</div>'
+    +'</div>'
+    +'<div style="background:'+scoreBg+';border-radius:12px;padding:16px;text-align:center;margin-bottom:16px">'
+    +'<div style="font-size:42px;font-weight:900;color:'+scoreCol+'">'+pct+'%</div>'
+    +'<div style="font-size:12px;font-weight:800;color:'+scoreCol+'">'+( pct>=90?'Excellent':pct>=80?'Bien':pct>=60?'Plan action requis':'Critique')+'</div>'
+    +'</div>'
+    +'<table style="width:100%;border-radius:12px;overflow:hidden;border-collapse:collapse;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.1)">'+ncRows+'</table>'
+    +'<div style="height:20px"></div>'
+    +'</body></html>';
+  
+  var blob = new Blob([html], {type:'text/html;charset=utf-8'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'VisiteSurprise_'+suc.replace(/\s+/g,'_')+'_'+date+'.html';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  
+  showToast('⚡ Rapport de visite surprise téléchargé !');
+  
+  // Save to Firebase under surpriseVisits
+  pushToBin('surpriseVisits', {
+    date: date, heure: heure, succursale: suc,
+    score: pct, nonConformes: ncItems.length,
+    timestamp: Date.now(), ncItems: ncItems.map(function(nc){ return {section:nc.section,label:nc.label,comment:nc.comment}; })
+  }, function(){});
+}
+
+function resetSurpriseVisit() {
+  buildSurpriseVisit();
+  document.getElementById('sv-score').style.display='none';
 }
 
 function showSupervisorTab(tab) {
@@ -2536,5 +2822,8 @@ fetch(FB_URL + '/messages.json')
     else if(Array.isArray(d)) cachedMessages = d.filter(Boolean);
   }).catch(function(){});
 </script>
+
 </body>
 </html>
+
+Envoyé à partir de Outlook pour iOS
