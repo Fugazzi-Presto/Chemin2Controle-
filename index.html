@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -92,48 +91,47 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
 
 /* ACTION BUTTONS */
 .action-btns{display:flex;gap:10px;margin:14px 14px 0}
-.btn-email{flex:1;background:var(–yellow);color:var(–dark);border:none;border-radius:var(–radius);padding:15px;font-family:‘Black Han Sans’,sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 14px rgba(245,200,0,.3)}
+.btn-email{flex:1;background:var(--yellow);color:var(--dark);border:none;border-radius:var(--radius);padding:15px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 14px rgba(245,200,0,.3)}
 /* MODALS */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:100;align-items:flex-end;justify-content:center}
 .modal-overlay.open{display:flex}
 .modal{background:#fff;border-radius:20px 20px 0 0;padding:22px 18px calc(env(safe-area-inset-bottom,0px)+32px);width:100%;max-width:600px;animation:slideUp .3s ease;max-height:88vh;overflow-y:auto}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 @keyframes slideRight{from{transform:translateX(-100%)}to{transform:translateX(0)}}
-.modal h2{font-family:‘Black Han Sans’,sans-serif;font-size:17px;color:var(–dark);margin-bottom:6px}
-.modal-sub{font-size:12px;color:var(–mid);font-weight:700;margin-bottom:12px}
-.modal label{font-size:10px;font-weight:800;color:var(–teal-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;margin-top:10px}
-.modal input[type=email]{width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:11px 12px;font-size:14px;font-family:‘Nunito’,sans-serif;color:var(–dark);background:var(–teal-light);outline:none}
+.modal h2{font-family:'Black Han Sans',sans-serif;font-size:17px;color:var(--dark);margin-bottom:6px}
+.modal-sub{font-size:12px;color:var(--mid);font-weight:700;margin-bottom:12px}
+.modal label{font-size:10px;font-weight:800;color:var(--teal-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;margin-top:10px}
+.modal input[type=email]{width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:11px 12px;font-size:14px;font-family:'Nunito',sans-serif;color:var(--dark);background:var(--teal-light);outline:none}
 .modal-btns{display:flex;flex-direction:column;gap:8px;margin-top:14px}
-.btn-send-mail{width:100%;background:var(–dark);color:#fff;border:none;border-radius:12px;padding:14px;font-family:‘Black Han Sans’,sans-serif;font-size:14px;cursor:pointer;letter-spacing:1px}
-.btn-copy-report{width:100%;background:var(–teal);color:#fff;border:none;border-radius:12px;padding:14px;font-family:‘Black Han Sans’,sans-serif;font-size:14px;cursor:pointer;letter-spacing:1px}
-.btn-cancel{width:100%;background:var(–grey);color:var(–mid);border:none;border-radius:12px;padding:13px;font-family:‘Nunito’,sans-serif;font-size:13px;font-weight:800;cursor:pointer}
+.btn-send-mail{width:100%;background:var(--dark);color:#fff;border:none;border-radius:12px;padding:14px;font-family:'Black Han Sans',sans-serif;font-size:14px;cursor:pointer;letter-spacing:1px}
+.btn-copy-report{width:100%;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px;font-family:'Black Han Sans',sans-serif;font-size:14px;cursor:pointer;letter-spacing:1px}
+.btn-cancel{width:100%;background:var(--grey);color:var(--mid);border:none;border-radius:12px;padding:13px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer}
 .recap-box{background:#F8F8F8;border-radius:10px;padding:12px;max-height:180px;overflow-y:auto;font-size:11px;color:#333;line-height:1.7;white-space:pre-wrap;font-family:monospace;margin-bottom:4px;border:1px solid #eee}
-.warning-box{background:#FFF3CD;border-radius:10px;padding:12px;margin-bottom:10px;border-left:4px solid var(–yellow)}
+.warning-box{background:#FFF3CD;border-radius:10px;padding:12px;margin-bottom:10px;border-left:4px solid var(--yellow)}
 .warning-box p{font-size:12px;font-weight:800;color:#856404;line-height:1.6}
-.email-display{background:var(–teal-light);border-radius:10px;padding:12px;margin-bottom:10px}
-.email-display .lbl{font-size:10px;font-weight:800;color:var(–teal-dark);text-transform:uppercase;margin-bottom:4px}
-.email-display .addr{font-size:13px;font-weight:700;color:var(–dark);line-height:1.5}
+.email-display{background:var(--teal-light);border-radius:10px;padding:12px;margin-bottom:10px}
+.email-display .lbl{font-size:10px;font-weight:800;color:var(--teal-dark);text-transform:uppercase;margin-bottom:4px}
+.email-display .addr{font-size:13px;font-weight:700;color:var(--dark);line-height:1.5}
 /* PHOTOS MODAL */
 .photos-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 .photo-nc-item{text-align:center}
-.photo-nc-item img{width:100%;border-radius:10px;border:2px solid var(–red)}
+.photo-nc-item img{width:100%;border-radius:10px;border:2px solid var(--red)}
 .photo-nc-label{font-size:10px;font-weight:700;color:#721c24;margin-top:4px;line-height:1.3}
-.photo-nc-dl{display:block;margin-top:5px;background:var(–red);color:#fff;border-radius:8px;padding:6px;font-size:11px;font-weight:800;text-decoration:none;text-align:center}
+.photo-nc-dl{display:block;margin-top:5px;background:var(--red);color:#fff;border-radius:8px;padding:6px;font-size:11px;font-weight:800;text-decoration:none;text-align:center}
 /* TOAST */
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(80px);background:var(–dark);color:#fff;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:800;font-family:‘Nunito’,sans-serif;z-index:200;transition:transform .3s;white-space:nowrap}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--dark);color:#fff;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:800;font-family:'Nunito',sans-serif;z-index:200;transition:transform .3s;white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0)}
 @media print{
-body{background:#fff;padding-bottom:0}
-.section{display:block!important;margin:6px 6px 0}
-.info-block{margin:6px 6px 0}
-.btn-check{border:1.5px solid #ccc!important;background:#fff!important;color:#333!important}
-.btn-check.active.conforme{background:#D4EDDA!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.btn-check.active.non-conforme{background:#F8D7DA!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.section-header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-#scoreBlock,.plan-section{display:block!important}
+  body{background:#fff;padding-bottom:0}
+  .section{display:block!important;margin:6px 6px 0}
+  .info-block{margin:6px 6px 0}
+  .btn-check{border:1.5px solid #ccc!important;background:#fff!important;color:#333!important}
+  .btn-check.active.conforme{background:#D4EDDA!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .btn-check.active.non-conforme{background:#F8D7DA!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .section-header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #scoreBlock,.plan-section{display:block!important}
 }
 </style>
-
 </head>
 <body>
 
@@ -152,7 +150,6 @@ body{background:#fff;padding-bottom:0}
 </div>
 
 <!-- SECTION 0: INFO -->
-
 <div class="section visible" id="sec-0">
   <div class="info-block" style="margin:14px 0 0">
     <div class="info-grid">
@@ -1125,7 +1122,7 @@ body{background:#fff;padding-bottom:0}
   <div class="section-body">
     <div class="check-item" data-label="Tâches de gestion complétées" data-label-en="Management tasks completed" data-section="Tâches de gestion" data-section-en="Management Tasks">
       <div class="item-label" data-fr="Tâches de gestion complétées" data-en="Management tasks completed">Tâches de gestion complétées</div>
-      <div class="item-hint" data-fr="Pertes, prise de température, heures Veloce, et toutes tâches selon le document officiel" data-en="Losses, temperature check, Veloce hours, and all tasks per the official document">Pertes, prise de température, heures Veloce, et toutes tâches selon le document officiel</div>
+      <div class="item-hint" data-fr="Pertes, prise de température, heures Veloce, et toutes tâches selon le document officiel" data-en="Losses, Veloce hours, and all tasks per the official document">Pertes, prise de température, heures Veloce, et toutes tâches selon le document officiel</div>
       <div class="check-row">
         <button class="btn-check conforme" onclick="toggle(this)">✓ Conforme</button>
         <button class="btn-check non-conforme" onclick="toggle(this)">✗ Non conforme</button>
@@ -1155,7 +1152,6 @@ body{background:#fff;padding-bottom:0}
 <div id="scoreBlock"><div id="scorePct"></div><div id="scoreMsg"></div></div>
 
 <!-- PLAN D'ACTION -->
-
 <div class="plan-section" id="planSection" style="display:none">
   <div class="section-header">
     <div class="section-number">📋</div>
@@ -1167,37 +1163,35 @@ body{background:#fff;padding-bottom:0}
   </div>
 </div>
 
-<!-- MESSAGE FIN DE RAPPORT -->
 
+
+<!-- MESSAGE FIN DE RAPPORT -->
 <div id="endMessage" style="display:none;margin:14px 14px 0;background:#1A1A1A;border-radius:16px;padding:20px;text-align:center">
   <div style="font-size:24px;margin-bottom:10px">🍕</div>
-  <div style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#F5C800;letter-spacing:1px;margin-bottom:10px" id="endTitle">MERCI POUR TON RAPPORT !</div>
-  <div style="font-size:13px;color:rgba(255,255,255,.8);font-weight:700;line-height:1.7;margin-bottom:14px" id="endMsg">Ton suivi quotidien fait toute la différence.<br>Chaque détail compte pour le standard Fugazzi. 💪</div>
+  <div style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#F5C800;letter-spacing:1px;margin-bottom:10px">MERCI POUR TON RAPPORT !</div>
+  <div style="font-size:13px;color:rgba(255,255,255,.8);font-weight:700;line-height:1.7;margin-bottom:14px">Ton suivi quotidien fait toute la différence.<br>Chaque détail compte pour le standard Fugazzi. 💪</div>
   <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:12px;margin-bottom:10px;text-align:left">
-    <div style="font-size:10px;font-weight:800;color:#00B5A8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="endReportLbl">📊 Ton rapport est sauvegardé</div>
-    <div style="font-size:12px;color:rgba(255,255,255,.7);font-weight:700;line-height:1.6" id="endReportDesc">Il est accessible dans le menu ☰ → Rapports & Suivi pour toi et ton équipe.</div>
+    <div style="font-size:10px;font-weight:800;color:#00B5A8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">📊 Ton rapport est sauvegardé</div>
+    <div style="font-size:12px;color:rgba(255,255,255,.7);font-weight:700;line-height:1.6">Il est accessible dans le menu ☰ → Rapports &amp; Suivi.</div>
   </div>
   <div id="endLowScore" style="display:none;background:#dc3545;border-radius:10px;padding:12px;text-align:left">
-    <div style="font-size:11px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="endUrgentLbl">🔴 ACTION REQUISE</div>
-    <div style="font-size:12px;color:#fff;font-weight:700;line-height:1.7" id="endUrgentDesc">Score sous 80% — Envoie le rapport à :<br><strong>fugazzipresto@barroco.ca</strong><br>En cas d'urgence, appelle immédiatement Kahena.</div>
+    <div style="font-size:11px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">🔴 ACTION REQUISE</div>
+    <div style="font-size:12px;color:#fff;font-weight:700;line-height:1.7">Score sous 80% — Envoie le rapport à :<br><strong>fugazzipresto@barroco.ca</strong><br>En cas d'urgence, appelle immédiatement Kahena.</div>
   </div>
 </div>
 
 <!-- ACTION BUTTONS -->
-
 <div class="action-btns" id="actionBtns" style="display:none">
   <button class="btn-email" onclick="openSendFlow()" id="sendBtn">📄 Télécharger en PDF</button>
 </div>
 
 <!-- NAV BUTTONS -->
-
 <div class="nav-btns" id="navBtns">
   <button class="btn-prev" id="btnPrev" onclick="prevStep()" disabled>← <span id="prevLbl">Retour</span></button>
   <button class="btn-next" id="btnNext" onclick="nextStep()"><span id="nextLbl">Commencer</span> →</button>
 </div>
 
 <!-- PHOTOS MODAL -->
-
 <div class="modal-overlay" id="photosModal">
   <div class="modal">
     <h2 id="photoModalTitle">📷 Photos non conformes</h2>
@@ -1219,7 +1213,6 @@ body{background:#fff;padding-bottom:0}
 </div>
 
 <!-- EMAIL MODAL -->
-
 <div class="modal-overlay" id="emailModal">
   <div class="modal">
     <h2 id="emailModalTitle">📧 Envoyer le rapport</h2>
@@ -1242,7 +1235,6 @@ body{background:#fff;padding-bottom:0}
 </div>
 
 <!-- INSTRUCTIONS MODAL -->
-
 <div class="modal-overlay" id="instructionsModal">
   <div class="modal">
     <div style="background:#00B5A8;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:10px;margin-bottom:14px">
@@ -1251,244 +1243,222 @@ body{background:#fff;padding-bottom:0}
     </div>
     <p id="instrSubtitle" style="font-size:13px;font-weight:700;color:#888;margin-bottom:14px;line-height:1.5">Votre rapport avec les photos est prêt. Suivez les étapes selon votre téléphone :</p>
 
-```
-<!-- iPhone -->
-<div style="border:1.5px solid #E0E0E0;border-radius:12px;overflow:hidden;margin-bottom:10px">
-  <div style="background:#1A1A1A;padding:8px 14px;font-size:12px;font-weight:900;color:#F5C800;letter-spacing:1px;font-family:'Black Han Sans',sans-serif" id="iphoneLabel">IPHONE</div>
-  <div style="padding:12px 14px" id="iphoneSteps">
-    <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
-      <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">1</div>
-      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Ouvre l'app <strong>Fichiers</strong> sur ton iPhone" data-en="Open the <strong>Files</strong> app on your iPhone">Ouvre l'app <strong>Fichiers</strong> sur ton iPhone</div>
+    <!-- iPhone -->
+    <div style="border:1.5px solid #E0E0E0;border-radius:12px;overflow:hidden;margin-bottom:10px">
+      <div style="background:#1A1A1A;padding:8px 14px;font-size:12px;font-weight:900;color:#F5C800;letter-spacing:1px;font-family:'Black Han Sans',sans-serif">IPHONE</div>
+      <div style="padding:12px 14px" id="iphoneSteps">
+        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+          <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">1</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Ouvre l'app <strong>Fichiers</strong> sur ton iPhone</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+          <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">2</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Appuie sur <strong>Téléchargements</strong></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+          <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">3</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Appuie sur le fichier <strong>Rapport_Fugazzi...</strong></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">4</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Appuie sur <strong>Partager</strong> (carré + flèche ↑) → <strong>Mail</strong></div>
+        </div>
+      </div>
     </div>
-    <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
-      <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">2</div>
-      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Appuie sur <strong>Téléchargements</strong>" data-en="Tap <strong>Downloads</strong>">Appuie sur <strong>Téléchargements</strong></div>
-    </div>
-    <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
-      <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">3</div>
-      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Appuie sur le fichier <strong>Rapport_Fugazzi...</strong>" data-en="Tap the file <strong>Rapport_Fugazzi...</strong>">Appuie sur le fichier <strong>Rapport_Fugazzi...</strong></div>
-    </div>
-    <div style="display:flex;gap:10px;align-items:flex-start">
-      <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">4</div>
-      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Appuie sur <strong>Partager</strong> (carré + flèche ↑) → <strong>Mail</strong>" data-en="Tap <strong>Share</strong> (square + arrow ↑) → <strong>Mail</strong>">Appuie sur <strong>Partager</strong> (carré + flèche ↑) → <strong>Mail</strong></div>
-    </div>
-  </div>
-</div>
 
-<!-- Android -->
-<div style="border:1.5px solid #E0E0E0;border-radius:12px;overflow:hidden;margin-bottom:10px">
-  <div style="background:#1A1A1A;padding:8px 14px;font-size:12px;font-weight:900;color:#F5C800;letter-spacing:1px;font-family:'Black Han Sans',sans-serif" id="androidLabel">ANDROID</div>
-  <div style="padding:12px 14px" id="androidSteps">
-    <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
-      <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">1</div>
-      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Glisse vers le bas → appuie sur la <strong>notification</strong> de téléchargement" data-en="Swipe down → tap the download <strong>notification</strong>">Glisse vers le bas → appuie sur la <strong>notification</strong> de téléchargement</div>
+    <!-- Android -->
+    <div style="border:1.5px solid #E0E0E0;border-radius:12px;overflow:hidden;margin-bottom:10px">
+      <div style="background:#1A1A1A;padding:8px 14px;font-size:12px;font-weight:900;color:#F5C800;letter-spacing:1px;font-family:'Black Han Sans',sans-serif">ANDROID</div>
+      <div style="padding:12px 14px" id="androidSteps">
+        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+          <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">1</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Glisse vers le bas → appuie sur la <strong>notification</strong> de téléchargement</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
+          <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">2</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Le rapport s'ouvre dans le navigateur</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">3</div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Menu ⋮ → <strong>Partager</strong> → <strong>Gmail</strong> ou <strong>Mail</strong></div>
+        </div>
+      </div>
     </div>
-    <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
-      <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">2</div>
-      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Le rapport s'ouvre dans le navigateur" data-en="The report opens in the browser">Le rapport s'ouvre dans le navigateur</div>
+
+    <!-- Emails -->
+    <div style="background:#E0F7F5;border-radius:12px;padding:12px 14px;margin-bottom:12px">
+      <div style="font-size:10px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="instrEmailLbl">Envoyer à</div>
+      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.8" id="instrEmails">fugazzipresto@barroco.ca</div>
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start">
-      <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">3</div>
-      <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5" data-fr="Menu ⋮ → <strong>Partager</strong> → <strong>Gmail</strong> ou <strong>Mail</strong>" data-en="Menu ⋮ → <strong>Share</strong> → <strong>Gmail</strong> or <strong>Mail</strong>">Menu ⋮ → <strong>Partager</strong> → <strong>Gmail</strong> ou <strong>Mail</strong></div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <button onclick="copyEmails()" id="copyEmailsBtn" style="width:100%;padding:14px;background:#1A1A1A;color:#fff;border:none;border-radius:12px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer">📋 Copier les adresses courriel</button>
+      <button onclick="closeInstructionsModal()" id="instrCloseBtn" style="width:100%;padding:13px;background:#00B5A8;color:#fff;border:none;border-radius:12px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer">OK, compris !</button>
     </div>
-  </div>
-</div>
-
-<!-- Emails -->
-<div style="background:#E0F7F5;border-radius:12px;padding:12px 14px;margin-bottom:12px">
-  <div style="font-size:10px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="instrEmailLbl">Envoyer à</div>
-  <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.8" id="instrEmails">fugazzipresto@barroco.ca</div>
-</div>
-
-<div style="display:flex;flex-direction:column;gap:8px">
-  <button onclick="copyEmails()" id="copyEmailsBtn" style="width:100%;padding:14px;background:#1A1A1A;color:#fff;border:none;border-radius:12px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer">📋 Copier les adresses courriel</button>
-  <button onclick="closeInstructionsModal()" id="instrCloseBtn" style="width:100%;padding:13px;background:#00B5A8;color:#fff;border:none;border-radius:12px;font-family:'Black Han Sans',sans-serif;font-size:14px;letter-spacing:1px;cursor:pointer">OK, compris !</button>
-</div>
-```
-
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <!-- MENU OVERLAY -->
-
 <div id="menuOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:200;align-items:flex-start;justify-content:flex-start">
   <div id="menuPanel" style="background:#fff;width:88%;max-width:360px;height:100%;overflow-y:auto;animation:slideRight .3s ease;box-shadow:4px 0 20px rgba(0,0,0,.2)">
+    
+    <!-- Menu Header -->
+    <div style="background:#1A1A1A;padding:env(safe-area-inset-top,0) 0 0">
+      <div style="padding:16px 16px 14px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#F5C800;letter-spacing:2px;text-transform:uppercase">Fugazzi</div>
+          <div style="font-size:10px;color:#00B5A8;font-weight:700;letter-spacing:1px;text-transform:uppercase">Pizza Presto</div>
+        </div>
+        <button onclick="closeMenu()" style="background:rgba(255,255,255,.1);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
+      </div>
+    </div>
 
-```
-<!-- Menu Header -->
-<div style="background:#1A1A1A;padding:env(safe-area-inset-top,0) 0 0">
-  <div style="padding:16px 16px 14px;display:flex;align-items:center;justify-content:space-between">
-    <div>
-      <div style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#F5C800;letter-spacing:2px;text-transform:uppercase">Fugazzi</div>
-      <div style="font-size:10px;color:#00B5A8;font-weight:700;letter-spacing:1px;text-transform:uppercase">Pizza Presto</div>
+    <!-- SECTION: Communications -->
+    <div style="border-bottom:1px solid #F0F0F0">
+      <div onclick="toggleMenuSection('comms')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="background:#E0F7F5;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">📢</div>
+          <div>
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="COMMUNICATIONS" data-en="COMMUNICATIONS">COMMUNICATIONS</div>
+            <div style="font-size:11px;color:#888;font-weight:700" id="commsSubtitle" data-fr="Chargement..." data-en="Loading...">Chargement...</div>
+          </div>
+        </div>
+        <div id="commsArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
+      </div>
+      <div id="commsSection" style="display:none;padding:0 14px 14px">
+        <!-- Messages list -->
+        <div id="messagesList" style="margin-bottom:12px"></div>
+        <!-- Write message -->
+        <div style="background:#F8F8F8;border-radius:12px;padding:12px">
+          <div style="font-size:11px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="newMsgLbl" data-fr="Nouveau message" data-en="New message">Nouveau message</div>
+          <textarea id="newMessageText" placeholder="Écrivez votre message ici..." style="width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:10px;font-size:13px;font-family:'Nunito',sans-serif;color:#1A1A1A;background:#fff;outline:none;min-height:80px;resize:vertical"></textarea>
+          <button onclick="postMessage()" style="width:100%;margin-top:8px;padding:11px;background:#00B5A8;color:#fff;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:13px;letter-spacing:1px;cursor:pointer" id="publishBtn">📤 Publier</button>
+        </div>
+      </div>
     </div>
-    <button onclick="closeMenu()" style="background:rgba(255,255,255,.1);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
-  </div>
-</div>
 
-<!-- SECTION: Communications -->
-<div style="border-bottom:1px solid #F0F0F0">
-  <div onclick="toggleMenuSection('comms')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="background:#E0F7F5;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">📢</div>
-      <div>
-        <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="COMMUNICATIONS" data-en="COMMUNICATIONS">COMMUNICATIONS</div>
-        <div style="font-size:11px;color:#888;font-weight:700" id="commsSubtitle" data-fr="Chargement..." data-en="Loading...">Chargement...</div>
+    <!-- SECTION: Ressources -->
+    <div style="border-bottom:1px solid #F0F0F0">
+      <div onclick="toggleMenuSection('resources')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="background:#E8F5E9;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">🔗</div>
+          <div>
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="RESSOURCES GÉRANT" data-en="MANAGER RESOURCES">RESSOURCES GÉRANT</div>
+            <div style="font-size:11px;color:#888;font-weight:700" data-fr="Listes, procédures, contacts" data-en="Lists, procedures, contacts">Listes, procédures, contacts</div>
+          </div>
+        </div>
+        <div id="resourcesArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
+      </div>
+      <div id="resourcesSection" style="display:none;padding:0 14px 14px">
+        <a href="https://docs.google.com/spreadsheets/d/1xVb2bZnTgXHwJqupXkDUzw5fOLIt2ZIPv9RFg57qxu8/edit" target="_blank" style="display:flex;align-items:center;gap:10px;background:#1a6b3c;color:#fff;padding:14px;border-radius:12px;text-decoration:none;margin-bottom:8px">
+          <span style="font-size:20px">📋</span>
+          <div>
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:13px;letter-spacing:.5px" data-fr="OUVRIR GOOGLE SHEETS" data-en="OPEN GOOGLE SHEETS">OUVRIR GOOGLE SHEETS</div>
+            <div style="font-size:11px;opacity:.8;font-family:'Nunito',sans-serif;font-weight:700" data-fr="Tâches, listes, ressources officielles" data-en="Tasks, lists, official resources">Tâches, listes, ressources officielles</div>
+          </div>
+        </a>
       </div>
     </div>
-    <div id="commsArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
-  </div>
-  <div id="commsSection" style="display:none;padding:0 14px 14px">
-    <!-- Messages list -->
-    <div id="messagesList" style="margin-bottom:12px"></div>
-    <!-- Write message -->
-    <div style="background:#F8F8F8;border-radius:12px;padding:12px">
-      <div style="font-size:11px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="newMsgLbl" data-fr="Nouveau message" data-en="New message">Nouveau message</div>
-      <textarea id="newMessageText" placeholder="Écrivez votre message ici..." style="width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:10px;font-size:13px;font-family:'Nunito',sans-serif;color:#1A1A1A;background:#fff;outline:none;min-height:80px;resize:vertical"></textarea>
-      <button onclick="postMessage()" style="width:100%;margin-top:8px;padding:11px;background:#00B5A8;color:#fff;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:13px;letter-spacing:1px;cursor:pointer" id="publishBtn">📤 Publier</button>
-    </div>
-  </div>
-</div>
 
-<!-- SECTION: Ressources -->
-<div style="border-bottom:1px solid #F0F0F0">
-  <div onclick="toggleMenuSection('resources')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="background:#E8F5E9;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">🔗</div>
-      <div>
-        <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="RESSOURCES GÉRANT" data-en="MANAGER RESOURCES">RESSOURCES GÉRANT</div>
-        <div style="font-size:11px;color:#888;font-weight:700" data-fr="Listes, procédures, contacts" data-en="Lists, procedures, contacts">Listes, procédures, contacts</div>
+    <!-- SECTION: Rapports -->
+    <div style="border-bottom:1px solid #F0F0F0">
+      <div onclick="toggleMenuSection('reports')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="background:#FFF3CD;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">📊</div>
+          <div>
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="RAPPORTS & SUIVI" data-en="REPORTS & TRACKING">RAPPORTS & SUIVI</div>
+            <div style="font-size:11px;color:#888;font-weight:700" id="reportsSubtitle">Chargement...</div>
+          </div>
+        </div>
+        <div id="reportsArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
+      </div>
+      <div id="reportsSection" style="display:none;padding:0 14px 14px">
+        <!-- Filter by succursale -->
+        <div style="margin-bottom:10px">
+          <label style="font-size:10px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px" id="filterLbl" data-fr="Filtrer par succursale" data-en="Filter by location">Filtrer par succursale</label>
+          <select id="reportFilter" onchange="filterReports()" style="width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:10px;font-size:14px;font-family:'Nunito',sans-serif;color:#1A1A1A;background:#E0F7F5;outline:none">
+            <option value="all">Toutes les succursales</option>
+          </select>
+        </div>
+        <div id="reportsList"></div>
       </div>
     </div>
-    <div id="resourcesArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
-  </div>
-  <div id="resourcesSection" style="display:none;padding:0 14px 14px">
-    <a href="https://docs.google.com/spreadsheets/d/1xVb2bZnTgXHwJqupXkDUzw5fOLIt2ZIPv9RFg57qxu8/edit" target="_blank" style="display:flex;align-items:center;gap:10px;background:#1a6b3c;color:#fff;padding:14px;border-radius:12px;text-decoration:none;margin-bottom:8px">
-      <span style="font-size:20px">📋</span>
-      <div>
-        <div style="font-family:'Black Han Sans',sans-serif;font-size:13px;letter-spacing:.5px" data-fr="OUVRIR GOOGLE SHEETS" data-en="OPEN GOOGLE SHEETS">OUVRIR GOOGLE SHEETS</div>
-        <div style="font-size:11px;opacity:.8;font-family:'Nunito',sans-serif;font-weight:700" data-fr="Tâches, listes, ressources officielles" data-en="Tasks, lists, official resources">Tâches, listes, ressources officielles</div>
-      </div>
-    </a>
-  </div>
-</div>
 
-<!-- SECTION: Rapports -->
-<div style="border-bottom:1px solid #F0F0F0">
-  <div onclick="toggleMenuSection('reports')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="background:#FFF3CD;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">📊</div>
-      <div>
-        <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="RAPPORTS & SUIVI" data-en="REPORTS & TRACKING">RAPPORTS & SUIVI</div>
-        <div style="font-size:11px;color:#888;font-weight:700" id="reportsSubtitle">Chargement...</div>
+    <!-- VISITE SUPERVISEUR -->
+    <div style="border-bottom:1px solid #F0F0F0">
+      <div onclick="toggleMenuSection('supervisor')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="background:#F8D7DA;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">🔐</div>
+          <div>
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px">VISITE SUPERVISEUR</div>
+            <div style="font-size:11px;color:#888;font-weight:700" id="supervisorSubtitle">Accès protégé</div>
+          </div>
+        </div>
+        <div id="supervisorArrow" style="color:#888;font-size:14px">▼</div>
+      </div>
+      <div id="supervisorSection" style="display:none;padding:0 14px 14px">
+        <div id="supervisorLocked">
+          <div style="background:#F8D7DA;border-radius:12px;padding:14px;margin-bottom:10px;text-align:center">
+            <div style="font-size:24px;margin-bottom:6px">🔐</div>
+            <div style="font-size:13px;font-weight:800;color:#721c24;margin-bottom:10px">Accès réservé au superviseur</div>
+            <input type="password" id="supervisorPwd" placeholder="Mot de passe..." style="width:100%;border:2px solid #F5C8C8;border-radius:10px;padding:10px;font-size:14px;font-family:'Nunito',sans-serif;outline:none;background:#fff;margin-bottom:8px">
+            <button onclick="unlockSupervisor()" style="width:100%;padding:11px;background:#721c24;color:#fff;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:13px;cursor:pointer;letter-spacing:1px">🔓 Accéder</button>
+          </div>
+        </div>
+        <div id="supervisorUnlocked" style="display:none">
+          <div style="display:flex;gap:8px;margin-bottom:12px">
+            <button onclick="showSupervisorTab('monthly')" id="tabMonthly" style="flex:1;padding:10px;background:#1A1A1A;color:#F5C800;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:12px;cursor:pointer">📋 MENSUELLE</button>
+            <button onclick="showSupervisorTab('surprise')" id="tabSurprise" style="flex:1;padding:10px;background:#F4F4F4;color:#888;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:12px;cursor:pointer">⚡ SURPRISE</button>
+          </div>
+          <div id="supervisorMonthly" style="display:block">
+            <div style="background:#FFF3CD;border-radius:12px;padding:16px;text-align:center;border:2px dashed #F5C800">
+              <div style="font-size:20px;margin-bottom:8px">📋</div>
+              <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#856404;margin-bottom:6px">VISITE MENSUELLE</div>
+              <div style="font-size:12px;color:#856404;font-weight:700">Liste en cours de création<br>Disponible prochainement</div>
+            </div>
+          </div>
+          <div id="supervisorSurprise" style="display:none">
+            <div style="font-size:10px;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;text-align:center">⚡ VISITE SURPRISE SUPERVISEUR</div>
+            <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
+              <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">1. EXTÉRIEUR</div>
+              <div id="sv-ext"></div>
+            </div>
+            <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
+              <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">2. ACCUEIL</div>
+              <div id="sv-acc"></div>
+            </div>
+            <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
+              <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">3. PROPRETÉ GÉNÉRALE</div>
+              <div id="sv-prop"></div>
+            </div>
+            <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
+              <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">4. TOILETTES</div>
+              <div id="sv-wc"></div>
+            </div>
+            <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
+              <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">5. QUALITÉ DE LA COMMANDE</div>
+              <div id="sv-qual"></div>
+            </div>
+            <div id="sv-score" style="display:none;border-radius:10px;padding:14px;text-align:center;margin-bottom:8px">
+              <div style="font-family:'Black Han Sans',sans-serif;font-size:36px" id="sv-score-pct">—</div>
+              <div style="font-size:12px;font-weight:800" id="sv-score-msg"></div>
+            </div>
+            <button onclick="submitSurpriseVisit()" style="width:100%;padding:13px;background:#721c24;color:#fff;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:13px;cursor:pointer;letter-spacing:1px;margin-bottom:6px">📤 Soumettre la visite</button>
+            <button onclick="resetSurpriseVisit()" style="width:100%;padding:10px;background:#F4F4F4;color:#888;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer">🔄 Recommencer</button>
+          </div>
+          <button onclick="lockSupervisor()" style="width:100%;margin-top:10px;padding:10px;background:#F4F4F4;color:#888;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer">🔒 Se déconnecter</button>
+        </div>
       </div>
     </div>
-    <div id="reportsArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
-  </div>
-  <div id="reportsSection" style="display:none;padding:0 14px 14px">
-    <!-- Filter by succursale -->
-    <div style="margin-bottom:10px">
-      <label style="font-size:10px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px" id="filterLbl" data-fr="Filtrer par succursale" data-en="Filter by location">Filtrer par succursale</label>
-      <select id="reportFilter" onchange="filterReports()" style="width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:10px;font-size:14px;font-family:'Nunito',sans-serif;color:#1A1A1A;background:#E0F7F5;outline:none">
-        <option value="all">Toutes les succursales</option>
-      </select>
-    </div>
-    <div id="reportsList"></div>
-  </div>
-</div>
 
-<!-- SECTION: Visite superviseur -->
-<div style="border-bottom:1px solid #F0F0F0">
-  <div onclick="toggleMenuSection('supervisor')" style="padding:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#FAFAFA">
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="background:#F8D7DA;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">🔐</div>
-      <div>
-        <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#1A1A1A;letter-spacing:.5px" data-fr="VISITE SUPERVISEUR" data-en="SUPERVISOR VISIT">VISITE SUPERVISEUR</div>
-        <div style="font-size:11px;color:#888;font-weight:700" id="supervisorSubtitle" data-fr="Accès protégé" data-en="Protected access">Accès protégé</div>
-      </div>
-    </div>
-    <div id="supervisorArrow" style="color:#888;font-size:14px;transition:transform .2s">▼</div>
-  </div>
-  <div id="supervisorSection" style="display:none;padding:0 14px 14px">
-    <div id="supervisorLocked" style="display:block">
-      <div style="background:#F8D7DA;border-radius:12px;padding:14px;margin-bottom:10px;text-align:center">
-        <div style="font-size:24px;margin-bottom:6px">🔐</div>
-        <div style="font-size:13px;font-weight:800;color:#721c24;margin-bottom:10px" id="supervisorLockMsg">Accès réservé au superviseur</div>
-        <input type="password" id="supervisorPwd" placeholder="Mot de passe..." style="width:100%;border:2px solid #F5C8C8;border-radius:10px;padding:10px;font-size:14px;font-family:'Nunito',sans-serif;outline:none;background:#fff;margin-bottom:8px">
-        <button onclick="unlockSupervisor()" style="width:100%;padding:11px;background:#721c24;color:#fff;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:13px;cursor:pointer;letter-spacing:1px">🔓 Accéder</button>
-      </div>
-    </div>
-    <div id="supervisorUnlocked" style="display:none">
-      <!-- Sub-tabs -->
-      <div style="display:flex;gap:8px;margin-bottom:12px">
-        <button onclick="showSupervisorTab('monthly')" id="tabMonthly" style="flex:1;padding:10px;background:#1A1A1A;color:#F5C800;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:12px;cursor:pointer;letter-spacing:.5px">📋 MENSUELLE</button>
-        <button onclick="showSupervisorTab('surprise')" id="tabSurprise" style="flex:1;padding:10px;background:#F4F4F4;color:#888;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:12px;cursor:pointer;letter-spacing:.5px">⚡ SURPRISE</button>
-      </div>
-      <!-- Monthly tab -->
-      <div id="supervisorMonthly" style="display:block">
-        <div style="background:#FFF3CD;border-radius:12px;padding:16px;text-align:center;border:2px dashed #F5C800">
-          <div style="font-size:20px;margin-bottom:8px">📋</div>
-          <div style="font-family:'Black Han Sans',sans-serif;font-size:14px;color:#856404;letter-spacing:1px;margin-bottom:6px">VISITE MENSUELLE</div>
-          <div style="font-size:12px;color:#856404;font-weight:700;line-height:1.5">Liste en cours de création<br>Disponible prochainement</div>
-        </div>
-      </div>
-      <!-- Surprise tab -->
-      <div id="supervisorSurprise" style="display:none">
-        <div style="font-size:10px;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;text-align:center">⚡ VISITE SURPRISE SUPERVISEUR</div>
-        
-        <!-- Section 1: Extérieur -->
-        <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
-          <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">1. EXTÉRIEUR</div>
-          <div id="sv-ext"></div>
-        </div>
-        
-        <!-- Section 2: Accueil -->
-        <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
-          <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">2. ACCUEIL</div>
-          <div id="sv-acc"></div>
-        </div>
-        
-        <!-- Section 3: Propreté -->
-        <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
-          <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">3. PROPRETÉ GÉNÉRALE</div>
-          <div id="sv-prop"></div>
-        </div>
-        
-        <!-- Section 4: Toilettes -->
-        <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
-          <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">4. TOILETTES</div>
-          <div id="sv-wc"></div>
-        </div>
-        
-        <!-- Section 5: Qualité -->
-        <div style="background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid #eee">
-          <div style="background:#1A1A1A;padding:8px 12px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:#F5C800;letter-spacing:1px">5. QUALITÉ DE LA COMMANDE</div>
-          <div id="sv-qual"></div>
-        </div>
-        
-        <!-- Score & Submit -->
-        <div id="sv-score" style="display:none;border-radius:10px;padding:14px;text-align:center;margin-bottom:8px">
-          <div style="font-family:'Black Han Sans',sans-serif;font-size:36px" id="sv-score-pct">—</div>
-          <div style="font-size:12px;font-weight:800" id="sv-score-msg"></div>
-        </div>
-        
-        <button onclick="submitSurpriseVisit()" style="width:100%;padding:13px;background:#721c24;color:#fff;border:none;border-radius:10px;font-family:'Black Han Sans',sans-serif;font-size:13px;cursor:pointer;letter-spacing:1px;margin-bottom:6px">📤 Soumettre la visite</button>
-        <button onclick="resetSurpriseVisit()" style="width:100%;padding:10px;background:#F4F4F4;color:#888;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer">🔄 Recommencer</button>
-      </div>
-      <button onclick="lockSupervisor()" style="width:100%;margin-top:10px;padding:10px;background:#F4F4F4;color:#888;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer">🔒 Se déconnecter</button>
+    <div style="padding:20px;text-align:center">
+      <div style="font-size:11px;color:#ccc;font-weight:700">Fugazzi Pizza Presto · Chemin de contrôle</div>
     </div>
   </div>
 </div>
 
-<div style="padding:20px;text-align:center">
-  <div style="font-size:11px;color:#ccc;font-weight:700">Fugazzi Pizza Presto · Chemin de contrôle</div>
-</div>
-```
-
-  </div>
-</div>
 
 <script>
 // ── STATE ─────────────────────────────────────────────────
@@ -1616,23 +1586,6 @@ function applyLang() {
   updateProgress();
   if (cur === 13) updateScore();
   updateStepLabel();
-  // End message translations
-  var endTitle = document.getElementById('endTitle');
-  if(endTitle) endTitle.textContent = lang==='fr'?'MERCI POUR TON RAPPORT !':'THANK YOU FOR YOUR REPORT!';
-  var endMsg = document.getElementById('endMsg');
-  if(endMsg) endMsg.innerHTML = lang==='fr'?'Ton suivi quotidien fait toute la différence.<br>Chaque détail compte pour le standard Fugazzi. 💪':'Your daily follow-up makes all the difference.<br>Every detail counts for the Fugazzi standard. 💪';
-  var endReportLbl = document.getElementById('endReportLbl');
-  if(endReportLbl) endReportLbl.textContent = lang==='fr'?'📊 Ton rapport est sauvegardé':'📊 Your report is saved';
-  var endReportDesc = document.getElementById('endReportDesc');
-  if(endReportDesc) endReportDesc.textContent = lang==='fr'?'Il est accessible dans le menu ☰ → Rapports & Suivi pour toi et ton équipe.':'It is accessible in the ☰ menu → Reports & Tracking for you and your team.';
-  var endUrgentLbl = document.getElementById('endUrgentLbl');
-  if(endUrgentLbl) endUrgentLbl.textContent = lang==='fr'?'🔴 ACTION REQUISE':'🔴 ACTION REQUIRED';
-  var endUrgentDesc = document.getElementById('endUrgentDesc');
-  if(endUrgentDesc) {
-    var urgFr = 'Score sous 80% — Envoie le rapport à : fugazzipresto@barroco.ca | En cas urgence, appelle Kahena.';
-    var urgEn = 'Score under 80% — Send report to: fugazzipresto@barroco.ca | In emergency, call Kahena.';
-    endUrgentDesc.textContent = lang==='fr' ? urgFr : urgEn;
-  }
   // Update menu texts
   var publishBtn = document.getElementById('publishBtn');
   if (publishBtn) publishBtn.textContent = lang==='fr' ? '📤 Publier' : '📤 Publish';
@@ -1669,8 +1622,8 @@ function goStep(idx) {
   document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('visible'); });
   document.getElementById('scoreBlock').style.display = 'none';
   document.getElementById('planSection').style.display = 'none';
-  document.getElementById('endMessage').style.display = 'none';
   document.getElementById('actionBtns').style.display = 'none';
+  var em = document.getElementById('endMessage'); if(em) em.style.display='none';
 
   cur = idx;
 
@@ -1691,13 +1644,9 @@ function goStep(idx) {
   } else if (idx === 13) {
     document.getElementById('scoreBlock').style.display = 'block';
     document.getElementById('planSection').style.display = 'block';
-    document.getElementById('endMessage').style.display = 'block';
     document.getElementById('actionBtns').style.display = 'flex';
     updateScore();
-    // Show low score warning
-    var s13 = getScore();
-    var lowScore = document.getElementById('endLowScore');
-    if (lowScore) lowScore.style.display = (s13.pct !== null && s13.pct < 80) ? 'block' : 'none';
+    showEndMessage();
   }
 
   updateNavBtns();
@@ -1853,153 +1802,75 @@ function buildReport() {
 }
 
 // ── SEND FLOW ─────────────────────────────────────────────
-// ── CLOUDINARY ───────────────────────────────────────────
-var CLOUD_NAME = 'drnovmfmp';
-var UPLOAD_PRESET = 'fugazzi_reports';
-
-function uploadPhotoToCloudinary(dataUrl, filename, callback) {
-  var formData = new FormData();
-  // Convert dataUrl to blob
-  var arr = dataUrl.split(','), mime = arr[0].match(/:(.*?);/)[1];
-  var bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-  while(n--) u8arr[n] = bstr.charCodeAt(n);
-  var blob = new Blob([u8arr], {type: mime});
-  formData.append('file', blob, filename);
-  formData.append('upload_preset', UPLOAD_PRESET);
-  formData.append('api_key', '292998532642883');
-  // Add folder with date for easy cleanup
-  var now = new Date();
-  var folder = 'fugazzi/' + now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
-  formData.append('folder', folder);
-  
-  fetch('https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/image/upload', {
-    method: 'POST',
-    body: formData
-  })
-  .then(function(r){ return r.json(); })
-  .then(function(d){ callback(d.secure_url || null); })
-  .catch(function(){ callback(null); });
-}
-
-function uploadAllNCPhotos(callback) {
-  var ncItems = [];
-  var uploadTasks = [];
-  
-  document.querySelectorAll('.check-item').forEach(function(item){
-    if (!item.querySelector('.non-conforme.active')) return;
-    var lbl = item.getAttribute('data-label') || '';
-    var sec = item.getAttribute('data-section') || '';
-    var cmt = item.querySelector('.nc-extras input[type=text]') ? item.querySelector('.nc-extras input[type=text]').value : '';
-    var imgs = item.querySelectorAll('.photo-thumb img');
-    var photoUrls = [];
-    
-    imgs.forEach(function(img, idx){
-      uploadTasks.push({
-        dataUrl: img.src,
-        filename: 'NC_' + lbl.replace(/[^a-zA-Z0-9]/g,'_').slice(0,20) + '_' + idx + '.jpg',
-        targetArray: photoUrls
-      });
-    });
-    
-    ncItems.push({ section: sec, label: lbl, comment: cmt, photos: photoUrls });
-  });
-  
-  if (uploadTasks.length === 0) { callback(ncItems); return; }
-  
-  var completed = 0;
-  uploadTasks.forEach(function(task){
-    uploadPhotoToCloudinary(task.dataUrl, task.filename, function(url){
-      if (url) task.targetArray.push(url);
-      completed++;
-      if (completed === uploadTasks.length) callback(ncItems);
-    });
-  });
+function compressImage(src, callback) {
+  var canvas = document.createElement('canvas');
+  var img = new Image();
+  img.onload = function() {
+    var maxW = 400, maxH = 400;
+    var w = img.width, h = img.height;
+    if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+    if (h > maxH) { w = Math.round(w * maxH / h); h = maxH; }
+    canvas.width = w; canvas.height = h;
+    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+    callback(canvas.toDataURL('image/jpeg', 0.5));
+  };
+  img.onerror = function(){ callback(src); };
+  img.src = src;
 }
 
 function openSendFlow() {
   var s = getScore();
-  var sendBtn = document.getElementById('sendBtn');
-  if(sendBtn){ sendBtn.textContent = lang==='fr'?'⏳ Upload photos...':'⏳ Uploading...'; sendBtn.disabled=true; }
-  
-  // Upload photos to Cloudinary first
-  var hasPhotos = false;
+
+  // Collect NC items with compressed photos
+  var ncItemsRaw = [];
   document.querySelectorAll('.check-item').forEach(function(item){
-    if(item.querySelector('.non-conforme.active') && item.querySelectorAll('.photo-thumb img').length > 0) hasPhotos = true;
+    if (!item.querySelector('.non-conforme.active')) return;
+    var imgs = [];
+    item.querySelectorAll('.photo-thumb img').forEach(function(img){ imgs.push(img.src); });
+    ncItemsRaw.push({
+      section: item.getAttribute('data-section')||'',
+      label: item.getAttribute('data-label')||'',
+      comment: item.querySelector('.nc-extras input[type=text]') ? item.querySelector('.nc-extras input[type=text]').value : '',
+      _rawPhotos: imgs
+    });
   });
-  
-  function proceedWithSave(ncItemsWithPhotos) {
-    if(sendBtn){ sendBtn.textContent = T[lang].sendBtn; sendBtn.disabled=false; }
-    
-    // Determine rush
-    var heure = document.getElementById('f-heure').value;
-    var heureNum = parseInt((heure||'00').split(':')[0]);
-    var rush = heureNum < 12 ? 'midi' : (heureNum >= 15 && heureNum < 18 ? 'soir' : 'hors-rush');
-    
+
+  // Compress all photos then save
+  var allPhotos = [];
+  ncItemsRaw.forEach(function(nc){ nc._rawPhotos.forEach(function(src){ allPhotos.push({nc: nc, src: src}); }); });
+
+  function finalize(ncItems) {
     var reportData = {
       date: document.getElementById('f-date').value,
-      heure: heure,
+      heure: document.getElementById('f-heure').value,
       succursale: document.getElementById('f-succursale').value||'Non specifiee',
       responsable: document.getElementById('f-resp').value||'Non specifie',
       score: s.pct!==null?s.pct:0,
       conformes: s.c,
       nonConformes: s.nc,
-      rush: rush,
       timestamp: Date.now(),
-      ncItems: ncItemsWithPhotos
+      ncItems: ncItems
     };
-    saveReport(reportData);
-    
-    // Auto email if score < 80
-    if (s.pct !== null && s.pct < 80) {
-      sendLowScoreEmail(reportData);
-    }
-    
-    // Cleanup old photos (7 days) - runs silently
-    cleanupOldReports();
+    initBins(function(){ saveReport(reportData); });
   }
-  
-  // Always collect NC items immediately
-  var ncItemsBase = [];
-  document.querySelectorAll('.check-item').forEach(function(item){
-    if (!item.querySelector('.non-conforme.active')) return;
-    var photoSrcs = [];
-    item.querySelectorAll('.photo-thumb img').forEach(function(img){ photoSrcs.push(img.src); });
-    ncItemsBase.push({
-      section: item.getAttribute('data-section')||'',
-      label: item.getAttribute('data-label')||'',
-      comment: item.querySelector('.nc-extras input[type=text]') ? item.querySelector('.nc-extras input[type=text]').value : '',
-      photos: photoSrcs  // store base64 locally for now
-    });
-  });
-  
-  // Save to Firebase immediately (without waiting for Cloudinary)
-  proceedWithSave(ncItemsBase);
-  
-  // Then try to upload photos to Cloudinary in background and update Firebase
-  if (hasPhotos) {
-    uploadAllNCPhotos(function(ncItemsWithCloudinary) {
-      // Update the report in Firebase with Cloudinary URLs if upload succeeded
-      var anyCloudinaryPhotos = ncItemsWithCloudinary.some(function(nc){ return nc.photos && nc.photos.some(function(p){ return p.startsWith('http'); }); });
-      if (anyCloudinaryPhotos) {
-        // Re-save with Cloudinary URLs
-        var s2 = getScore();
-        var heure2 = document.getElementById('f-heure').value;
-        var heureNum2 = parseInt((heure2||'00').split(':')[0]);
-        var rush2 = heureNum2 < 12 ? 'midi' : (heureNum2 >= 15 && heureNum2 < 18 ? 'soir' : 'hors-rush');
-        var reportData2 = {
-          date: document.getElementById('f-date').value,
-          heure: heure2,
-          succursale: document.getElementById('f-succursale').value||'Non specifiee',
-          responsable: document.getElementById('f-resp').value||'Non specifie',
-          score: s2.pct!==null?s2.pct:0,
-          conformes: s2.c,
-          nonConformes: s2.nc,
-          rush: rush2,
-          timestamp: Date.now(),
-          ncItems: ncItemsWithCloudinary
-        };
-        saveReport(reportData2);
-      }
+
+  if (allPhotos.length === 0) {
+    var ncItems = ncItemsRaw.map(function(nc){ return {section:nc.section,label:nc.label,comment:nc.comment,photos:[]}; });
+    finalize(ncItems);
+  } else {
+    // Compress all photos
+    var photoMap = {};
+    ncItemsRaw.forEach(function(nc){ photoMap[nc.label+nc.section] = []; });
+    var total = allPhotos.length, done = 0;
+    allPhotos.forEach(function(task){
+      compressImage(task.src, function(compressed){
+        photoMap[task.nc.label+task.nc.section].push(compressed);
+        done++;
+        if (done === total) {
+          var ncItems = ncItemsRaw.map(function(nc){ return {section:nc.section,label:nc.label,comment:nc.comment,photos:photoMap[nc.label+nc.section]||[]}; });
+          finalize(ncItems);
+        }
+      });
     });
   }
 
@@ -2158,10 +2029,6 @@ function openInstructionsModal(suc, gerant) {
   document.getElementById('instrEmailLbl').textContent = lang==='fr'?'Envoyer a':'Send to';
   document.getElementById('copyEmailsBtn').textContent = lang==='fr'?'Copier les adresses courriel':'Copy email addresses';
   document.getElementById('instrCloseBtn').textContent = lang==='fr'?'OK, compris !':'OK, got it!';
-  // Update iPhone/Android step texts
-  document.querySelectorAll('#iphoneSteps [data-fr], #androidSteps [data-fr]').forEach(function(el){
-    el.innerHTML = lang==='fr' ? el.getAttribute('data-fr') : el.getAttribute('data-en');
-  });
   document.getElementById('instructionsModal').classList.add('open');
 }
 
@@ -2190,307 +2057,67 @@ document.getElementById('instructionsModal').addEventListener('click', function(
 document.getElementById('photosModal').addEventListener('click', function(e){ if (e.target === this) closePhotosModal(); });
 document.getElementById('menuOverlay').addEventListener('click', function(e){ if(e.target===this) closeMenu(); });
 
-// ── SUPERVISOR ────────────────────────────────────────────
-var SUPERVISOR_PWD = 'Fugazzi.Presto';
+// ── MESSAGES (modifiez directement ici) ──────────────────
+// Pour ajouter/modifier un message : cherchez MESSAGES_ICI sur GitHub
+// et modifiez le texte. Vercel met à jour en 30 secondes.
+var STATIC_MESSAGES = [
+  // ===== MESSAGES_ICI — MODIFIEZ OU AJOUTEZ DES MESSAGES ICI =====
+  {
+    id: 'msg_1',
+    text: 'Bienvenue sur le chemin de contrôle Fugazzi ! Ce système permet de suivre la qualité de nos restaurants. Pour toute question, contactez Kahena.',
+    date: '2026-05-04 09:00',
+    author: 'Kahena',
+    readBy: []
+  }
+  // Exemple pour ajouter un message :
+  // ,{
+  //   id: 'msg_2',
+  //   text: 'Votre message ici',
+  //   date: '2026-05-04 10:00',
+  //   author: 'Kahena',
+  //   readBy: []
+  // }
+  // ===== FIN DES MESSAGES =====
+];
 
-function unlockSupervisor() {
-  var pwd = document.getElementById('supervisorPwd').value;
-  if (pwd === SUPERVISOR_PWD) {
-    document.getElementById('supervisorLocked').style.display = 'none';
-    document.getElementById('supervisorUnlocked').style.display = 'block';
-    document.getElementById('supervisorSubtitle').textContent = lang==='fr'?'Connecté ✅':'Connected ✅';
-    document.getElementById('supervisorPwd').value = '';
-    buildSurpriseVisit();
+// Read/write stored read status locally
+function initBins(callback) { if(callback) callback(); }
+
+function readBin(binId, callback) {
+  if (binId === 'messages') {
+    // Merge static messages with local read status
+    var readData = JSON.parse(localStorage.getItem('fugazzi_reads') || '{}');
+    var msgs = STATIC_MESSAGES.map(function(m) {
+      return { id: m.id, text: m.text, date: m.date, author: m.author, readBy: readData[m.id] || [] };
+    });
+    callback(msgs);
   } else {
-    showToast(lang==='fr'?'Mot de passe incorrect':'Wrong password');
-    document.getElementById('supervisorPwd').value = '';
+    // Reports stored locally
+    var reports = JSON.parse(localStorage.getItem('fugazzi_reports') || '[]');
+    callback(reports);
   }
 }
 
-function lockSupervisor() {
-  document.getElementById('supervisorLocked').style.display = 'block';
-  document.getElementById('supervisorUnlocked').style.display = 'none';
-  document.getElementById('supervisorSubtitle').textContent = lang==='fr'?'Accès protégé':'Protected access';
-}
-
-// ── SURPRISE VISIT ────────────────────────────────────────
-var SV_SECTIONS = {
-  'sv-ext': [
-    'Vitres et façade propres',
-    'Pas de déchets au sol',
-    'Affichage en place et bien collé',
-    'Enseigne allumée'
-  ],
-  'sv-acc': [
-    'Accueil chaleureux par un employé',
-    'Tenue vestimentaire conforme',
-    'Ambiance — lumière et musique'
-  ],
-  'sv-prop': [
-    'Sol propre',
-    'Tables et chaises propres',
-    'Comptoir propre et accueillant',
-    'Poubelles vides'
-  ],
-  'sv-wc': [
-    'Papier, savon et eau chaude disponibles',
-    'Lavabo et miroirs propres',
-    'Toilettes propres'
-  ],
-  'sv-qual': [
-    'Présentation de la commande',
-    'Croûte standard Fugazzi',
-    'Respect des quantités de la recette',
-    'Goût et qualité du produit',
-    'Température adéquate',
-    'Emballage propre et correct'
-  ]
-};
-
-var SV_SECTION_NAMES = {
-  'sv-ext': 'Extérieur',
-  'sv-acc': 'Accueil',
-  'sv-prop': 'Propreté générale',
-  'sv-wc': 'Toilettes',
-  'sv-qual': 'Qualité de la commande'
-};
-
-function buildSurpriseVisit() {
-  Object.keys(SV_SECTIONS).forEach(function(sectionId) {
-    var container = document.getElementById(sectionId);
-    if (!container) return;
-    var items = SV_SECTIONS[sectionId];
-    var html = '';
-    items.forEach(function(label, idx) {
-      var itemId = sectionId + '_' + idx;
-      html += '<div style="padding:10px 12px;border-bottom:1px solid #F5F5F5">';
-      html += '<div style="font-size:13px;font-weight:800;color:#1A1A1A;margin-bottom:8px">' + label + '</div>';
-      html += '<div style="display:flex;gap:8px;margin-bottom:6px">';
-      html += '<button id="ok_' + itemId + '" style="flex:1;padding:10px;border-radius:10px;border:2px solid #E0E0E0;background:#F4F4F4;font-family:Nunito,sans-serif;font-size:13px;font-weight:900;color:#999;cursor:pointer">&#10003; OK</button>';
-      html += '<button id="nc_' + itemId + '" style="flex:1;padding:10px;border-radius:10px;border:2px solid #E0E0E0;background:#F4F4F4;font-family:Nunito,sans-serif;font-size:13px;font-weight:900;color:#999;cursor:pointer">&#10007; NC</button>';
-      html += '</div>';
-      html += '<div id="extras_' + itemId + '" style="display:none;gap:6px;flex-direction:column">';
-      html += '<input type="text" placeholder="Commentaire..." style="width:100%;border:2px solid #FFE8A3;border-radius:8px;padding:8px 10px;font-size:13px;font-family:Nunito,sans-serif;outline:none;background:#FFFBE0" id="cmt_' + itemId + '">';
-      html += '<label style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:8px;border:2px dashed #dc3545;background:#FFF5F5;color:#dc3545;font-family:Nunito,sans-serif;font-size:12px;font-weight:800;cursor:pointer">&#128247; Photo<input type="file" accept="image/*" capture="environment" id="file_' + itemId + '" style="display:none"></label>';
-      html += '<div id="photos_' + itemId + '" style="display:flex;flex-wrap:wrap;gap:6px"></div>';
-      html += '</div></div>';
-    });
-    container.innerHTML = html;
-    
-    // Add event listeners after HTML is set
-    items.forEach(function(label, idx) {
-      var itemId = sectionId + '_' + idx;
-      var okBtn = document.getElementById('ok_' + itemId);
-      var ncBtn = document.getElementById('nc_' + itemId);
-      var fileInput = document.getElementById('file_' + itemId);
-      if(okBtn) okBtn.addEventListener('click', function(){ svToggle(itemId, true); });
-      if(ncBtn) ncBtn.addEventListener('click', function(){ svToggle(itemId, false); });
-      if(fileInput) fileInput.addEventListener('change', function(){ svAddPhoto(this, itemId); });
-    });
-  });
-}
-
-
-function svToggle(itemId, isOk) {
-  var okBtn = document.getElementById('ok_'+itemId);
-  var ncBtn = document.getElementById('nc_'+itemId);
-  var extras = document.getElementById('extras_'+itemId);
-  okBtn.style.background = isOk ? '#D4EDDA' : '#F4F4F4';
-  okBtn.style.color = isOk ? '#155724' : '#999';
-  okBtn.style.borderColor = isOk ? '#28a745' : '#E0E0E0';
-  ncBtn.style.background = !isOk ? '#F8D7DA' : '#F4F4F4';
-  ncBtn.style.color = !isOk ? '#721c24' : '#999';
-  ncBtn.style.borderColor = !isOk ? '#dc3545' : '#E0E0E0';
-  extras.style.display = !isOk ? 'flex' : 'none';
-  okBtn.setAttribute('data-selected', isOk ? 'true' : '');
-  ncBtn.setAttribute('data-selected', !isOk ? 'true' : '');
-  svUpdateScore();
-}
-
-function svAddPhoto(input) {
-  var itemId = input.getAttribute('data-itemid');
-  var file = input.files[0]; if(!file) return;
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    var container = document.getElementById('photos_'+itemId);
-    var div = document.createElement('div');
-    div.style.cssText = 'position:relative;width:60px;height:60px';
-    div.innerHTML = '<img src="'+e.target.result+'" style="width:60px;height:60px;object-fit:cover;border-radius:8px;border:2px solid #dc3545"><button onclick="this.parentElement.remove()" style="position:absolute;top:-5px;right:-5px;background:#dc3545;color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:10px;cursor:pointer;font-weight:900">✕</button>';
-    container.appendChild(div);
-  };
-  reader.readAsDataURL(file);
-  input.value = '';
-}
-
-function svUpdateScore() {
-  var total = 0, ok = 0;
-  Object.keys(SV_SECTIONS).forEach(function(sectionId){
-    SV_SECTIONS[sectionId].forEach(function(label, idx){
-      var itemId = sectionId + '_' + idx;
-      var okBtn = document.getElementById('ok_'+itemId);
-      var ncBtn = document.getElementById('nc_'+itemId);
-      if(!okBtn) return;
-      total++;
-      if(okBtn.getAttribute('data-selected')==='true') ok++;
-    });
-  });
-  var checked = ok + document.querySelectorAll('[id^="nc_"][data-selected="true"]').length;
-  if(checked === 0) { document.getElementById('sv-score').style.display='none'; return; }
-  var pct = Math.round(ok/total*100);
-  var scoreEl = document.getElementById('sv-score');
-  var pctEl = document.getElementById('sv-score-pct');
-  var msgEl = document.getElementById('sv-score-msg');
-  scoreEl.style.display = 'block';
-  pctEl.textContent = pct+'%';
-  if(pct>=90){scoreEl.style.background='#D4EDDA';pctEl.style.color='#155724';msgEl.style.color='#155724';msgEl.textContent='Excellent — Standard Fugazzi respecté !';}
-  else if(pct>=80){scoreEl.style.background='#FFF3CD';pctEl.style.color='#856404';msgEl.style.color='#856404';msgEl.textContent='Bien — quelques points à corriger.';}
-  else if(pct>=60){scoreEl.style.background='#FFE5CC';pctEl.style.color='#C05000';msgEl.style.color='#C05000';msgEl.textContent='Plan action requis.';}
-  else{scoreEl.style.background='#F8D7DA';pctEl.style.color='#721c24';msgEl.style.color='#721c24';msgEl.textContent='Critique — intervention immédiate.';}
-}
-
-function submitSurpriseVisit() {
-  var suc = document.getElementById('f-succursale').value || 'Non spécifiée';
-  var date = document.getElementById('f-date').value;
-  var heure = document.getElementById('f-heure').value;
-  var ncItems = [];
-  var total = 0, ok = 0;
-  
-  Object.keys(SV_SECTIONS).forEach(function(sectionId){
-    var secName = SV_SECTION_NAMES[sectionId];
-    SV_SECTIONS[sectionId].forEach(function(label, idx){
-      var itemId = sectionId + '_' + idx;
-      var okBtn = document.getElementById('ok_'+itemId);
-      var ncBtn = document.getElementById('nc_'+itemId);
-      if(!okBtn) return;
-      total++;
-      if(okBtn.getAttribute('data-selected')==='true') { ok++; return; }
-      if(ncBtn.getAttribute('data-selected')==='true') {
-        var cmt = document.getElementById('cmt_'+itemId) ? document.getElementById('cmt_'+itemId).value : '';
-        var photos = [];
-        document.querySelectorAll('#photos_'+itemId+' img').forEach(function(img){ photos.push(img.src); });
-        ncItems.push({section: secName, label: label, comment: cmt, photos: photos});
-      }
-    });
-  });
-  
-  var pct = total > 0 ? Math.round(ok/total*100) : 0;
-  
-  // Build HTML report
-  var ncRows = ncItems.length === 0 ? '<tr><td style="padding:16px;text-align:center;color:#155724;font-weight:800">✅ Tous les points sont conformes !</td></tr>' :
-    ncItems.map(function(nc){
-      var photos = nc.photos.map(function(p){ return '<img src="'+p+'" style="width:100px;height:100px;object-fit:cover;border-radius:6px;border:2px solid #dc3545;margin:4px">'; }).join('');
-      return '<tr style="border-bottom:1px solid #eee"><td style="padding:10px 14px"><div style="font-weight:800;font-size:13px;color:#1A1A1A">❌ '+nc.section+' — '+nc.label+'</div>'+(nc.comment?'<div style="font-size:12px;color:#666;margin-top:4px">💬 '+nc.comment+'</div>':'')+(photos?'<div style="margin-top:6px">'+photos+'</div>':'')+'</td></tr>';
-    }).join('');
-  
-  var scoreBg = pct>=90?'#D4EDDA':pct>=80?'#FFF3CD':pct>=60?'#FFE5CC':'#F8D7DA';
-  var scoreCol = pct>=90?'#155724':pct>=80?'#856404':pct>=60?'#C05000':'#721c24';
-  
-  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Visite Surprise — '+suc+'</title></head>'
-    +'<body style="font-family:Arial,sans-serif;background:#F0FAF9;margin:0;padding:16px">'
-    +'<div style="background:#721c24;border-radius:16px;padding:20px;text-align:center;margin-bottom:16px">'
-    +'<div style="font-size:18px;font-weight:900;color:#F5C800;letter-spacing:2px;text-transform:uppercase">⚡ VISITE SURPRISE SUPERVISEUR</div>'
-    +'<div style="font-size:13px;color:rgba(255,255,255,.8);margin-top:4px;font-weight:700">'+suc+' · '+date+' · '+heure+'</div>'
-    +'</div>'
-    +'<div style="background:'+scoreBg+';border-radius:12px;padding:16px;text-align:center;margin-bottom:16px">'
-    +'<div style="font-size:42px;font-weight:900;color:'+scoreCol+'">'+pct+'%</div>'
-    +'<div style="font-size:12px;font-weight:800;color:'+scoreCol+'">'+( pct>=90?'Excellent':pct>=80?'Bien':pct>=60?'Plan action requis':'Critique')+'</div>'
-    +'</div>'
-    +'<table style="width:100%;border-radius:12px;overflow:hidden;border-collapse:collapse;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.1)">'+ncRows+'</table>'
-    +'<div style="height:20px"></div>'
-    +'</body></html>';
-  
-  var blob = new Blob([html], {type:'text/html;charset=utf-8'});
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'VisiteSurprise_'+suc.replace(/\s+/g,'_')+'_'+date+'.html';
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  
-  showToast('⚡ Rapport de visite surprise téléchargé !');
-  
-  // Save to Firebase under surpriseVisits
-  pushToBin('surpriseVisits', {
-    date: date, heure: heure, succursale: suc,
-    score: pct, nonConformes: ncItems.length,
-    timestamp: Date.now(), ncItems: ncItems.map(function(nc){ return {section:nc.section,label:nc.label,comment:nc.comment}; })
-  }, function(){});
-}
-
-function resetSurpriseVisit() {
-  buildSurpriseVisit();
-  document.getElementById('sv-score').style.display='none';
-}
-
-function showSupervisorTab(tab) {
-  document.getElementById('supervisorMonthly').style.display = tab==='monthly'?'block':'none';
-  document.getElementById('supervisorSurprise').style.display = tab==='surprise'?'block':'none';
-  document.getElementById('tabMonthly').style.background = tab==='monthly'?'#1A1A1A':'#F4F4F4';
-  document.getElementById('tabMonthly').style.color = tab==='monthly'?'#F5C800':'#888';
-  document.getElementById('tabSurprise').style.background = tab==='surprise'?'#721c24':'#F4F4F4';
-  document.getElementById('tabSurprise').style.color = tab==='surprise'?'#fff':'#888';
-}
-
-// Allow Enter key for supervisor password
-document.getElementById('supervisorPwd').addEventListener('keypress', function(e){
-  if(e.key==='Enter') unlockSupervisor();
-});
-
-// ── FIREBASE STORAGE ─────────────────────────────────────
-var FB_URL = 'https://fugazzi-presto-default-rtdb.firebaseio.com';
-
-function initBins(callback) { if(callback) callback(); }
-
-function readBin(path, callback) {
-  fetch(FB_URL + '/' + path + '.json')
-    .then(function(r){ return r.json(); })
-    .then(function(d){
-      if (!d || d === null) { callback([]); return; }
-      var result = [];
-      if (Array.isArray(d)) {
-        result = d;
-      } else if (typeof d === 'object') {
-        // Firebase returns object with auto-generated keys like {"-OrsS70L": {...}}
-        var keys = Object.keys(d);
-        for (var i = 0; i < keys.length; i++) {
-          if (d[keys[i]] !== null && d[keys[i]] !== undefined) {
-            result.push(d[keys[i]]);
-          }
-        }
-      }
-      callback(result);
-    })
-    .catch(function(e){ console.log('readBin error:', e); callback([]); });
-}
-
-function writeBin(path, data, callback) {
-  fetch(FB_URL + '/' + path + '.json', {
-    method: 'PUT',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(data)
-  })
-  .then(function(r){ return r.ok; })
-  .then(function(ok){ if(callback) callback(ok); })
-  .catch(function(){ if(callback) callback(false); });
-}
-
-function pushToBin(path, data, callback) {
-  fetch(FB_URL + '/' + path + '.json', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(data)
-  })
-  .then(function(r){ return r.ok; })
-  .then(function(ok){ if(callback) callback(ok); })
-  .catch(function(){ if(callback) callback(false); });
+function writeBin(binId, data, callback) {
+  if (binId === 'messages') {
+    // Save read status locally
+    var readData = {};
+    data.forEach(function(m){ readData[m.id] = m.readBy || []; });
+    localStorage.setItem('fugazzi_reads', JSON.stringify(readData));
+    if(callback) callback(true);
+  } else {
+    // Save reports locally
+    localStorage.setItem('fugazzi_reports', JSON.stringify(data));
+    if(callback) callback(true);
+  }
 }
 
 // ── MENU OPEN/CLOSE ───────────────────────────────────────
 function openMenu() {
   var overlay = document.getElementById('menuOverlay');
   overlay.style.display = 'flex';
-  setTimeout(function(){
-    loadMessages();
-    loadReports();
-  }, 100);
+  loadMessages();
+  loadReports();
 }
 
 function closeMenu() {
@@ -2508,40 +2135,39 @@ function toggleMenuSection(section) {
 // ── COMMUNICATIONS ────────────────────────────────────────
 function loadMessages() {
   var list = document.getElementById('messagesList');
-  if(cachedMessages.length > 0) displayMessages(cachedMessages);
-  else list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Chargement...':'Loading...') + '</div>';
+  list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Chargement...':'Loading...') + '</div>';
   
-  fetch(FB_URL + '/messages.json')
-    .then(function(r){ return r.json(); })
-    .then(function(d){
-      if(d && typeof d==='object') cachedMessages = Array.isArray(d) ? d.filter(Boolean) : Object.values(d).filter(Boolean);
-      else cachedMessages = [];
-      displayMessages(cachedMessages);
-    })
-    .catch(function(){
-      if(cachedMessages.length===0){
-        list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun message.':'No messages.') + '</div>';
+  initBins(function() {
+    readBin('messages', function(messages) {
+      if (!messages || messages.length === 0) {
+        list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun message pour le moment.':'No messages yet.') + '</div>';
+        document.getElementById('commsSubtitle').textContent = lang==='fr'?'Aucun message':'No messages';
+        return;
       }
+      var unread = 0;
+      var myDeviceId = localStorage.getItem('fugazzi_device_id');
+      if (!myDeviceId) {
+        myDeviceId = 'dev_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+        localStorage.setItem('fugazzi_device_id', myDeviceId);
+      }
+      var hidden = JSON.parse(localStorage.getItem('fugazzi_hidden') || '[]');
+      messages = messages.filter(function(m){ return hidden.indexOf(m.id) < 0; });
+      list.innerHTML = messages.slice().reverse().map(function(msg) {
+        var readBy = msg.readBy || [];
+        var isRead = readBy.indexOf(myDeviceId) >= 0;
+        if (!isRead) unread++;
+        var readCount = readBy.length;
+        return '<div style="background:#fff;border-radius:10px;padding:12px;margin-bottom:8px;border-left:3px solid #00B5A8;border:1px solid #E0F7F5">' +
+          '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">' +
+          '<div style="font-size:11px;color:#888;font-weight:700">' + msg.date + ' · ' + (msg.author||'Kahena') + '</div>' +
+          '<button onclick="deleteMessage(\'' + msg.id + '\')" style="background:none;border:none;color:#ddd;font-size:13px;cursor:pointer;padding:0">🗑️</button>' +
+          '</div>' +
+          '<div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.6">' + msg.text + '</div>' +
+          '</div>';
+      }).join('');
+      document.getElementById('commsSubtitle').textContent = messages.length + (lang==='fr'?' message(s)':' message(s)');
     });
-}
-
-function displayMessages(messages) {
-  var list = document.getElementById('messagesList');
-  if(!messages || messages.length===0){
-    list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun message pour le moment.':'No messages yet.') + '</div>';
-    document.getElementById('commsSubtitle').textContent = lang==='fr'?'Aucun message':'No messages';
-    return;
-  }
-  list.innerHTML = messages.slice().reverse().map(function(msg){
-    return '<div style="background:#fff;border-radius:10px;padding:12px;margin-bottom:8px;border-left:3px solid #00B5A8;border:1px solid #E0F7F5">' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">' +
-      '<div style="font-size:11px;color:#888;font-weight:700">' + (msg.date||'') + ' · ' + (msg.author||'Kahena') + '</div>' +
-      '<button onclick="deleteMessage(\'' + (msg.id||'') + '\')" style="background:none;border:none;color:#ddd;font-size:13px;cursor:pointer;padding:0">&#128465;</button>' +
-      '</div>' +
-      '<div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.6">' + (msg.text||'') + '</div>' +
-      '</div>';
-  }).join('');
-  document.getElementById('commsSubtitle').textContent = messages.length + ' message(s)';
+  });
 }
 
 
@@ -2566,7 +2192,9 @@ function markRead(msgId) {
 }
 
 function postMessage() {
-  var text = document.getElementById('newMessageText').value.trim();
+  showToast(lang==='fr'?'Modifiez les messages sur GitHub':'Edit messages on GitHub');
+  return;
+  var text = '';
   
   var btn = document.getElementById('publishBtn');
   if (btn) { btn.textContent = '⏳'; btn.disabled = true; }
@@ -2616,57 +2244,48 @@ function deleteMessage(msgId) {
 // ── REPORTS ───────────────────────────────────────────────
 function saveReport(reportData) {
   initBins(function() {
-    pushToBin('reports', reportData, function(ok) {
-      if (ok) showToast(lang==='fr' ? '📊 Rapport sauvegardé !' : '📊 Report saved!');
+    readBin('reports', function(reports) {
+      reports.push(reportData);
+      if (reports.length > 200) reports = reports.slice(-200);
+      writeBin('reports', reports, function(ok) {
+        if (ok) showToast(lang==='fr' ? '📊 Rapport sauvegardé !' : '📊 Report saved!');
+      });
     });
   });
 }
 
 function loadReports() {
   var list = document.getElementById('reportsList');
+  list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">Chargement...</div>';
   
-  // Show cached data immediately if available
-  if (cachedReports.length > 0) {
-    displayReports(cachedReports);
-  } else {
-    list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Chargement...':'Loading...') + '</div>';
-  }
-  
-  // Always refresh from Firebase
-  fetch(FB_URL + '/reports.json')
-    .then(function(r){ return r.json(); })
-    .then(function(d){
-      cachedReports = d && typeof d==='object' ? Object.values(d).filter(Boolean) : [];
-      displayReports(cachedReports);
-    })
-    .catch(function(){
-      if(cachedReports.length === 0){
-        list.innerHTML = '<div style="text-align:center;padding:16px;color:#dc3545;font-size:12px;font-weight:700">' + (lang==='fr'?'Erreur — vérifiez votre connexion':'Error — check your connection') + '</div>';
-      }
-    });
-}
-
-function displayReports(reports) {
-  var list = document.getElementById('reportsList');
-  if (!reports || reports.length === 0) {
-    list.innerHTML = '<div style="text-align:center;padding:16px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun rapport soumis encore.':'No reports yet.') + '</div>';
-    document.getElementById('reportsSubtitle').textContent = lang==='fr'?'Aucun rapport':'No reports';
-    return;
-  }
-  var filter = document.getElementById('reportFilter');
-  var seen = {}; var succursales = [];
-  reports.forEach(function(r){ if(r.succursale&&!seen[r.succursale]){seen[r.succursale]=true;succursales.push(r.succursale);} });
-  var currentVal = filter.value || 'all';
-  filter.innerHTML = '<option value="all">' + (lang==='fr'?'Toutes les succursales':'All locations') + ' (' + reports.length + ')</option>' +
-    succursales.map(function(s){ return '<option value="' + s + '">' + s + '</option>'; }).join('');
-  filter.value = currentVal;
-  document.getElementById('reportsSubtitle').textContent = reports.length + ' rapport(s)';
-  renderReports(reports, currentVal);
+  readBin('reports', function(reports) {
+    if (!reports || reports.length === 0) {
+      list.innerHTML = '<div style="text-align:center;padding:16px;color:#888;font-size:12px;font-weight:700">Aucun rapport soumis encore.</div>';
+      document.getElementById('reportsSubtitle').textContent = 'Aucun rapport';
+      return;
+    }
+    
+    // Populate filter
+    var filter = document.getElementById('reportFilter');
+    var succursales = [...new Set(reports.map(function(r){ return r.succursale; }))].filter(Boolean);
+    filter.innerHTML = '<option value="all">Toutes les succursales (' + reports.length + ')</option>' +
+      succursales.map(function(s){ return '<option value="' + s + '">' + s + '</option>'; }).join('');
+    
+    document.getElementById('reportsSubtitle').textContent = reports.length + ' rapport(s)';
+    renderReports(reports, 'all');
+  });
 }
 
 function filterReports() {
   var val = document.getElementById('reportFilter').value;
-  renderReports(cachedReports, val);
+  readBin('reports', function(reports) {
+    renderReports(reports, val);
+  });
+}
+
+function toggleDetail(id) {
+  var el = document.getElementById(id);
+  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
 }
 
 function renderReports(reports, filter) {
@@ -2727,7 +2346,7 @@ function renderReports(reports, filter) {
       '</div>';
   }
   
-  // Recent reports list - clickable to see details + photos
+  // Recent reports list - clickable with photos
   var recentHtml = '<div style="background:#fff;border-radius:10px;padding:12px;border:1px solid #eee">' +
     '<div style="font-size:11px;font-weight:800;color:#008C82;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">📋 ' + (lang==='fr'?'Derniers rapports':'Recent reports') + '</div>' +
     filtered.slice(0, 15).map(function(r, idx) {
@@ -2735,29 +2354,39 @@ function renderReports(reports, filter) {
       var bg = sc >= 90 ? '#D4EDDA' : sc >= 80 ? '#FFF3CD' : sc >= 60 ? '#FFE5CC' : '#F8D7DA';
       var col = sc >= 90 ? '#155724' : sc >= 80 ? '#856404' : sc >= 60 ? '#C05000' : '#721c24';
       var shortSuc = (r.succursale||'?').replace('Fugazzi Presto ','');
-      var rushLabel = r.rush==='midi'?'🌞 Midi':r.rush==='soir'?'🌙 Soir':'';
       var hasPhotos = r.ncItems && r.ncItems.some(function(nc){ return nc.photos && nc.photos.length > 0; });
+      
+      // Build detail section
+      var detailHtml = '<div id="rdetail_'+idx+'" style="display:none;margin-top:8px;background:#F8F8F8;border-radius:8px;padding:10px">';
+      if (r.ncItems && r.ncItems.length > 0) {
+        r.ncItems.forEach(function(nc){
+          detailHtml += '<div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #eee">';
+          detailHtml += '<div style="font-size:11px;font-weight:800;color:#721c24">❌ ' + (nc.section||'') + ' — ' + (nc.label||'') + '</div>';
+          if (nc.comment) detailHtml += '<div style="font-size:11px;color:#666;margin-top:2px">💬 ' + nc.comment + '</div>';
+          if (nc.photos && nc.photos.length > 0) {
+            detailHtml += '<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">';
+            nc.photos.forEach(function(photo){
+              detailHtml += '<a href="'+photo+'" target="_blank"><img src="'+photo+'" style="width:64px;height:64px;object-fit:cover;border-radius:6px;border:2px solid #dc3545"></a>';
+            });
+            detailHtml += '</div>';
+          }
+          detailHtml += '</div>';
+        });
+      } else {
+        detailHtml += '<div style="font-size:11px;color:#155724;font-weight:700">✅ ' + (lang==='fr'?'Tous conformes':'All compliant') + '</div>';
+      }
+      detailHtml += '</div>';
+
       return '<div style="border-bottom:1px solid #F5F5F5;padding:8px 0">' +
-        '<div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer" onclick="toggleReportDetail(this)" data-detail="detail_'+idx+'">' +
+        '<div onclick="toggleDetail(&quot;rdetail_'+idx+'&quot;)" style="display:flex;justify-content:space-between;align-items:center;cursor:pointer">' +
         '<div style="flex:1;min-width:0">' +
-        '<div style="font-size:12px;font-weight:800;color:#1A1A1A">' + shortSuc + ' · ' + (r.responsable||'?') + (rushLabel?' <span style="font-size:10px;color:#888">'+rushLabel+'</span>':'') + '</div>' +
+        '<div style="font-size:12px;font-weight:800;color:#1A1A1A">' + shortSuc + ' · ' + (r.responsable||'?') + '</div>' +
         '<div style="font-size:11px;color:#888;font-weight:700">' + (r.date||'') + ' ' + (r.heure||'') + (r.nonConformes>0?' · <span style="color:#dc3545">'+r.nonConformes+' NC</span>':'') + (hasPhotos?' 📷':'') + '</div>' +
         '</div>' +
         '<div style="display:flex;align-items:center;gap:6px">' +
         '<div style="background:' + bg + ';color:' + col + ';padding:3px 10px;border-radius:99px;font-size:12px;font-weight:900">' + sc + '%</div>' +
-        '<span style="color:#ccc;font-size:12px">▼</span></div></div>' +
-        '<div id="detail_'+idx+'" style="display:none;margin-top:8px;background:#F8F8F8;border-radius:8px;padding:10px">' +
-        (r.ncItems && r.ncItems.length > 0 ? r.ncItems.map(function(nc){
-          var photosHtml = nc.photos && nc.photos.length > 0 ? 
-            '<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">' + 
-            nc.photos.map(function(url){ return '<a href="'+url+'" target="_blank"><img src="'+url+'" style="width:60px;height:60px;object-fit:cover;border-radius:6px;border:1.5px solid #dc3545"></a>'; }).join('') + 
-            '</div>' : '';
-          return '<div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #eee">' +
-            '<div style="font-size:11px;font-weight:800;color:#721c24">❌ '+nc.section+' — '+nc.label+'</div>' +
-            (nc.comment?'<div style="font-size:11px;color:#666;margin-top:2px">💬 '+nc.comment+'</div>':'') +
-            photosHtml + '</div>';
-        }).join('') : '<div style="font-size:11px;color:#155724;font-weight:700">✅ '+(lang==="fr"?"Tous conformes":"All compliant")+'</div>') +
-        '</div></div>';
+        '<span style="color:#ccc">▼</span></div></div>' +
+        detailHtml + '</div>';
     }).join('') +
     '</div>';
   
@@ -2766,64 +2395,168 @@ function renderReports(reports, filter) {
 
 function closeReport(){ var el=document.getElementById('reportOverlay'); if(el) el.remove(); }
 
-function toggleReportDetail(btn) {
-  var id = btn.getAttribute('data-detail');
-  var el = document.getElementById(id);
-  if (!el) return;
-  var isOpen = el.style.display !== 'none';
-  el.style.display = isOpen ? 'none' : 'block';
-  var arrow = btn.querySelector('span:last-child');
-  if (arrow) arrow.textContent = isOpen ? '▼' : '▲';
-}
-
 // ── START ─────────────────────────────────────────────────
-// ── AUTO CLEANUP (7 days) ────────────────────────────────
-function cleanupOldReports() {
-  var sevenDaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
-  fetch(FB_URL + '/reports.json')
-    .then(function(r){ return r.json(); })
-    .then(function(d){
-      if (!d || typeof d !== 'object') return;
-      var keys = Object.keys(d);
-      keys.forEach(function(key){
-        var report = d[key];
-        if (report && report.timestamp && report.timestamp < sevenDaysAgo) {
-          fetch(FB_URL + '/reports/' + key + '.json', {method:'DELETE'}).catch(function(){});
-        }
-      });
-    }).catch(function(){});
+// ── END MESSAGE ─────────────────────────────────────────
+function showEndMessage() {
+  var el = document.getElementById('endMessage');
+  if (el) el.style.display = 'block';
+  var s = getScore();
+  var low = document.getElementById('endLowScore');
+  if (low) low.style.display = (s.pct !== null && s.pct < 80) ? 'block' : 'none';
 }
 
-// ── LOW SCORE EMAIL ───────────────────────────────────────
-function sendLowScoreEmail(reportData) {
-  // Same method as regular report - show alert then open instructions
-  showToast(lang==='fr' ? '🔴 Score sous 80% — Envoyez le rapport à fugazzipresto@barroco.ca' : '🔴 Score under 80% — Send report to fugazzipresto@barroco.ca');
-  openInstructionsModal(reportData.succursale||'', reportData.succursale ? 'fugazzipresto@barroco.ca' : '');
+// ── SUPERVISOR ───────────────────────────────────────────
+function unlockSupervisor() {
+  if (document.getElementById('supervisorPwd').value === 'Fugazzi.Presto') {
+    document.getElementById('supervisorLocked').style.display = 'none';
+    document.getElementById('supervisorUnlocked').style.display = 'block';
+    document.getElementById('supervisorSubtitle').textContent = 'Connecté ✅';
+    document.getElementById('supervisorPwd').value = '';
+    buildSurpriseVisit();
+  } else {
+    showToast('Mot de passe incorrect');
+    document.getElementById('supervisorPwd').value = '';
+  }
 }
 
+function lockSupervisor() {
+  document.getElementById('supervisorLocked').style.display = 'block';
+  document.getElementById('supervisorUnlocked').style.display = 'none';
+  document.getElementById('supervisorSubtitle').textContent = 'Accès protégé';
+}
+
+function showSupervisorTab(tab) {
+  document.getElementById('supervisorMonthly').style.display = tab==='monthly' ? 'block' : 'none';
+  document.getElementById('supervisorSurprise').style.display = tab==='surprise' ? 'block' : 'none';
+  document.getElementById('tabMonthly').style.background = tab==='monthly' ? '#1A1A1A' : '#F4F4F4';
+  document.getElementById('tabMonthly').style.color = tab==='monthly' ? '#F5C800' : '#888';
+  document.getElementById('tabSurprise').style.background = tab==='surprise' ? '#721c24' : '#F4F4F4';
+  document.getElementById('tabSurprise').style.color = tab==='surprise' ? '#fff' : '#888';
+}
+
+var SV_SECTIONS = {
+  'sv-ext': ['Vitres et façade propres','Pas de déchets au sol','Affichage en place et bien collé','Enseigne allumée'],
+  'sv-acc': ['Accueil chaleureux par un employé','Tenue vestimentaire conforme','Ambiance — lumière et musique'],
+  'sv-prop': ['Sol propre','Tables et chaises propres','Comptoir propre et accueillant','Poubelles vides'],
+  'sv-wc': ['Papier, savon et eau chaude disponibles','Lavabo et miroirs propres','Toilettes propres'],
+  'sv-qual': ['Présentation de la commande','Croûte standard Fugazzi','Respect des quantités de la recette','Goût et qualité du produit','Température adéquate','Emballage propre et correct']
+};
+var SV_NAMES = {'sv-ext':'Extérieur','sv-acc':'Accueil','sv-prop':'Propreté générale','sv-wc':'Toilettes','sv-qual':'Qualité de la commande'};
+
+function buildSurpriseVisit() {
+  Object.keys(SV_SECTIONS).forEach(function(sid) {
+    var container = document.getElementById(sid);
+    if (!container) return;
+    var html = '';
+    SV_SECTIONS[sid].forEach(function(label, idx) {
+      var id = sid+'_'+idx;
+      html += '<div style="padding:10px 12px;border-bottom:1px solid #F5F5F5">';
+      html += '<div style="font-size:13px;font-weight:800;color:#1A1A1A;margin-bottom:8px">'+label+'</div>';
+      html += '<div style="display:flex;gap:8px;margin-bottom:6px">';
+      html += '<button id="ok_'+id+'" style="flex:1;padding:10px;border-radius:10px;border:2px solid #E0E0E0;background:#F4F4F4;font-family:Nunito,sans-serif;font-size:13px;font-weight:900;color:#999;cursor:pointer">✓ OK</button>';
+      html += '<button id="nc_'+id+'" style="flex:1;padding:10px;border-radius:10px;border:2px solid #E0E0E0;background:#F4F4F4;font-family:Nunito,sans-serif;font-size:13px;font-weight:900;color:#999;cursor:pointer">✗ NC</button>';
+      html += '</div>';
+      html += '<div id="extras_'+id+'" style="display:none;flex-direction:column;gap:6px">';
+      html += '<input type="text" placeholder="Commentaire..." style="width:100%;border:2px solid #FFE8A3;border-radius:8px;padding:8px 10px;font-size:13px;font-family:Nunito,sans-serif;outline:none;background:#FFFBE0" id="cmt_'+id+'">';
+      html += '<label style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:8px;border:2px dashed #dc3545;background:#FFF5F5;color:#dc3545;font-family:Nunito,sans-serif;font-size:12px;font-weight:800;cursor:pointer">📷 Photo<input type="file" accept="image/*" capture="environment" id="file_'+id+'" style="display:none"></label>';
+      html += '<div id="photos_'+id+'" style="display:flex;flex-wrap:wrap;gap:6px"></div>';
+      html += '</div></div>';
+    });
+    container.innerHTML = html;
+    SV_SECTIONS[sid].forEach(function(label, idx) {
+      var id = sid+'_'+idx;
+      (function(itemId){
+        var ok = document.getElementById('ok_'+itemId);
+        var nc = document.getElementById('nc_'+itemId);
+        var fi = document.getElementById('file_'+itemId);
+        if(ok) ok.addEventListener('click', function(){ svToggle(itemId, true); });
+        if(nc) nc.addEventListener('click', function(){ svToggle(itemId, false); });
+        if(fi) fi.addEventListener('change', function(){ svAddPhoto(this, itemId); });
+      })(id);
+    });
+  });
+}
+
+function svToggle(id, isOk) {
+  var ok = document.getElementById('ok_'+id), nc = document.getElementById('nc_'+id), ex = document.getElementById('extras_'+id);
+  ok.style.background = isOk?'#D4EDDA':'#F4F4F4'; ok.style.color = isOk?'#155724':'#999'; ok.style.borderColor = isOk?'#28a745':'#E0E0E0';
+  nc.style.background = !isOk?'#F8D7DA':'#F4F4F4'; nc.style.color = !isOk?'#721c24':'#999'; nc.style.borderColor = !isOk?'#dc3545':'#E0E0E0';
+  ex.style.display = !isOk?'flex':'none';
+  ok.setAttribute('data-sel', isOk?'1':''); nc.setAttribute('data-sel', !isOk?'1':'');
+  svUpdateScore();
+}
+
+function svAddPhoto(input, itemId) {
+  var file = input.files[0]; if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var c = document.getElementById('photos_'+itemId);
+    var d = document.createElement('div'); d.style.cssText='position:relative;width:60px;height:60px';
+    d.innerHTML='<img src="'+e.target.result+'" style="width:60px;height:60px;object-fit:cover;border-radius:8px;border:2px solid #dc3545"><button onclick="this.parentElement.remove()" style="position:absolute;top:-5px;right:-5px;background:#dc3545;color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:10px;cursor:pointer">✕</button>';
+    c.appendChild(d);
+  };
+  reader.readAsDataURL(file); input.value='';
+}
+
+function svUpdateScore() {
+  var total=0, ok=0;
+  Object.keys(SV_SECTIONS).forEach(function(sid){ SV_SECTIONS[sid].forEach(function(l,i){ var id=sid+'_'+i; var ob=document.getElementById('ok_'+id); if(!ob)return; total++; if(ob.getAttribute('data-sel')==='1')ok++; }); });
+  var checked = document.querySelectorAll('[id^="ok_"][data-sel="1"],[id^="nc_"][data-sel="1"]').length;
+  if(checked===0){document.getElementById('sv-score').style.display='none';return;}
+  var pct=Math.round(ok/total*100), sc=document.getElementById('sv-score');
+  sc.style.display='block';
+  document.getElementById('sv-score-pct').textContent=pct+'%';
+  var msg=pct>=90?'Excellent':pct>=80?'Bien':pct>=60?'Plan action requis':'Critique';
+  var bg=pct>=90?'#D4EDDA':pct>=80?'#FFF3CD':pct>=60?'#FFE5CC':'#F8D7DA';
+  var col=pct>=90?'#155724':pct>=80?'#856404':pct>=60?'#C05000':'#721c24';
+  sc.style.background=bg; document.getElementById('sv-score-pct').style.color=col;
+  document.getElementById('sv-score-msg').style.color=col; document.getElementById('sv-score-msg').textContent=msg;
+}
+
+function submitSurpriseVisit() {
+  var suc=document.getElementById('f-succursale').value||'Non spécifiée';
+  var date=document.getElementById('f-date').value, heure=document.getElementById('f-heure').value;
+  var ncItems=[],total=0,ok=0;
+  Object.keys(SV_SECTIONS).forEach(function(sid){
+    SV_SECTIONS[sid].forEach(function(label,idx){
+      var id=sid+'_'+idx, ob=document.getElementById('ok_'+id), nb=document.getElementById('nc_'+id);
+      if(!ob)return; total++;
+      if(ob.getAttribute('data-sel')==='1'){ok++;return;}
+      if(nb.getAttribute('data-sel')==='1'){
+        var cmt=document.getElementById('cmt_'+id)?document.getElementById('cmt_'+id).value:'';
+        var photos=[]; document.querySelectorAll('#photos_'+id+' img').forEach(function(img){photos.push(img.src);});
+        ncItems.push({section:SV_NAMES[sid],label:label,comment:cmt,photos:photos});
+      }
+    });
+  });
+  var pct=total>0?Math.round(ok/total*100):0;
+  var scoreBg=pct>=90?'#D4EDDA':pct>=80?'#FFF3CD':pct>=60?'#FFE5CC':'#F8D7DA';
+  var scoreCol=pct>=90?'#155724':pct>=80?'#856404':pct>=60?'#C05000':'#721c24';
+  var ncRows=ncItems.length===0?'<tr><td style="padding:16px;text-align:center;color:#155724;font-weight:800">✅ Tous conformes</td></tr>':
+    ncItems.map(function(nc){
+      var ph=nc.photos.map(function(p){return '<img src="'+p+'" style="width:100px;height:100px;object-fit:cover;border-radius:6px;border:2px solid #dc3545;margin:4px">';}).join('');
+      return '<tr style="border-bottom:1px solid #eee"><td style="padding:10px 14px"><div style="font-weight:800;font-size:13px">❌ '+nc.section+' — '+nc.label+'</div>'+(nc.comment?'<div style="font-size:12px;color:#666;margin-top:4px">💬 '+nc.comment+'</div>':'')+(ph?'<div style="margin-top:6px">'+ph+'</div>':'')+'</td></tr>';
+    }).join('');
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Visite Surprise — '+suc+'</title></head><body style="font-family:Arial,sans-serif;background:#F0FAF9;margin:0;padding:16px">'
+    +'<div style="background:#721c24;border-radius:16px;padding:20px;text-align:center;margin-bottom:16px"><div style="font-size:18px;font-weight:900;color:#F5C800;letter-spacing:2px">⚡ VISITE SURPRISE SUPERVISEUR</div><div style="font-size:13px;color:rgba(255,255,255,.8);margin-top:4px;font-weight:700">'+suc+' · '+date+' · '+heure+'</div></div>'
+    +'<div style="background:'+scoreBg+';border-radius:12px;padding:16px;text-align:center;margin-bottom:16px"><div style="font-size:42px;font-weight:900;color:'+scoreCol+'">'+pct+'%</div></div>'
+    +'<table style="width:100%;border-radius:12px;overflow:hidden;border-collapse:collapse;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.1)">'+ncRows+'</table>'
+    +'</body></html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='VisiteSurprise_'+suc.replace(/\s+/g,'_')+'_'+date+'.html';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  showToast('⚡ Visite surprise téléchargée !');
+  pushToBin('surpriseVisits',{date:date,heure:heure,succursale:suc,score:pct,nonConformes:ncItems.length,timestamp:Date.now(),ncItems:ncItems.map(function(nc){return {section:nc.section,label:nc.label,comment:nc.comment};})},function(){});
+}
+
+function resetSurpriseVisit() { buildSurpriseVisit(); document.getElementById('sv-score').style.display='none'; }
+
+document.addEventListener('keypress', function(e){ if(e.key==='Enter'&&document.activeElement&&document.activeElement.id==='supervisorPwd') unlockSupervisor(); });
 
 goStep(0);
 updateProgress();
-
-// Pre-load data on startup
-var cachedReports = [];
-var cachedMessages = [];
-
-fetch(FB_URL + '/reports.json')
-  .then(function(r){ return r.json(); })
-  .then(function(d){
-    if(d && typeof d==='object') cachedReports = Object.values(d).filter(Boolean);
-  }).catch(function(){});
-
-fetch(FB_URL + '/messages.json')
-  .then(function(r){ return r.json(); })
-  .then(function(d){
-    if(d && typeof d==='object') cachedMessages = Object.values(d).filter(Boolean);
-    else if(Array.isArray(d)) cachedMessages = d.filter(Boolean);
-  }).catch(function(){});
+initBins(function(){});
 </script>
-
 </body>
 </html>
-
-Envoyé à partir de Outlook pour iOS
