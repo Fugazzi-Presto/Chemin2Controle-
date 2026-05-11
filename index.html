@@ -1168,15 +1168,15 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
 <!-- MESSAGE FIN DE RAPPORT -->
 <div id="endMessage" style="display:none;margin:14px 14px 0;background:#1A1A1A;border-radius:16px;padding:20px;text-align:center">
   <div style="font-size:24px;margin-bottom:10px">🍕</div>
-  <div style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#F5C800;letter-spacing:1px;margin-bottom:10px">MERCI POUR TON RAPPORT !</div>
-  <div style="font-size:13px;color:rgba(255,255,255,.8);font-weight:700;line-height:1.7;margin-bottom:14px">Ton suivi quotidien fait toute la différence.<br>Chaque détail compte pour le standard Fugazzi. 💪</div>
+  <div id="endTitle" style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#F5C800;letter-spacing:1px;margin-bottom:10px" data-fr="MERCI POUR TON RAPPORT !" data-en="THANK YOU FOR YOUR REPORT!">MERCI POUR TON RAPPORT !</div>
+  <div id="endMsg" style="font-size:13px;color:rgba(255,255,255,.8);font-weight:700;line-height:1.7;margin-bottom:14px" data-fr="Ton suivi quotidien fait toute la différence. Chaque détail compte pour le standard Fugazzi. 💪" data-en="Your daily follow-up makes all the difference. Every detail counts for the Fugazzi standard. 💪">Ton suivi quotidien fait toute la différence. Chaque détail compte pour le standard Fugazzi. 💪</div>
   <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:12px;margin-bottom:10px;text-align:left">
-    <div style="font-size:10px;font-weight:800;color:#00B5A8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">📊 Ton rapport est sauvegardé</div>
-    <div style="font-size:12px;color:rgba(255,255,255,.7);font-weight:700;line-height:1.6">Il est accessible dans le menu ☰ → Rapports &amp; Suivi.</div>
+    <div id="endSavedLbl" style="font-size:10px;font-weight:800;color:#00B5A8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" data-fr="📊 Ton rapport est sauvegardé" data-en="📊 Your report is saved">📊 Ton rapport est sauvegardé</div>
+    <div id="endSavedDesc" style="font-size:12px;color:rgba(255,255,255,.7);font-weight:700;line-height:1.6" data-fr="Il est accessible dans le menu ☰ → Rapports &amp; Suivi." data-en="It is accessible in the ☰ menu → Reports &amp; Tracking.">Il est accessible dans le menu ☰ → Rapports &amp; Suivi.</div>
   </div>
   <div id="endLowScore" style="display:none;background:#dc3545;border-radius:10px;padding:12px;text-align:left">
-    <div style="font-size:11px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">🔴 ACTION REQUISE</div>
-    <div style="font-size:12px;color:#fff;font-weight:700;line-height:1.7">Score sous 80% — Envoie le rapport à :<br><strong>fugazzipresto@barroco.ca</strong><br>En cas d'urgence, appelle immédiatement Kahena.</div>
+    <div id="endActionLbl" style="font-size:11px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" data-fr="🔴 ACTION REQUISE" data-en="🔴 ACTION REQUIRED">🔴 ACTION REQUISE</div>
+    <div id="endActionDesc" style="font-size:12px;color:#fff;font-weight:700;line-height:1.7" data-fr="Score sous 80% — Envoie le rapport à : fugazzipresto@barroco.ca — En cas d'urgence, appelle immédiatement Kahena." data-en="Score under 80% — Send the report to: fugazzipresto@barroco.ca — In case of emergency, call Kahena immediately.">Score sous 80% — Envoie le rapport à : fugazzipresto@barroco.ca — En cas d'urgence, appelle immédiatement Kahena.</div>
   </div>
 </div>
 
@@ -1249,19 +1249,19 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
       <div style="padding:12px 14px" id="iphoneSteps">
         <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
           <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">1</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Ouvre l'app <strong>Fichiers</strong> sur ton iPhone</div>
+          <div data-step style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Ouvre l'app Fichiers sur ton iPhone</div>
         </div>
         <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
           <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">2</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Appuie sur <strong>Téléchargements</strong></div>
+          <div data-step style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Appuie sur Téléchargements</div>
         </div>
         <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
           <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">3</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Appuie sur le fichier <strong>Rapport_Fugazzi...</strong></div>
+          <div data-step style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Appuie sur le fichier Rapport_Fugazzi...</div>
         </div>
         <div style="display:flex;gap:10px;align-items:flex-start">
           <div style="background:#00B5A8;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">4</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Appuie sur <strong>Partager</strong> (carré + flèche ↑) → <strong>Mail</strong></div>
+          <div data-step style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Appuie sur Partager (carré + flèche ↑) → Mail</div>
         </div>
       </div>
     </div>
@@ -1272,15 +1272,15 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
       <div style="padding:12px 14px" id="androidSteps">
         <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
           <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">1</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Glisse vers le bas → appuie sur la <strong>notification</strong> de téléchargement</div>
+          <div data-step style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Glisse vers le bas → appuie sur la notification de téléchargement</div>
         </div>
         <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start">
           <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">2</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Le rapport s'ouvre dans le navigateur</div>
+          <div data-step style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Le rapport s'ouvre dans le navigateur</div>
         </div>
         <div style="display:flex;gap:10px;align-items:flex-start">
           <div style="background:#F5C800;color:#1A1A1A;border-radius:50%;width:24px;height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900">3</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Menu ⋮ → <strong>Partager</strong> → <strong>Gmail</strong> ou <strong>Mail</strong></div>
+          <div data-step style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.5">Menu ⋮ → Partager → Gmail ou Mail</div>
         </div>
       </div>
     </div>
@@ -1596,6 +1596,19 @@ function applyLang() {
   // Update succursale dropdown first option
   var selSuc = document.getElementById('f-succursale');
   if (selSuc && selSuc.options[0]) selSuc.options[0].text = lang==='fr' ? '-- Choisir une succursale --' : '-- Choose a location --';
+  // End message translations
+  var endTitle = document.getElementById('endTitle');
+  if (endTitle) endTitle.textContent = lang==='fr' ? 'MERCI POUR TON RAPPORT !' : 'THANK YOU FOR YOUR REPORT!';
+  var endMsg = document.getElementById('endMsg');
+  if (endMsg) endMsg.innerHTML = lang==='fr' ? 'Ton suivi quotidien fait toute la différence.<br>Chaque détail compte pour le standard Fugazzi. 💪' : 'Your daily follow-up makes all the difference.<br>Every detail counts for the Fugazzi standard. 💪';
+  var endSavedLbl = document.getElementById('endSavedLbl');
+  if (endSavedLbl) endSavedLbl.textContent = lang==='fr' ? '📊 Ton rapport est sauvegardé' : '📊 Your report is saved';
+  var endSavedDesc = document.getElementById('endSavedDesc');
+  if (endSavedDesc) endSavedDesc.textContent = lang==='fr' ? 'Il est accessible dans le menu ☰ → Rapports & Suivi.' : 'Accessible in the ☰ menu → Reports & Tracking.';
+  var endLowTitle = document.getElementById('endLowTitle');
+  if (endLowTitle) endLowTitle.textContent = lang==='fr' ? '🔴 ACTION REQUISE' : '🔴 ACTION REQUIRED';
+  var endLowDesc = document.getElementById('endLowDesc');
+  if (endLowDesc) endLowDesc.textContent = lang==='fr' ? 'Score sous 80% - Envoie le rapport a fugazzipresto@barroco.ca - En cas urgence, appelle Kahena.' : 'Score under 80% - Send the report to fugazzipresto@barroco.ca - In emergency, call Kahena.';
 }
 
 // ── INIT ─────────────────────────────────────────────────
@@ -2018,17 +2031,24 @@ document.getElementById('emailModal').addEventListener('click', function(e){ if 
 
 function openInstructionsModal(suc, gerant) {
   var emailStr = 'fugazzipresto@barroco.ca';
-  if (gerant) emailStr += '\n' + gerant;
   document.getElementById('instrEmails').textContent = emailStr;
-  // Store for copy
   document.getElementById('instructionsModal')._emails = emailStr;
-  // Update language if needed
-  var t2 = T[lang];
   document.getElementById('instrTitle').textContent = lang==='fr'?'RAPPORT TELECHARGE !':'REPORT DOWNLOADED!';
   document.getElementById('instrSubtitle').textContent = lang==='fr'?'Votre rapport avec les photos est pret. Suivez les etapes selon votre telephone :':'Your report with photos is ready. Follow the steps for your device:';
   document.getElementById('instrEmailLbl').textContent = lang==='fr'?'Envoyer a':'Send to';
   document.getElementById('copyEmailsBtn').textContent = lang==='fr'?'Copier les adresses courriel':'Copy email addresses';
   document.getElementById('instrCloseBtn').textContent = lang==='fr'?'OK, compris !':'OK, got it!';
+  // Translate iPhone steps
+  var iphoneFR = ['Ouvre l’app Fichiers sur ton iPhone','Appuie sur Téléchargements','Appuie sur le fichier Rapport_Fugazzi...','Appuie sur Partager (carré + flèche ↑) → Mail'];
+  var iphoneEN = ['Open the Files app on your iPhone','Tap Downloads','Tap the file Rapport_Fugazzi...','Tap Share (square + arrow ↑) → Mail'];
+  var androidFR = ['Glisse vers le bas → appuie sur la notification de téléchargement','Le rapport s’ouvre dans le navigateur','Menu ⋮ → Partager → Gmail ou Mail'];
+  var androidEN = ['Swipe down → tap the download notification','The report opens in the browser','Menu ⋮ → Share → Gmail or Mail'];
+  var iphoneSteps = lang==='fr' ? iphoneFR : iphoneEN;
+  var androidSteps = lang==='fr' ? androidFR : androidEN;
+  var iphoneEls = document.querySelectorAll('#iphoneSteps [data-step]');
+  iphoneEls.forEach(function(el, i){ if(iphoneSteps[i]) el.textContent = iphoneSteps[i]; });
+  var androidEls = document.querySelectorAll('#androidSteps [data-step]');
+  androidEls.forEach(function(el, i){ if(androidSteps[i]) el.textContent = androidSteps[i]; });
   document.getElementById('instructionsModal').classList.add('open');
 }
 
