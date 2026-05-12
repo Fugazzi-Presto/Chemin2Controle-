@@ -1170,9 +1170,9 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
   <div style="font-size:24px;margin-bottom:10px">🍕</div>
   <div id="endTitle" style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#F5C800;letter-spacing:1px;margin-bottom:10px" data-fr="MERCI POUR TON RAPPORT !" data-en="THANK YOU FOR YOUR REPORT!">MERCI POUR TON RAPPORT !</div>
   <div id="endMsg" style="font-size:13px;color:rgba(255,255,255,.8);font-weight:700;line-height:1.7;margin-bottom:14px" data-fr="Ton suivi quotidien fait toute la différence. Chaque détail compte pour le standard Fugazzi. 💪" data-en="Your daily follow-up makes all the difference. Every detail counts for the Fugazzi standard. 💪">Ton suivi quotidien fait toute la différence. Chaque détail compte pour le standard Fugazzi. 💪</div>
-  <div style="background:rgba(255,255,255,.1);border-radius:10px;padding:12px;margin-bottom:10px;text-align:left">
-    <div id="endSavedLbl" style="font-size:10px;font-weight:800;color:#00B5A8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" data-fr="📊 Ton rapport est sauvegardé" data-en="📊 Your report is saved">📊 Ton rapport est sauvegardé</div>
-    <div id="endSavedDesc" style="font-size:12px;color:rgba(255,255,255,.7);font-weight:700;line-height:1.6" data-fr="Il est accessible dans le menu ☰ → Rapports &amp; Suivi." data-en="It is accessible in the ☰ menu → Reports &amp; Tracking.">Il est accessible dans le menu ☰ → Rapports &amp; Suivi.</div>
+  <div style="background:#F5C800;border-radius:10px;padding:12px;margin-bottom:10px;text-align:center">
+    <div id="endSavedLbl" style="font-size:13px;font-weight:900;color:#1A1A1A;margin-bottom:4px" data-fr="⬇️ N'OUBLIE PAS DE TÉLÉCHARGER !" data-en="⬇️ DON'T FORGET TO DOWNLOAD!">⬇️ N'OUBLIE PAS DE TÉLÉCHARGER !</div>
+    <div id="endSavedDesc" style="font-size:12px;color:#1A1A1A;font-weight:700;line-height:1.6" data-fr="Il est accessible dans le menu ☰ → Rapports &amp; Suivi." data-en="It is accessible in the ☰ menu → Reports &amp; Tracking.">Il est accessible dans le menu ☰ → Rapports &amp; Suivi.</div>
   </div>
   <div id="endLowScore" style="display:none;background:#dc3545;border-radius:10px;padding:12px;text-align:left">
     <div id="endActionLbl" style="font-size:11px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" data-fr="🔴 ACTION REQUISE" data-en="🔴 ACTION REQUIRED">🔴 ACTION REQUISE</div>
@@ -1381,6 +1381,7 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
           <select id="reportFilter" onchange="filterReports()" style="width:100%;border:2px solid #E0F7F5;border-radius:10px;padding:10px;font-size:14px;font-family:'Nunito',sans-serif;color:#1A1A1A;background:#E0F7F5;outline:none">
             <option value="all">Toutes les succursales</option>
           </select>
+          <button onclick="loadReports()" style="width:100%;margin-top:8px;padding:10px;background:#00B5A8;color:#fff;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer">🔄 Actualiser les rapports</button>
         </div>
         <div id="reportsList"></div>
       </div>
@@ -1602,9 +1603,9 @@ function applyLang() {
   var endMsg = document.getElementById('endMsg');
   if (endMsg) endMsg.innerHTML = lang==='fr' ? 'Ton suivi quotidien fait toute la différence.<br>Chaque détail compte pour le standard Fugazzi. 💪' : 'Your daily follow-up makes all the difference.<br>Every detail counts for the Fugazzi standard. 💪';
   var endSavedLbl = document.getElementById('endSavedLbl');
-  if (endSavedLbl) endSavedLbl.textContent = lang==='fr' ? '📊 Ton rapport est sauvegardé' : '📊 Your report is saved';
+  if (endSavedLbl) endSavedLbl.textContent = lang==='fr' ? "N'OUBLIE PAS D'APPUYER SUR TÉLÉCHARGER !" : 'DON\'T FORGET TO TAP DOWNLOAD!';
   var endSavedDesc = document.getElementById('endSavedDesc');
-  if (endSavedDesc) endSavedDesc.textContent = lang==='fr' ? 'Il est accessible dans le menu ☰ → Rapports & Suivi.' : 'Accessible in the ☰ menu → Reports & Tracking.';
+  if (endSavedDesc) endSavedDesc.textContent = lang==='fr' ? "C'est obligatoire pour sauvegarder ton rapport dans Rapports & Suivi." : 'Required to save your report in Reports & Tracking.';
   var endLowTitle = document.getElementById('endLowTitle');
   if (endLowTitle) endLowTitle.textContent = lang==='fr' ? '🔴 ACTION REQUISE' : '🔴 ACTION REQUIRED';
   var endLowDesc = document.getElementById('endLowDesc');
