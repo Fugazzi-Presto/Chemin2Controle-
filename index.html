@@ -1466,6 +1466,7 @@ body{font-family:'Nunito',sans-serif;background:#F0FAF9;min-height:100vh;padding
 var lang = 'fr';
 var cur = 0;
 var TOTAL = 14; // 0=info, 1-12=sections, 13=recap
+var FB_URL = 'https://fugazzi-presto-default-rtdb.firebaseio.com';
 
 // ── TRANSLATIONS ──────────────────────────────────────────
 var T = {
@@ -2334,44 +2335,57 @@ function deleteMessage(msgId) {
 
 // ── REPORTS ───────────────────────────────────────────────
 function saveReport(reportData) {
-  initBins(function() {
-    readBin('reports', function(reports) {
-      reports.push(reportData);
-      if (reports.length > 200) reports = reports.slice(-200);
-      writeBin('reports', reports, function(ok) {
-        if (ok) showToast(lang==='fr' ? '📊 Rapport sauvegardé !' : '📊 Report saved!');
-      });
-    });
-  });
+  fetch(FB_URL + '/reports.json', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(reportData)
+  })
+  .then(function(r){ return r.ok; })
+  .then(function(ok){
+    if(ok) showToast(lang==='fr' ? '📊 Rapport sauvegardé !' : '📊 Report saved!');
+    else showToast(lang==='fr' ? '❌ Erreur Firebase' : '❌ Firebase error');
+  })
+  .catch(function(){ showToast(lang==='fr' ? '❌ Erreur connexion' : '❌ Connection error'); });
 }
 
 function loadReports() {
   var list = document.getElementById('reportsList');
-  list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">Chargement...</div>';
+  list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Chargement...':'Loading...') + '</div>';
   
-  readBin('reports', function(reports) {
-    if (!reports || reports.length === 0) {
-      list.innerHTML = '<div style="text-align:center;padding:16px;color:#888;font-size:12px;font-weight:700">Aucun rapport soumis encore.</div>';
-      document.getElementById('reportsSubtitle').textContent = 'Aucun rapport';
-      return;
-    }
-    
-    // Populate filter
-    var filter = document.getElementById('reportFilter');
-    var succursales = [...new Set(reports.map(function(r){ return r.succursale; }))].filter(Boolean);
-    filter.innerHTML = '<option value="all">Toutes les succursales (' + reports.length + ')</option>' +
-      succursales.map(function(s){ return '<option value="' + s + '">' + s + '</option>'; }).join('');
-    
-    document.getElementById('reportsSubtitle').textContent = reports.length + ' rapport(s)';
-    renderReports(reports, 'all');
-  });
+  fetch(FB_URL + '/reports.json')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var reports = [];
+      if (d && typeof d === 'object') {
+        reports = Object.values(d).filter(Boolean);
+      }
+      if (reports.length === 0) {
+        list.innerHTML = '<div style="text-align:center;padding:16px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun rapport soumis encore.':'No reports yet.') + '</div>';
+        document.getElementById('reportsSubtitle').textContent = lang==='fr'?'Aucun rapport':'No reports';
+        return;
+      }
+      var filter = document.getElementById('reportFilter');
+      var seen = {}; var succursales = [];
+      reports.forEach(function(r){ if(r.succursale&&!seen[r.succursale]){seen[r.succursale]=true;succursales.push(r.succursale);} });
+      filter.innerHTML = '<option value="all">' + (lang==='fr'?'Toutes les succursales':'All locations') + ' (' + reports.length + ')</option>' +
+        succursales.map(function(s){ return '<option value="' + s + '">' + s + '</option>'; }).join('');
+      document.getElementById('reportsSubtitle').textContent = reports.length + ' rapport(s)';
+      renderReports(reports, 'all');
+    })
+    .catch(function(){
+      list.innerHTML = '<div style="text-align:center;padding:16px;color:#dc3545;font-size:12px;font-weight:700">' + (lang==='fr'?'Erreur — vérifiez votre connexion':'Error — check your connection') + '</div>';
+    });
 }
 
 function filterReports() {
   var val = document.getElementById('reportFilter').value;
-  readBin('reports', function(reports) {
-    renderReports(reports, val);
-  });
+  fetch(FB_URL + '/reports.json')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var reports = d && typeof d==='object' ? Object.values(d).filter(Boolean) : [];
+      renderReports(reports, val);
+    })
+    .catch(function(){});
 }
 
 function toggleDetail(id) {
