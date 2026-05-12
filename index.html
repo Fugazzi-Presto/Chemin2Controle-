@@ -1853,19 +1853,89 @@ function openSendFlow() {
   var allPhotos = [];
   ncItemsRaw.forEach(function(nc){ nc._rawPhotos.forEach(function(src){ allPhotos.push({nc: nc, src: src}); }); });
 
+  function uploadToCloudinary(base64, callback) {
+    var arr = base64.split(',');
+    if (arr.length < 2) { callback(null); return; }
+    var mime = arr[0].match(/:(.*?);/)[1];
+    var bstr = atob(arr[1]), n = bstr.length, u8 = new Uint8Array(n);
+    while(n--) u8[n] = bstr.charCodeAt(n);
+    var blob = new Blob([u8], {type: mime});
+    var fd = new FormData();
+    fd.append('file', blob, 'photo.jpg');
+    fd.append('upload_preset', 'fugazzi_reports');
+    fd.append('folder', 'fugazzi');
+    fetch('https://api.cloudinary.com/v1_1/drnovmfmp/image/upload', {method:'POST', body:fd})
+      .then(function(r){ return r.json(); })
+      .then(function(d){ callback(d.secure_url || null); })
+      .catch(function(){ callback(null); });
+  }
+
   function finalize(ncItems) {
-    var reportData = {
-      date: document.getElementById('f-date').value,
-      heure: document.getElementById('f-heure').value,
-      succursale: document.getElementById('f-succursale').value||'Non specifiee',
-      responsable: document.getElementById('f-resp').value||'Non specifie',
-      score: s.pct!==null?s.pct:0,
-      conformes: s.c,
-      nonConformes: s.nc,
-      timestamp: Date.now(),
-      ncItems: ncItems
-    };
-    initBins(function(){ saveReport(reportData); });
+    var sendBtn = document.getElementById('sendBtn');
+    var hasPhotos = ncItems.some(function(nc){ return nc.photos && nc.photos.length > 0; });
+
+    function saveToFirebase(ncItemsFinal) {
+      var reportData = {
+        date: document.getElementById('f-date').value,
+        heure: document.getElementById('f-heure').value,
+        succursale: document.getElementById('f-succursale').value||'Non specifiee',
+        responsable: document.getElementById('f-resp').value||'Non specifie',
+        score: s.pct!==null?s.pct:0,
+        conformes: s.c,
+        nonConformes: s.nc,
+        timestamp: Date.now(),
+        ncItems: ncItemsFinal
+      };
+      fetch(FB_URL + '/reports.json', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(reportData)
+      })
+      .then(function(r){ return r.ok; })
+      .then(function(ok){
+        if(sendBtn){ sendBtn.textContent = T[lang].sendBtn; sendBtn.disabled = false; }
+        if(ok) showToast(lang==='fr'?'📊 Rapport sauvegardé !':'📊 Report saved!');
+        else showToast(lang==='fr'?'❌ Erreur Firebase':'❌ Firebase error');
+      })
+      .catch(function(){
+        if(sendBtn){ sendBtn.textContent = T[lang].sendBtn; sendBtn.disabled = false; }
+        showToast(lang==='fr'?'❌ Erreur connexion':'❌ Connection error');
+      });
+    }
+
+    if (!hasPhotos) {
+      var clean = ncItems.map(function(nc){ return {section:nc.section,label:nc.label,comment:nc.comment,photos:[]}; });
+      saveToFirebase(clean);
+      return;
+    }
+
+    // Upload all photos to Cloudinary first, then save
+    if(sendBtn){ sendBtn.textContent = lang==='fr'?'⏳ Upload photos...':'⏳ Uploading...'; sendBtn.disabled = true; }
+
+    var tasks = [];
+    ncItems.forEach(function(nc, ncIdx){
+      (nc.photos||[]).forEach(function(photo, pIdx){
+        tasks.push({photo: photo, ncIdx: ncIdx, pIdx: pIdx});
+      });
+    });
+
+    var results = ncItems.map(function(nc){
+      return {section:nc.section, label:nc.label, comment:nc.comment, photos: new Array((nc.photos||[]).length).fill(null)};
+    });
+    var done = 0, total = tasks.length;
+
+    tasks.forEach(function(task){
+      uploadToCloudinary(task.photo, function(url){
+        if(url) results[task.ncIdx].photos[task.pIdx] = url;
+        done++;
+        if(sendBtn) sendBtn.textContent = (lang==='fr'?'⏳ Photo ':'⏳ Photo ') + done + '/' + total;
+        if(done === total) {
+          // Clean up null photos
+          results.forEach(function(nc){ nc.photos = nc.photos.filter(Boolean); });
+          saveToFirebase(results);
+        }
+      });
+    });
   }
 
   if (allPhotos.length === 0) {
