@@ -1887,21 +1887,32 @@ function openSendFlow() {
         timestamp: Date.now(),
         ncItems: ncItemsFinal
       };
-      fetch(FB_URL + '/reports.json', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(reportData)
-      })
-      .then(function(r){ return r.ok; })
-      .then(function(ok){
-        if(sendBtn){ sendBtn.textContent = T[lang].sendBtn; sendBtn.disabled = false; }
-        if(ok) showToast(lang==='fr'?'📊 Rapport sauvegardé !':'📊 Report saved!');
-        else showToast(lang==='fr'?'❌ Erreur Firebase':'❌ Firebase error');
-      })
-      .catch(function(){
-        if(sendBtn){ sendBtn.textContent = T[lang].sendBtn; sendBtn.disabled = false; }
-        showToast(lang==='fr'?'❌ Erreur connexion':'❌ Connection error');
-      });
+      var reportJSON = JSON.stringify(reportData);
+      var maxRetries = 3, attempt = 0;
+      function tryPost() {
+        attempt++;
+        fetch(FB_URL + '/reports.json', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: reportJSON
+        })
+        .then(function(r){ return r.ok; })
+        .then(function(ok){
+          if(sendBtn){ sendBtn.textContent = T[lang].sendBtn; sendBtn.disabled = false; }
+          if(ok) showToast(lang==='fr'?'📊 Rapport sauvegardé !':'📊 Report saved!');
+          else if(attempt < maxRetries) { setTimeout(tryPost, 2000); }
+          else showToast(lang==='fr'?'❌ Erreur Firebase — réessayez':'❌ Firebase error — retry');
+        })
+        .catch(function(){
+          if(attempt < maxRetries) {
+            setTimeout(tryPost, 2000);
+          } else {
+            if(sendBtn){ sendBtn.textContent = T[lang].sendBtn; sendBtn.disabled = false; }
+            showToast(lang==='fr'?'❌ Erreur connexion — réessayez':'❌ Connection error — retry');
+          }
+        });
+      }
+      tryPost();
     }
 
     if (!hasPhotos) {
