@@ -2239,38 +2239,33 @@ function toggleMenuSection(section) {
 function loadMessages() {
   var list = document.getElementById('messagesList');
   list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Chargement...':'Loading...') + '</div>';
-  
-  initBins(function() {
-    readBin('messages', function(messages) {
+  fetch(FB_URL + '/messages.json')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var messages = [];
+      if (d && typeof d === 'object') {
+        messages = Object.entries(d).map(function(e){ return Object.assign({_fbKey: e[0]}, e[1]); }).filter(Boolean);
+      }
       if (!messages || messages.length === 0) {
         list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun message pour le moment.':'No messages yet.') + '</div>';
         document.getElementById('commsSubtitle').textContent = lang==='fr'?'Aucun message':'No messages';
         return;
       }
-      var unread = 0;
-      var myDeviceId = localStorage.getItem('fugazzi_device_id');
-      if (!myDeviceId) {
-        myDeviceId = 'dev_' + Date.now() + '_' + Math.random().toString(36).slice(2);
-        localStorage.setItem('fugazzi_device_id', myDeviceId);
-      }
-      var hidden = JSON.parse(localStorage.getItem('fugazzi_hidden') || '[]');
-      messages = messages.filter(function(m){ return hidden.indexOf(m.id) < 0; });
       list.innerHTML = messages.slice().reverse().map(function(msg) {
-        var readBy = msg.readBy || [];
-        var isRead = readBy.indexOf(myDeviceId) >= 0;
-        if (!isRead) unread++;
-        var readCount = readBy.length;
+        var key = msg._fbKey || msg.id || '';
         return '<div style="background:#fff;border-radius:10px;padding:12px;margin-bottom:8px;border-left:3px solid #00B5A8;border:1px solid #E0F7F5">' +
           '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">' +
-          '<div style="font-size:11px;color:#888;font-weight:700">' + msg.date + ' · ' + (msg.author||'Kahena') + '</div>' +
-          '<button onclick="deleteMessage(\'' + msg.id + '\')" style="background:none;border:none;color:#ddd;font-size:13px;cursor:pointer;padding:0">🗑️</button>' +
+          '<div style="font-size:11px;color:#888;font-weight:700">' + (msg.date||'') + ' · ' + (msg.author||'Kahena') + '</div>' +
+          '<button onclick="deleteMessage(\'' + key + '\')" style="background:none;border:none;color:#ddd;font-size:13px;cursor:pointer;padding:0">&#128465;</button>' +
           '</div>' +
-          '<div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.6">' + msg.text + '</div>' +
+          '<div style="font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.6">' + (msg.text||'') + '</div>' +
           '</div>';
       }).join('');
-      document.getElementById('commsSubtitle').textContent = messages.length + (lang==='fr'?' message(s)':' message(s)');
+      document.getElementById('commsSubtitle').textContent = messages.length + ' message(s)';
+    })
+    .catch(function(){
+      list.innerHTML = '<div style="text-align:center;padding:12px;color:#888;font-size:12px;font-weight:700">' + (lang==='fr'?'Aucun message.':'No messages.') + '</div>';
     });
-  });
 }
 
 
@@ -2336,12 +2331,12 @@ function postMessage() {
 function deleteMessage(msgId) {
   var pwd = prompt(lang==='fr'?'Mot de passe admin :':'Admin password:');
   if (pwd !== 'Presto') { showToast(lang==='fr'?'Mot de passe incorrect':'Wrong password'); return; }
-  readBin('messages', function(messages) {
-    var filtered = messages.filter(function(m){ return m.id !== msgId; });
-    writeBin('messages', filtered, function(ok) {
-      if (ok) { showToast(lang==='fr'?'🗑️ Message supprimé':'🗑️ Message deleted'); loadMessages(); }
-    });
-  });
+  fetch(FB_URL + '/messages/' + msgId + '.json', { method: 'DELETE' })
+    .then(function(r){ 
+      if(r.ok) { showToast(lang==='fr'?'🗑️ Message supprimé':'🗑️ Message deleted'); loadMessages(); }
+      else showToast(lang==='fr'?'❌ Erreur':'❌ Error');
+    })
+    .catch(function(){ showToast(lang==='fr'?'❌ Erreur connexion':'❌ Connection error'); });
 }
 
 // ── REPORTS ───────────────────────────────────────────────
